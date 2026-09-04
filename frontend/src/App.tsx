@@ -205,26 +205,9 @@ export const App: React.FC = () => {
           />
 
           {/* Main Content Workspace */}
-          <div className="flex-1 flex flex-col h-screen overflow-y-auto bg-[#030712]">
-            <Header
-              user={user}
-              currentView={currentView}
-              onViewChange={setCurrentView}
-              onOpenDocs={() => setIsDocsModalOpen(true)}
-              onToggleTimeline={() => setIsTimelineOpen(!isTimelineOpen)}
-              onOpenGuide={() => setIsGuideModalOpen(true)}
-              onOpenAuth={() => setIsAuthModalOpen(true)}
-              onLogout={() => {
-                setUser({ ...user, isLoggedIn: false });
-                setCurrentView('landing');
-              }}
-              isTimelineOpen={isTimelineOpen}
-            />
-
-            <main className="flex-1 max-w-7xl w-full mx-auto px-6 py-4 space-y-4">
-              <KpiRibbon metrics={metrics} />
-
-              {currentView === 'flow' ? (
+          <div className="flex-1 flex flex-col h-screen overflow-hidden bg-[#07090e]">
+            {currentView === 'flow' ? (
+              <div className="flex-1 w-full h-full p-3 overflow-hidden">
                 <HorizontalAgenticFlow
                   user={user}
                   response={response}
@@ -235,18 +218,38 @@ export const App: React.FC = () => {
                   onApprove={handleApproveAction}
                   onReject={handleRejectAction}
                 />
-              ) : (
-                <ChatView
+              </div>
+            ) : (
+              <div className="flex-1 flex flex-col h-screen overflow-y-auto">
+                <Header
                   user={user}
-                  response={response}
-                  isLoading={isLoading}
-                  onSendMessage={(q) => executeOrchestration(70, q)}
-                  modelConfig={modelConfig}
-                  onApprove={handleApproveAction}
-                  onReject={handleRejectAction}
+                  currentView={currentView}
+                  onViewChange={setCurrentView}
+                  onOpenDocs={() => setIsDocsModalOpen(true)}
+                  onToggleTimeline={() => setIsTimelineOpen(!isTimelineOpen)}
+                  onOpenGuide={() => setIsGuideModalOpen(true)}
+                  onOpenAuth={() => setIsAuthModalOpen(true)}
+                  onLogout={() => {
+                    setUser({ ...user, isLoggedIn: false });
+                    setCurrentView('landing');
+                  }}
+                  isTimelineOpen={isTimelineOpen}
                 />
-              )}
-            </main>
+
+                <main className="flex-1 max-w-6xl w-full mx-auto px-6 py-4 space-y-4">
+                  <KpiRibbon metrics={metrics} />
+                  <ChatView
+                    user={user}
+                    response={response}
+                    isLoading={isLoading}
+                    onSendMessage={(q) => executeOrchestration(70, q)}
+                    modelConfig={modelConfig}
+                    onApprove={handleApproveAction}
+                    onReject={handleRejectAction}
+                  />
+                </main>
+              </div>
+            )}
           </div>
         </div>
       )}
