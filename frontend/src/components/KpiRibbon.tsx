@@ -1,6 +1,6 @@
 import React from 'react';
 import { OverviewMetrics } from '../types';
-import { IndianRupee, TrendingUp, AlertTriangle, ShieldCheck, Sparkles } from 'lucide-react';
+import { IndianRupee, TrendingUp, AlertTriangle, ShieldCheck } from 'lucide-react';
 
 interface KpiRibbonProps {
   metrics: OverviewMetrics | null;
@@ -13,67 +13,67 @@ export const KpiRibbon: React.FC<KpiRibbonProps> = ({ metrics }) => {
   const risks = metrics?.critical_stock_risks ?? 1;
 
   return (
-    <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5 mb-6">
-      {/* 1. Cash Balance */}
-      <div className="bg-[#0e1424] border border-slate-800/80 rounded-2xl p-4 flex items-center justify-between shadow-lg relative overflow-hidden">
+    <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5 mb-5">
+      {/* 1. Treasury Cash */}
+      <div className="glass-card p-4 rounded-2xl border border-white/[0.08] hover:border-emerald-500/30 transition-all shadow-lg flex items-center justify-between group">
         <div className="space-y-1">
-          <div className="text-[11px] font-mono uppercase text-slate-400 font-semibold tracking-wider flex items-center space-x-1.5">
-            <span>Treasury Cash</span>
+          <div className="text-[11px] font-mono uppercase tracking-wider text-zinc-400 font-semibold">
+            Treasury Cash
           </div>
-          <div className="text-xl font-bold text-white flex items-center">
-            <span>₹{(cash / 100000).toFixed(2)}L</span>
+          <div className="text-xl font-extrabold text-white font-mono">
+            ₹{(cash / 100000).toFixed(2)}L
           </div>
           <div className="text-[10px] text-emerald-400 font-medium">₹5.0L statutory reserve safe</div>
         </div>
-        <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center">
+        <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center shadow-inner group-hover:scale-105 transition-transform">
           <IndianRupee className="w-5 h-5" />
         </div>
       </div>
 
       {/* 2. 7-Day Revenue */}
-      <div className="bg-[#0e1424] border border-slate-800/80 rounded-2xl p-4 flex items-center justify-between shadow-lg">
+      <div className="glass-card p-4 rounded-2xl border border-white/[0.08] hover:border-cyan-500/30 transition-all shadow-lg flex items-center justify-between group">
         <div className="space-y-1">
-          <div className="text-[11px] font-mono uppercase text-slate-400 font-semibold tracking-wider">
+          <div className="text-[11px] font-mono uppercase tracking-wider text-zinc-400 font-semibold">
             7-Day Revenue
           </div>
-          <div className="text-xl font-bold text-white">
+          <div className="text-xl font-extrabold text-white font-mono">
             ₹{(rev / 100000).toFixed(2)}L
           </div>
-          <div className="text-[10px] text-blue-400 font-medium">+18.4% velocity lift</div>
+          <div className="text-[10px] text-cyan-400 font-medium">+18.4% velocity lift</div>
         </div>
-        <div className="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-400 flex items-center justify-center">
+        <div className="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center shadow-inner group-hover:scale-105 transition-transform">
           <TrendingUp className="w-5 h-5" />
         </div>
       </div>
 
-      {/* 3. Safe Procurement Budget */}
-      <div className="bg-[#0e1424] border border-slate-800/80 rounded-2xl p-4 flex items-center justify-between shadow-lg">
+      {/* 3. Safe Spend Cap */}
+      <div className="glass-card p-4 rounded-2xl border border-white/[0.08] hover:border-indigo-500/30 transition-all shadow-lg flex items-center justify-between group">
         <div className="space-y-1">
-          <div className="text-[11px] font-mono uppercase text-slate-400 font-semibold tracking-wider">
+          <div className="text-[11px] font-mono uppercase tracking-wider text-zinc-400 font-semibold">
             Safe Spend Cap
           </div>
-          <div className="text-xl font-bold text-white">
+          <div className="text-xl font-extrabold text-white font-mono">
             ₹{(reserve / 100000).toFixed(2)}L
           </div>
-          <div className="text-[10px] text-indigo-400 font-medium">Max liquid spend approved</div>
+          <div className="text-[10px] text-indigo-400 font-medium">Working capital spend limit</div>
         </div>
-        <div className="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center">
+        <div className="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center shadow-inner group-hover:scale-105 transition-transform">
           <ShieldCheck className="w-5 h-5" />
         </div>
       </div>
 
       {/* 4. Critical Stockout Risks */}
-      <div className="bg-[#0e1424] border border-slate-800/80 rounded-2xl p-4 flex items-center justify-between shadow-lg">
+      <div className="glass-card p-4 rounded-2xl border border-white/[0.08] hover:border-amber-500/30 transition-all shadow-lg flex items-center justify-between group">
         <div className="space-y-1">
-          <div className="text-[11px] font-mono uppercase text-slate-400 font-semibold tracking-wider">
+          <div className="text-[11px] font-mono uppercase tracking-wider text-zinc-400 font-semibold">
             Stockout Alerts
           </div>
-          <div className="text-xl font-bold text-amber-400 flex items-center space-x-1">
-            <span>{risks} SKU Alert</span>
+          <div className="text-xl font-extrabold text-amber-400 font-mono">
+            {risks} SKU Alert
           </div>
           <div className="text-[10px] text-amber-400/80 font-medium">P100 (UltraGlide Mouse)</div>
         </div>
-        <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center">
+        <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center shadow-inner group-hover:scale-105 transition-transform">
           <AlertTriangle className="w-5 h-5" />
         </div>
       </div>
