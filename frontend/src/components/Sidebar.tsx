@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { UserProfile } from '../types';
 import {
   MessageSquare,
@@ -13,6 +13,13 @@ import {
   LogOut,
   ShieldCheck,
   TrendingUp,
+  Search,
+  Settings,
+  PanelLeftClose,
+  PanelLeft,
+  Compass,
+  Trophy,
+  LayoutGrid,
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -36,6 +43,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
   onNewSession,
   onLogout,
 }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+
   const pastSessions = [
     { title: 'Viral Demand Surge (P100)', date: 'Today', status: 'Resolved' },
     { title: 'Supplier B Net-30 Analysis', date: 'Yesterday', status: 'Optimal' },
@@ -44,143 +53,166 @@ export const Sidebar: React.FC<SidebarProps> = ({
   ];
 
   return (
-    <aside className="w-64 h-screen bg-[#070b14] border-r border-white/[0.06] flex flex-col justify-between p-3.5 select-none z-30 flex-shrink-0">
-      {/* Top: Brand & New Session */}
-      <div className="space-y-4">
-        {/* Workspace Brand */}
-        <div className="flex items-center justify-between px-2 py-1">
-          <div className="flex items-center space-x-2.5">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-indigo-500 via-blue-500 to-cyan-400 p-[1px] shadow-lg shadow-indigo-500/20">
-              <div className="w-full h-full bg-[#070b14] rounded-[7px] flex items-center justify-center">
-                <Zap className="w-4 h-4 text-cyan-400" />
-              </div>
-            </div>
-            <div>
-              <div className="flex items-center space-x-1.5">
-                <span className="font-bold text-sm text-white tracking-tight">NEXUS</span>
-                <span className="text-[9px] font-mono px-1 py-0.2 rounded bg-indigo-950/80 text-indigo-400 border border-indigo-800/60 font-semibold">
-                  2.0 OS
-                </span>
-              </div>
-              <div className="text-[10px] text-zinc-400 truncate max-w-[120px]">{user.company}</div>
-            </div>
+    <aside
+      className={`h-screen bg-[#080a10] border-r border-white/[0.08] flex flex-col justify-between p-2.5 select-none z-40 flex-shrink-0 transition-all duration-200 ${
+        isExpanded ? 'w-64' : 'w-16'
+      }`}
+    >
+      {/* Top: Sparkle Icon & Dock Navigation */}
+      <div className="flex flex-col items-center space-y-3 w-full">
+        {/* Gemini 4-pointed Sparkle Logo */}
+        <div
+          onClick={onNewSession}
+          className="w-10 h-10 rounded-2xl flex items-center justify-center cursor-pointer hover:bg-white/5 transition-all group"
+          title="NEXUS Autonomous Copilot"
+        >
+          <div className="relative">
+            <Sparkles className="w-6 h-6 text-cyan-400 group-hover:scale-110 transition-transform fill-cyan-400/20" />
+            <span className="w-1.5 h-1.5 rounded-full bg-rose-500 absolute -top-0.5 -right-0.5" />
           </div>
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" title="System Live" />
         </div>
 
-        {/* New Session Button */}
+        {/* Sidebar Expand / Collapse Toggle (Matches Screenshot) */}
+        <button
+          onClick={() => setIsExpanded(!isExpanded)}
+          className="w-10 h-10 rounded-xl text-zinc-400 hover:text-white hover:bg-white/5 flex items-center justify-center transition-colors"
+          title={isExpanded ? 'Collapse Sidebar' : 'Expand Sidebar'}
+        >
+          {isExpanded ? <PanelLeftClose className="w-5 h-5" /> : <PanelLeft className="w-5 h-5" />}
+        </button>
+
+        {/* New Chat / Action Button */}
         <button
           onClick={onNewSession}
-          className="w-full py-2.5 px-3 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] text-zinc-200 hover:text-white text-xs font-semibold flex items-center justify-between transition-all group active:scale-[0.98]"
+          className={`h-10 rounded-xl flex items-center justify-center transition-all ${
+            isExpanded
+              ? 'w-full px-3 bg-white/5 hover:bg-white/10 text-white justify-between'
+              : 'w-10 text-zinc-300 hover:text-white hover:bg-white/5'
+          }`}
+          title="New Chat / Directive"
         >
-          <div className="flex items-center space-x-2">
-            <Plus className="w-4 h-4 text-cyan-400 group-hover:rotate-90 transition-transform duration-200" />
-            <span>New Operational Task</span>
-          </div>
-          <kbd className="text-[10px] font-mono text-zinc-500 bg-black/40 px-1.5 py-0.5 rounded border border-white/5">
-            ⌘K
-          </kbd>
+          <Plus className="w-5 h-5 text-cyan-400" />
+          {isExpanded && <span className="text-xs font-semibold ml-2">New Operational Task</span>}
         </button>
 
-        {/* Core Nav Tabs */}
-        <div className="space-y-1">
-          <div className="text-[10px] font-mono uppercase tracking-wider text-zinc-500 px-2 py-1 font-semibold">
-            Interface Views
-          </div>
-          <button
-            onClick={() => onViewChange('chat')}
-            className={`w-full px-3 py-2 rounded-xl text-xs font-medium flex items-center space-x-2.5 transition-all ${
-              currentView === 'chat'
-                ? 'bg-gradient-to-r from-indigo-600/30 to-blue-600/20 text-white border border-indigo-500/40 shadow-sm'
-                : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/[0.03]'
-            }`}
-          >
-            <MessageSquare className={`w-4 h-4 ${currentView === 'chat' ? 'text-cyan-400' : 'text-zinc-400'}`} />
-            <span>Executive Chat Copilot</span>
-          </button>
+        {/* Search Icon */}
+        <button
+          onClick={onNewSession}
+          className={`h-10 rounded-xl flex items-center justify-center transition-all ${
+            isExpanded
+              ? 'w-full px-3 text-zinc-400 hover:text-white hover:bg-white/5 justify-start space-x-2'
+              : 'w-10 text-zinc-400 hover:text-white hover:bg-white/5'
+          }`}
+          title="Search Tasks"
+        >
+          <Search className="w-5 h-5" />
+          {isExpanded && <span className="text-xs font-medium">Search</span>}
+        </button>
 
-          <button
-            onClick={() => onViewChange('flow')}
-            className={`w-full px-3 py-2 rounded-xl text-xs font-medium flex items-center space-x-2.5 transition-all ${
-              currentView === 'flow'
-                ? 'bg-gradient-to-r from-indigo-600/30 to-cyan-600/20 text-white border border-cyan-500/40 shadow-sm'
-                : 'text-zinc-400 hover:text-zinc-200 hover:bg-white/[0.03]'
-            }`}
-          >
-            <Workflow className={`w-4 h-4 ${currentView === 'flow' ? 'text-indigo-400' : 'text-zinc-400'}`} />
-            <span>Horizontal Topology</span>
-          </button>
-        </div>
+        {/* Executive Chat Copilot View Switcher */}
+        <button
+          onClick={() => onViewChange('chat')}
+          className={`h-10 rounded-xl flex items-center justify-center transition-all ${
+            currentView === 'chat'
+              ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40'
+              : 'text-zinc-400 hover:text-white hover:bg-white/5'
+          } ${isExpanded ? 'w-full px-3 justify-start space-x-2' : 'w-10'}`}
+          title="Executive Copilot Chat"
+        >
+          <MessageSquare className="w-5 h-5" />
+          {isExpanded && <span className="text-xs font-semibold">Executive Chat</span>}
+        </button>
 
-        {/* Recent Operations History */}
-        <div className="space-y-1 pt-2">
-          <div className="text-[10px] font-mono uppercase tracking-wider text-zinc-500 px-2 py-1 font-semibold flex items-center justify-between">
-            <span>Recent Decisions</span>
-            <Clock className="w-3 h-3" />
-          </div>
-          <div className="space-y-0.5 max-h-48 overflow-y-auto pr-1">
-            {pastSessions.map((session, idx) => (
-              <div
-                key={idx}
-                className="w-full px-2.5 py-1.5 rounded-lg text-xs text-zinc-400 hover:text-zinc-200 hover:bg-white/[0.03] transition-colors flex items-center justify-between group cursor-pointer"
-              >
-                <span className="truncate max-w-[140px] text-[11px]">{session.title}</span>
-                <span className="text-[9px] font-mono px-1 rounded bg-white/[0.04] text-emerald-400 border border-emerald-500/20">
-                  {session.status}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+        {/* Agentic Swarm Studio View Switcher */}
+        <button
+          onClick={() => onViewChange('flow')}
+          className={`h-10 rounded-xl flex items-center justify-center transition-all ${
+            currentView === 'flow'
+              ? 'bg-rose-500/20 text-rose-300 border border-rose-500/40'
+              : 'text-zinc-400 hover:text-white hover:bg-white/5'
+          } ${isExpanded ? 'w-full px-3 justify-start space-x-2' : 'w-10'}`}
+          title="Agentic Swarm Studio"
+        >
+          <Workflow className="w-5 h-5" />
+          {isExpanded && <span className="text-xs font-semibold">Swarm Studio</span>}
+        </button>
 
-      {/* Bottom Actions & User Profile */}
-      <div className="space-y-2 pt-3 border-t border-white/[0.06]">
+        {/* Document Racks (RBAC) */}
         <button
           onClick={onOpenDocs}
-          className="w-full px-2.5 py-2 rounded-xl text-xs text-zinc-400 hover:text-zinc-200 hover:bg-white/[0.04] flex items-center justify-between transition-colors"
+          className={`h-10 rounded-xl flex items-center justify-center transition-all text-zinc-400 hover:text-white hover:bg-white/5 ${
+            isExpanded ? 'w-full px-3 justify-start space-x-2' : 'w-10'
+          }`}
+          title="Department Document Racks (RBAC)"
         >
-          <div className="flex items-center space-x-2">
-            <FolderOpen className="w-4 h-4 text-purple-400" />
-            <span>Document Racks</span>
-          </div>
-          <span className="text-[9px] font-mono text-purple-400 bg-purple-950/60 px-1 py-0.5 rounded border border-purple-800/40">
-            RBAC
-          </span>
+          <FolderOpen className="w-5 h-5 text-purple-400" />
+          {isExpanded && <span className="text-xs font-medium">Document Racks</span>}
         </button>
 
+        {/* Expanded History List */}
+        {isExpanded && (
+          <div className="w-full pt-3 space-y-1 border-t border-white/5 animate-in fade-in duration-200">
+            <div className="text-[10px] font-mono uppercase tracking-wider text-zinc-500 px-2 py-1 font-semibold flex items-center justify-between">
+              <span>Recent Decisions</span>
+              <Clock className="w-3 h-3" />
+            </div>
+            <div className="space-y-0.5 max-h-36 overflow-y-auto pr-1">
+              {pastSessions.map((session, idx) => (
+                <div
+                  key={idx}
+                  onClick={onNewSession}
+                  className="w-full px-2 py-1.5 rounded-lg text-xs text-zinc-400 hover:text-white hover:bg-white/5 transition-colors flex items-center justify-between cursor-pointer"
+                >
+                  <span className="truncate max-w-[130px] text-[11px]">{session.title}</span>
+                  <span className="text-[8px] font-mono px-1 rounded bg-white/5 text-emerald-400">
+                    {session.status}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Bottom: Settings & User Avatar (Exact match to screenshot) */}
+      <div className="flex flex-col items-center space-y-3 w-full border-t border-white/5 pt-3">
+        {/* Cloud Guide */}
         <button
           onClick={onOpenGuide}
-          className="w-full px-2.5 py-2 rounded-xl text-xs text-zinc-400 hover:text-zinc-200 hover:bg-white/[0.04] flex items-center justify-between transition-colors"
+          className={`h-10 rounded-xl flex items-center justify-center transition-all text-emerald-400 hover:text-emerald-300 hover:bg-white/5 ${
+            isExpanded ? 'w-full px-3 justify-start space-x-2' : 'w-10'
+          }`}
+          title="100% Free Live Cloud Deployment Guide"
         >
-          <div className="flex items-center space-x-2">
-            <HelpCircle className="w-4 h-4 text-emerald-400" />
-            <span>100% Free Live Guide</span>
-          </div>
-          <span className="text-[9px] font-mono text-emerald-400 bg-emerald-950/60 px-1 py-0.5 rounded border border-emerald-800/40">
-            Cloud
-          </span>
+          <HelpCircle className="w-5 h-5" />
+          {isExpanded && <span className="text-xs font-medium">Cloud Deploy</span>}
         </button>
 
-        {/* User Card */}
-        <div className="pt-2">
-          <div
-            onClick={onOpenAuth}
-            className="p-2 rounded-xl bg-white/[0.03] hover:bg-white/[0.06] border border-white/[0.06] flex items-center justify-between cursor-pointer transition-all group"
-          >
-            <div className="flex items-center space-x-2.5">
-              <div className="w-7 h-7 rounded-lg bg-gradient-to-tr from-indigo-500 to-cyan-500 text-white font-bold text-xs flex items-center justify-center shadow-md">
-                {user.name.charAt(0).toUpperCase()}
-              </div>
-              <div className="text-left">
-                <div className="text-xs font-semibold text-zinc-200 group-hover:text-white">{user.name}</div>
-                <div className="text-[10px] text-cyan-400 font-mono">{user.role}</div>
-              </div>
-            </div>
-            <ChevronRight className="w-3.5 h-3.5 text-zinc-500 group-hover:text-zinc-300 transition-colors" />
+        {/* Settings Gear with Blue Ping Dot (Matching screenshot) */}
+        <button
+          onClick={onOpenAuth}
+          className={`h-10 rounded-xl relative flex items-center justify-center transition-all text-zinc-400 hover:text-white hover:bg-white/5 ${
+            isExpanded ? 'w-full px-3 justify-start space-x-2' : 'w-10'
+          }`}
+          title="Settings & Role Profile"
+        >
+          <div className="relative">
+            <Settings className="w-5 h-5" />
+            <span className="w-2 h-2 rounded-full bg-cyan-400 absolute -top-0.5 -right-0.5 shadow-sm" />
           </div>
+          {isExpanded && <span className="text-xs font-medium">Settings</span>}
+        </button>
+
+        {/* Green Circle User Avatar 'R' (Matching screenshot) */}
+        <div
+          onClick={onOpenAuth}
+          className="w-9 h-9 rounded-full bg-emerald-700 hover:bg-emerald-600 text-white font-extrabold text-sm flex items-center justify-center cursor-pointer shadow-md transition-all border border-emerald-500/40"
+          title={`${user.name} (${user.role}) - ${user.company}`}
+        >
+          {user.name.charAt(0).toUpperCase()}
         </div>
       </div>
     </aside>
   );
 };
+

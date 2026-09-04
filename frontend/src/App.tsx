@@ -220,7 +220,7 @@ export const App: React.FC = () => {
                 />
               </div>
             ) : (
-              <div className="flex-1 flex flex-col h-screen overflow-y-auto">
+              <div className="flex-1 flex flex-col h-screen overflow-y-auto bg-gradient-to-b from-[#080b12] via-[#090e1a] to-[#04060b]">
                 <Header
                   user={user}
                   currentView={currentView}
@@ -234,18 +234,21 @@ export const App: React.FC = () => {
                     setCurrentView('landing');
                   }}
                   isTimelineOpen={isTimelineOpen}
+                  activeModel={modelConfig.orchestrator_model}
+                  onOpenModelModal={(role) => setSwapTargetRole(role)}
                 />
 
-                <main className="flex-1 max-w-6xl w-full mx-auto px-6 py-4 space-y-4">
-                  <KpiRibbon metrics={metrics} />
+                <main className="flex-1 max-w-5xl w-full mx-auto px-4 py-3 flex flex-col justify-between">
                   <ChatView
                     user={user}
                     response={response}
                     isLoading={isLoading}
                     onSendMessage={(q) => executeOrchestration(70, q)}
                     modelConfig={modelConfig}
+                    onOpenModelModal={(role) => setSwapTargetRole(role)}
                     onApprove={handleApproveAction}
                     onReject={handleRejectAction}
+                    onSwitchToFlow={() => setCurrentView('flow')}
                   />
                 </main>
               </div>
