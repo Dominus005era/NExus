@@ -1,4 +1,4 @@
-# 🚀 NEXUS: Autonomous AI Operating System for Business Decisions
+# 🚀 NEXUS: Autonomous AI Operating System for Business Decisions📶
 
 > **"Don't just monitor your business. Let it reason about itself."**
 
