@@ -1,0 +1,870 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Nexus Workspace Pro - Agentic Swarm Studio</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "text-primary": "#E3E3E3",
+            "outline": "#8c9196",
+            "surface-bright": "#393939",
+            "secondary-fixed-dim": "#b2c5ff",
+            "reasoning-accent": "#A8C7FA",
+            "primary-fixed-dim": "#a7cbe3",
+            "surface-container-lowest": "#0e0e0e",
+            "primary": "#fffeff",
+            "border-subtle": "rgba(255, 255, 255, 0.08)",
+            "surface-card": "#1E1F20",
+            "border-hover": "rgba(255, 255, 255, 0.16)",
+            "background": "#131313",
+            "surface-container-high": "#2a2a2a",
+            "on-tertiary-fixed": "#261900",
+            "secondary": "#b2c5ff",
+            "tertiary": "#fffeff",
+            "secondary-fixed": "#dae2ff",
+            "on-tertiary-fixed-variant": "#584417",
+            "on-tertiary": "#402d03",
+            "surface-container-highest": "#353535",
+            "on-tertiary-container": "#786131",
+            "inverse-surface": "#e5e2e1",
+            "surface-tint": "#a7cbe3",
+            "on-surface-variant": "#c2c7cc",
+            "secondary-container": "#0054cd",
+            "surface": "#131313",
+            "text-secondary": "#C4C7C5",
+            "outline-variant": "#42484c",
+            "error": "#ffb4ab",
+            "surface-dim": "#131313",
+            "surface-variant": "#353535",
+            "on-background": "#e5e2e1",
+            "primary-fixed": "#c3e7ff",
+            "on-secondary-fixed-variant": "#0040a1",
+            "surface-container-low": "#1b1b1c",
+            "inverse-on-surface": "#303030",
+            "inverse-primary": "#3f6377",
+            "on-secondary": "#002b72",
+            "on-primary-container": "#45687d",
+            "on-surface": "#e5e2e1",
+            "on-primary-fixed": "#001e2c",
+            "tertiary-fixed-dim": "#e1c38a",
+            "surface-container": "#202020",
+            "on-error-container": "#ffdad6",
+            "on-secondary-fixed": "#001847",
+            "primary-container": "#c2e7ff",
+            "surface-capsule": "#282A2C",
+            "surface-dark": "#131314",
+            "on-primary": "#0a3447",
+            "tertiary-container": "#fedea3",
+            "on-secondary-container": "#c6d4ff",
+            "code-surface": "#0F0F10",
+            "tertiary-fixed": "#fedea3",
+            "text-muted": "#747775",
+            "on-error": "#690005",
+            "error-container": "#93000a",
+            "on-primary-fixed-variant": "#264b5e"
+          },
+          "borderRadius": {
+            "DEFAULT": "1rem",
+            "lg": "2rem",
+            "xl": "3rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-sm": "0.75rem",
+            "space-3xl": "4rem",
+            "space-xl": "2rem",
+            "sidebar-collapsed": "4.25rem",
+            "space-lg": "1.5rem",
+            "chat-max-width": "50rem",
+            "space-2xs": "0.25rem",
+            "prompt-max-width": "52rem",
+            "space-md": "1rem",
+            "space-2xl": "3rem",
+            "sidebar-expanded": "17.5rem",
+            "space-xs": "0.5rem"
+          },
+          "fontFamily": {
+            "title-md": ["Inter", "sans-serif"],
+            "body-md": ["Inter", "sans-serif"],
+            "headline-xl-mobile": ["Plus Jakarta Sans", "sans-serif"],
+            "headline-lg": ["Plus Jakarta Sans", "sans-serif"],
+            "label-sm": ["Inter", "sans-serif"],
+            "headline-sm": ["Plus Jakarta Sans", "sans-serif"],
+            "body-lg": ["Inter", "sans-serif"],
+            "code": ["JetBrains Mono", "monospace"],
+            "label-md": ["Inter", "sans-serif"],
+            "body-sm": ["Inter", "sans-serif"],
+            "headline-xl": ["Plus Jakarta Sans", "sans-serif"]
+          },
+          "fontSize": {
+            "title-md": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+            "body-md": ["14px", { "lineHeight": "22px", "fontWeight": "400" }],
+            "headline-xl-mobile": ["30px", { "lineHeight": "38px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.03em", "fontWeight": "500" }],
+            "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "500" }],
+            "body-lg": ["16px", { "lineHeight": "26px", "fontWeight": "400" }],
+            "code": ["13px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+            "body-sm": ["13px", { "lineHeight": "18px", "fontWeight": "400" }],
+            "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .material-symbols-outlined.fill {
+      font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+    }
+    /* Sleek custom scrollbars for easy horizontal panning feedback */
+    #canvas-scroller::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
+    #canvas-scroller::-webkit-scrollbar-track {
+      background: rgba(18, 20, 26, 0.7);
+      border-radius: 9999px;
+    }
+    #canvas-scroller::-webkit-scrollbar-thumb {
+      background: rgba(168, 199, 250, 0.25);
+      border-radius: 9999px;
+      border: 2px solid rgba(18, 20, 26, 0.9);
+    }
+    #canvas-scroller::-webkit-scrollbar-thumb:hover {
+      background: rgba(168, 199, 250, 0.5);
+    }
+    .canvas-panning {
+      cursor: grabbing !important;
+      user-select: none !important;
+    }
+    @keyframes flowDashes {
+      from { stroke-dashoffset: 40; }
+      to { stroke-dashoffset: 0; }
+    }
+    .animate-flow {
+      stroke-dasharray: 6, 6;
+      animation: flowDashes 1.6s linear infinite;
+    }
+    .animate-flow-reverse {
+      stroke-dasharray: 6, 6;
+      animation: flowDashes 2.4s linear infinite reverse;
+    }
+</style>
+</head>
+<body class="bg-background text-text-primary antialiased font-body-md text-body-md h-screen w-screen overflow-hidden flex selection:bg-secondary-container selection:text-text-primary">
+<!-- ================= MAIN VIEWPORT / WORKSPACE ================= -->
+<div class="flex-1 flex flex-col w-full h-screen overflow-hidden bg-background">
+<!-- ================= TOP NAV BAR ================= -->
+<header class="flex justify-between items-center w-full h-14 px-4 bg-surface border-b border-border-subtle z-40 flex-shrink-0">
+<!-- Left: Brand + Model Selector Pill -->
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2">
+<span class="text-title-md font-title-md font-semibold text-text-primary tracking-tight">Nexus</span>
+</div>
+<!-- Model Selector Pill -->
+<div class="inline-flex p-1 rounded-full bg-surface-container-high border border-border-subtle items-center">
+<a class="text-text-secondary hover:text-text-primary px-3.5 py-1.5 rounded-full text-label-sm font-medium transition-colors flex items-center gap-1.5 cursor-pointer" href="#">
+<span class="material-symbols-outlined text-label-md">chat</span>
+<span class="">Executive Copilot</span>
+</a>
+<button class="bg-surface-bright text-text-primary px-3.5 py-1.5 rounded-full text-label-sm font-semibold shadow-sm flex items-center gap-1.5 border border-reasoning-accent/30 text-reasoning-accent transition-colors">
+<span class="material-symbols-outlined text-label-md text-reasoning-accent fill">hub</span>
+<span class="">Agentic Swarm Studio</span>
+<span class="w-2 h-2 rounded-full bg-reasoning-accent animate-pulse"></span>
+</button>
+</div>
+</div>
+<!-- Center: Top Navigation Links (Workspace Active) -->
+<nav class="hidden md:flex items-center gap-2">
+<div class="flex items-center gap-2 text-label-md text-text-secondary">
+<span class="text-text-muted">Nexus</span>
+<span class="material-symbols-outlined text-label-sm text-text-muted">chevron_right</span>
+<span class="flex items-center gap-1.5 text-text-primary font-medium px-2.5 py-1 rounded-full bg-surface-container border border-border-subtle">
+<span class="material-symbols-outlined text-label-md text-reasoning-accent">account_tree</span>
+          Swarm Canvas: Executive_ERP_v4
+        </span>
+<span class="px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 text-[10px] font-semibold uppercase tracking-wider">Live Sync</span>
+</div>
+</nav>
+<!-- Right Actions: Secondary Action + Controls -->
+<div class="flex items-center gap-2">
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container hover:bg-surface-bright text-text-primary border border-border-subtle hover:border-border-hover transition-all text-label-md font-medium">
+<span class="material-symbols-outlined text-body-md text-secondary">play_arrow</span>
+<span class="">Run Simulation</span>
+</button>
+<button class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-primary-container text-on-primary font-semibold hover:bg-white transition-all text-label-md shadow-sm">
+<span class="material-symbols-outlined text-body-md fill">rocket_launch</span>
+<span class="">Deploy Swarm</span>
+</button>
+<button class="p-2 rounded-full text-text-secondary hover:text-text-primary hover:bg-surface-container transition-colors" title="Inspect Memory &amp; State Store">
+<span class="material-symbols-outlined text-title-md text-reasoning-accent">database</span>
+</button>
+<button class="p-2 rounded-full text-text-secondary hover:text-text-primary hover:bg-surface-container transition-colors" title="Canvas Settings">
+<span class="material-symbols-outlined text-title-md">tune</span>
+</button>
+<button class="p-2 rounded-full text-text-secondary hover:text-text-primary hover:bg-surface-container transition-colors" title="Share Swarm Pipeline">
+<span class="material-symbols-outlined text-title-md">share</span>
+</button>
+<div class="ml-1 w-8 h-8 rounded-full border border-border-subtle overflow-hidden">
+<img alt="User profile avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfVLcsPTGh8dlj81hGsX-dqNZGE2KDaSGTmb_cCU4qoEybhKL4Dl4CWW_nc4dIQJQhbYJ-Rq2zUqp-V0iq0AX68eTQWRa9aOtgAav6sGDDOQbdDzjFbTCrP7QqU-_OXUpPQsDAOGI9wV8e5wrRiOyKAuX4GMsHHPYlWSXxltl3zOfg1MZQWX-7Lk9d37oGULiiZU9qx48DM0pZvCkkNZq6A7XWchkhQJNFBJyPE4lcqaMF0Sx2LNKO">
+</div>
+</div>
+</header>
+<!-- ================= CONVERSATION CANVAS WORKSPACE ================= -->
+<main class="flex-1 relative w-full h-[calc(100vh-3.5rem)] overflow-hidden select-none bg-[#0c0d10]" style="background-image: radial-gradient(#1f293d 1.2px, transparent 1.2px); background-size: 24px 24px;">
+<!-- Interactive Canvas Top Action Floating Toolbar -->
+<div class="absolute top-4 left-6 z-20 flex items-center gap-2 bg-surface-card/90 backdrop-blur-md px-3 py-1.5 rounded-full border border-border-subtle shadow-xl">
+<div class="flex items-center gap-1.5 pr-2 border-r border-border-subtle/60">
+<span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+<span class="font-label-sm font-semibold text-text-primary uppercase tracking-wide">Cluster Swarm: Running</span>
+</div>
+<div class="flex items-center gap-1 text-label-md text-text-secondary">
+<button class="flex items-center gap-1 px-2.5 py-1 rounded-full hover:bg-surface-container hover:text-text-primary transition-colors">
+<span class="material-symbols-outlined text-label-md text-reasoning-accent">add_box</span>
+<span class="">Add Agent</span>
+</button>
+<button class="flex items-center gap-1 px-2.5 py-1 rounded-full hover:bg-surface-container hover:text-text-primary transition-colors">
+<span class="material-symbols-outlined text-label-md text-secondary">link</span>
+<span class="">Connect Tool</span>
+</button>
+<button class="flex items-center gap-1 px-2.5 py-1 rounded-full hover:bg-surface-container hover:text-text-primary transition-colors" id="btn-autolayout">
+<span class="material-symbols-outlined text-label-md text-text-muted">auto_fix_high</span>
+<span class="">Auto Layout</span>
+</button>
+</div>
+</div>
+<!-- Top Right Stats Indicator -->
+<div class="absolute top-4 right-6 z-20 flex items-center gap-3 bg-surface-card/90 backdrop-blur-md px-4 py-2 rounded-xl border border-border-subtle shadow-xl font-code text-label-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-reasoning-accent text-body-md">speed</span>
+<span class="text-text-muted">Latency:</span>
+<span class="text-emerald-400 font-medium">142ms</span>
+</div>
+<div class="w-px h-4 bg-border-subtle"></div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-body-md">memory</span>
+<span class="text-text-muted">Tokens/s:</span>
+<span class="text-text-primary font-medium">384 tok/s</span>
+</div>
+<div class="w-px h-4 bg-border-subtle"></div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-reasoning-accent text-body-md">dataset</span>
+<span class="text-text-muted">Active Context:</span>
+<span class="text-reasoning-accent font-medium">64k</span>
+</div>
+</div>
+<!-- Panning Hint Bar -->
+<div class="absolute top-4 left-1/2 -translate-x-1/2 z-20 pointer-events-none hidden lg:flex items-center gap-2 px-3 py-1 bg-surface-container/70 backdrop-blur-md border border-border-subtle/50 rounded-full text-text-muted text-[11px] font-code">
+<span class="material-symbols-outlined text-[13px] text-reasoning-accent">drag_pan</span>
+<span class="">Click and drag to pan canvas • Scroll horizontally/vertically or use Zoom controls</span>
+</div>
+<!-- Canvas Viewport with Pan/Zoom Inner Container -->
+<div class="w-full h-full overflow-x-auto overflow-y-auto cursor-grab relative" id="canvas-scroller" style="scroll-behavior: smooth;">
+<div class="relative w-[3450px] min-h-[920px] pb-36 pt-20 px-10 transition-transform origin-top-left" id="canvas-stage" style="transform: scale(0.88);">
+<!-- SVG Connectors Layer (Complete Horizontal LTR Flow) -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none z-0" id="canvas-svg" style="filter: drop-shadow(0 0 8px rgba(56,189,248,0.22));">
+<defs>
+<linearGradient id="grad-h-cyan" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" stop-color="#38bdf8" stop-opacity="0.95"></stop>
+<stop offset="100%" stop-color="#818cf8" stop-opacity="0.95"></stop>
+</linearGradient>
+<linearGradient id="grad-h-purple" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" stop-color="#818cf8" stop-opacity="0.9"></stop>
+<stop offset="100%" stop-color="#34d399" stop-opacity="0.9"></stop>
+</linearGradient>
+<linearGradient id="grad-h-amber" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" stop-color="#34d399" stop-opacity="0.9"></stop>
+<stop offset="100%" stop-color="#f59e0b" stop-opacity="0.95"></stop>
+</linearGradient>
+<linearGradient id="grad-h-violet" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" stop-color="#f59e0b" stop-opacity="0.9"></stop>
+<stop offset="100%" stop-color="#a855f7" stop-opacity="0.95"></stop>
+</linearGradient>
+<linearGradient id="grad-loop-feedback" x1="100%" x2="0%" y1="0%" y2="0%">
+<stop offset="0%" stop-color="#a855f7" stop-opacity="0.9"></stop>
+<stop offset="50%" stop-color="#38bdf8" stop-opacity="0.75"></stop>
+<stop offset="100%" stop-color="#a7cbe3" stop-opacity="0.9"></stop>
+</linearGradient>
+</defs>
+<!-- Stage 1 -> Stage 2 (USER to React Dashboard & FastAPI) -->
+<path class="animate-flow" d="M 276 360 C 310 360, 310 240, 350 240" fill="none" stroke="#38bdf8" stroke-width="2.5"></path>
+<path class="animate-flow" d="M 276 360 C 310 360, 310 470, 350 470" fill="none" stroke="#38bdf8" stroke-width="2.5"></path>
+<!-- Stage 2 -> Stage 3 (React Dashboard & FastAPI to AI ORCHESTRATOR) -->
+<path d="M 640 240 C 685 240, 685 360, 730 360" fill="none" stroke="#38bdf8" stroke-width="2.5"></path>
+<path d="M 640 470 C 685 470, 685 360, 730 360" fill="none" stroke="#2dd4bf" stroke-width="2.5"></path>
+<!-- Stage 3 -> Stage 4 (Orchestrator to 3 Branched Swarm Agents) -->
+<path class="animate-flow" d="M 1130 290 C 1170 290, 1170 170, 1220 170" fill="none" stroke="url(#grad-h-cyan)" stroke-width="2.5"></path>
+<path class="animate-flow" d="M 1130 360 L 1220 360" fill="none" stroke="#818cf8" stroke-width="2.5"></path>
+<path class="animate-flow" d="M 1130 430 C 1170 430, 1170 550, 1220 550" fill="none" stroke="url(#grad-h-cyan)" stroke-width="2.5"></path>
+<!-- Stage 4 -> Stage 5 (3 Branched Agents to SHARED STATE) -->
+<path d="M 1530 170 C 1575 170, 1575 360, 1620 360" fill="none" stroke="url(#grad-h-purple)" stroke-width="2.5"></path>
+<path d="M 1530 360 L 1620 360" fill="none" stroke="#34d399" stroke-width="2.5"></path>
+<path d="M 1530 550 C 1575 550, 1575 360, 1620 360" fill="none" stroke="url(#grad-h-purple)" stroke-width="2.5"></path>
+<!-- Stage 5 -> Stage 6 (SHARED STATE to DECISION ENGINE) -->
+<path class="animate-flow" d="M 1910 360 L 1960 360" fill="none" stroke="#38bdf8" stroke-width="2.5"></path>
+<!-- Stage 6 -> Stage 7 & 8 (DECISION ENGINE to LLM EXPLANATION and HUMAN APPROVAL) -->
+<path d="M 2260 320 C 2285 320, 2285 220, 2310 220" fill="none" stroke="#38bdf8" stroke-width="2.5"></path>
+<path class="animate-flow" d="M 2260 400 C 2285 400, 2285 460, 2310 460" fill="none" stroke="url(#grad-h-amber)" stroke-width="2.5"></path>
+<!-- Stage 7 & 8 -> Stage 9 (LLM Explanation & Approval -> ACTION & OUTCOME) -->
+<path d="M 2630 220 C 2655 220, 2655 270, 2680 270" fill="none" stroke="#818cf8" stroke-dasharray="4,4" stroke-width="2"></path>
+<path class="animate-flow" d="M 2630 460 C 2655 460, 2655 370, 2680 370" fill="none" stroke="#f59e0b" stroke-width="2.5"></path>
+<!-- Stage 9 -> Stage 10 (ACTION / OUTCOME to AI MEMORY) -->
+<path class="animate-flow" d="M 3000 370 L 3050 370" fill="none" stroke="url(#grad-h-violet)" stroke-width="2.5"></path>
+<!-- Stage 10 Continuous Feedback Loop: curves from Stage 10 AI MEMORY back to Stage 3 AI ORCHESTRATOR -->
+<path class="animate-flow-reverse" d="M 3200 480 C 3200 770, 930 770, 930 520" fill="none" opacity="0.75" stroke="url(#grad-loop-feedback)" stroke-width="2.5"></path>
+</svg>
+<!-- ================= STAGE 1: USER / CEO INPUT ================= -->
+<div class="absolute left-10 top-[295px] w-64 z-10 bg-surface-card/95 backdrop-blur-md rounded-2xl border border-border-hover p-4 shadow-2xl hover:border-reasoning-accent transition-all group">
+<div class="flex items-center justify-between pb-2 border-b border-border-subtle">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-300 flex items-center justify-center font-bold">
+<span class="material-symbols-outlined text-body-md">person</span>
+</div>
+<div>
+<h4 class="font-title-md text-label-md font-semibold text-text-primary">USER / CEO</h4>
+<span class="text-[10px] font-code text-text-muted uppercase tracking-wider">Stage 01 • Trigger</span>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-300 text-[10px] font-medium border border-amber-500/20">Directive</span>
+</div>
+<div class="pt-3 px-1 text-label-sm text-text-secondary flex items-center justify-between">
+<span class="truncate max-w-[170px] italic">"Optimize Q3 supply chain &amp; 504s"</span>
+<span class="material-symbols-outlined text-label-md text-reasoning-accent">send</span>
+</div>
+<div class="mt-2 text-[10px] font-code text-text-muted flex items-center justify-between">
+<span class="">Priority: Executive</span>
+<span class="text-emerald-400 font-medium">Dispatched</span>
+</div>
+<!-- Output Pin -->
+<div class="absolute -right-2 top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-surface-card border-2 border-reasoning-accent flex items-center justify-center shadow">
+<div class="w-1.5 h-1.5 rounded-full bg-reasoning-accent"></div>
+</div>
+</div>
+<!-- ================= STAGE 2: INGRESS GATEWAYS (React & FastAPI) ================= -->
+<!-- React Dashboard -->
+<div class="absolute left-[350px] top-[170px] w-72 z-10 bg-surface-card/95 backdrop-blur-md rounded-2xl border border-border-subtle p-3.5 shadow-xl hover:border-border-hover transition-all">
+<div class="absolute -left-2 top-1/2 -translate-y-1/2 w-3.5 h-3.5 rounded-full bg-surface-card border-2 border-reasoning-accent"></div>
+<div class="flex items-center justify-between pb-2 border-b border-border-subtle">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-sky-500/20 text-sky-400 flex items-center justify-center">
+<span class="material-symbols-outlined text-body-md">web</span>
+</div>
+<div>
+<h4 class="font-title-md text-label-md font-semibold text-text-primary">React Dashboard</h4>
+<span class="text-[10px] font-code text-text-muted">Frontend Client • Stage 02A</span>
+</div>
+</div>
+<span class="px-1.5 py-0.5 rounded bg-surface-container text-sky-400 text-[10px] font-code">v3.2 WS</span>
+</div>
+<div class="pt-2 flex items-center justify-between text-[11px] font-code text-text-muted">
+<span class="">JSON WebSockets</span>
+<span class="text-emerald-400 flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>Connected</span>
+</div>
+<div class="absolute -right-2 top-1/2 -translate-y-1/2 w-3.5 h-3.5 rounded-full bg-surface-card border-2 border-reasoning-accent"></div>
+</div>
+<!-- FastAPI API Gateway -->
+<div class="absolute left-[350px] top-[400px] w-72 z-10 bg-surface-card/95 backdrop-blur-md rounded-2xl border border-border-subtle p-3.5 shadow-xl hover:border-border-hover transition-all">
+<div class="absolute -left-2 top-1/2 -translate-y-1/2 w-3.5 h-3.5 rounded-full bg-surface-card border-2 border-reasoning-accent"></div>
+<div class="flex items-center justify-between pb-2 border-b border-border-subtle">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-teal-500/20 text-teal-400 flex items-center justify-center">
+<span class="material-symbols-outlined text-body-md">api</span>
+</div>
+<div>
+<h4 class="font-title-md text-label-md font-semibold text-text-primary">FastAPI API Gateway</h4>
+<span class="text-[10px] font-code text-text-muted">Backend Ingress • Stage 02B</span>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-teal-500/10 text-teal-300 text-[10px] font-medium">ASGI 2.0</span>
+</div>
+<div class="pt-2 flex items-center justify-between text-[11px] font-code text-text-muted">
+<span class="">Route: /api/v1/swarm</span>
+<span class="text-emerald-400">200 OK • async</span>
+</div>
+<div class="absolute -right-2 top-1/2 -translate-y-1/2 w-3.5 h-3.5 rounded-full bg-surface-card border-2 border-teal-400"></div>
+</div>
+<!-- ================= STAGE 3: CENTRAL AI ORCHESTRATOR ================= -->
+<div class="absolute left-[730px] top-[220px] w-[400px] z-20 bg-surface-card/95 backdrop-blur-xl rounded-2xl border-2 border-reasoning-accent p-4 shadow-[0_0_35px_rgba(168,199,250,0.18)] transition-all hover:scale-[1.01]">
+<div class="absolute -left-2.5 top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-reasoning-accent border-2 border-surface-card shadow-sm"></div>
+<!-- Header -->
+<div class="flex items-center justify-between pb-2.5 border-b border-border-subtle">
+<div class="flex items-center gap-2.5">
+<div class="w-9 h-9 rounded-xl bg-reasoning-accent/20 text-reasoning-accent flex items-center justify-center shadow-inner">
+<span class="material-symbols-outlined text-title-md fill">neurology</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="font-title-md text-body-md font-bold text-text-primary tracking-tight">AI ORCHESTRATOR</h3>
+<span class="px-1.5 py-0.5 rounded bg-reasoning-accent/15 text-reasoning-accent text-[10px] font-semibold tracking-wide uppercase">Stage 03</span>
+</div>
+<span class="text-label-sm font-code text-secondary-fixed-dim">Nexus 2.5 Pro (Multi-Agent Planner)</span>
+</div>
+</div>
+<span class="flex h-2.5 w-2.5 relative">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-reasoning-accent opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-reasoning-accent"></span>
+</span>
+</div>
+<!-- Sub-modules Grid inside Orchestrator -->
+<div class="grid grid-cols-3 gap-2 my-3">
+<div class="bg-surface-container-high/80 rounded-lg p-2 border border-border-subtle/50 text-center">
+<span class="material-symbols-outlined text-label-md text-sky-400">radar</span>
+<div class="text-[11px] font-medium text-text-primary mt-0.5">Event Detection</div>
+<div class="text-[9px] text-text-muted font-code">Ingress Stream</div>
+</div>
+<div class="bg-surface-container-high/80 rounded-lg p-2 border border-border-subtle/50 text-center">
+<span class="material-symbols-outlined text-label-md text-amber-400">account_tree</span>
+<div class="text-[11px] font-medium text-text-primary mt-0.5">Task Planning</div>
+<div class="text-[9px] text-text-muted font-code">DAG Graph Gen</div>
+</div>
+<div class="bg-surface-container-high/80 rounded-lg p-2 border border-border-subtle/50 text-center">
+<span class="material-symbols-outlined text-label-md text-emerald-400">alt_route</span>
+<div class="text-[11px] font-medium text-text-primary mt-0.5">Agent Routing</div>
+<div class="text-[9px] text-text-muted font-code">Dynamic Fork</div>
+</div>
+</div>
+<!-- Output Pins Status -->
+<div class="flex items-center justify-between pt-1 border-t border-border-subtle/50 text-label-sm text-text-muted font-code">
+<span class="">Dispatching 3 Swarm Workers</span>
+<span class="text-reasoning-accent">Swarm State: Healthy</span>
+</div>
+<!-- Right Output Pins for 3 Branched Agents -->
+<div class="absolute -right-2 top-[70px] w-3.5 h-3.5 rounded-full bg-surface-card border-2 border-sky-400"></div>
+<div class="absolute -right-2 top-1/2 -translate-y-1/2 w-3.5 h-3.5 rounded-full bg-surface-card border-2 border-indigo-400"></div>
+<div class="absolute -right-2 bottom-[70px] w-3.5 h-3.5 rounded-full bg-surface-card border-2 border-emerald-400"></div>
+<!-- Bottom Pin for continuous feedback loop -->
+<div class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-3.5 h-3.5 rounded-full bg-reasoning-accent border-2 border-surface-card"></div>
+</div>
+<!-- ================= STAGE 4: PARALLEL BRANCHED SWARM AGENTS ================= -->
+<!-- Agent 1: SALES AGENT -->
+<div class="absolute left-[1220px] top-[75px] w-[310px] z-10 bg-surface-card/95 backdrop-blur-md rounded-2xl border border-sky-500/40 p-3.5 shadow-xl hover:border-sky-400 transition-all group">
+<div class="absolute -left-2 top-1/2 -translate-y-1/2 w-3.5 h-3.5 rounded-full bg-surface-card border-2 border-sky-400"></div>
+<div class="flex items-center justify-between pb-2 border-b border-border-subtle">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-sky-500/20 text-sky-400 flex items-center justify-center">
+<span class="material-symbols-outlined text-title-md">trending_up</span>
+</div>
+<div>
+<h4 class="font-title-md text-body-sm font-bold text-text-primary">SALES AGENT</h4>
+<span class="text-[11px] font-code text-sky-300">Stage 04A • Forecasting</span>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 text-[10px] font-semibold">Active</span>
+</div>
+<div class="py-2 space-y-1 text-label-sm">
+<div class="flex justify-between text-text-secondary"><span class="text-text-muted">Target:</span><span class="font-medium text-text-primary">Revenue Projections</span></div>
+<div class="flex justify-between text-text-secondary"><span class="text-text-muted">Model:</span><span class="font-code text-secondary-fixed-dim">Claude 3.5 Sonnet</span></div>
+<div class="flex justify-between text-text-secondary"><span class="text-text-muted">Confidence:</span><span class="text-emerald-400 font-semibold">98.4%</span></div>
+</div>
+<div class="pt-2 border-t border-border-subtle/60 flex items-center gap-1.5 flex-wrap">
+<span class="px-2 py-0.5 rounded bg-surface-container text-[10px] font-code text-text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] text-sky-400">query_stats</span>Salesforce API
+            </span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-[10px] font-code text-text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] text-reasoning-accent">database</span>Short-term Mem
+            </span>
+</div>
+<div class="absolute -right-2 top-1/2 -translate-y-1/2 w-3.5 h-3.5 rounded-full bg-surface-card border-2 border-sky-400"></div>
+</div>
+<!-- Agent 2: INVENTORY AGENT -->
+<div class="absolute left-[1220px] top-[265px] w-[310px] z-10 bg-surface-card/95 backdrop-blur-md rounded-2xl border border-indigo-500/40 p-3.5 shadow-xl hover:border-indigo-400 transition-all group">
+<div class="absolute -left-2 top-1/2 -translate-y-1/2 w-3.5 h-3.5 rounded-full bg-surface-card border-2 border-indigo-400"></div>
+<div class="flex items-center justify-between pb-2 border-b border-border-subtle">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-400 flex items-center justify-center">
+<span class="material-symbols-outlined text-title-md">inventory_2</span>
+</div>
+<div>
+<h4 class="font-title-md text-body-sm font-bold text-text-primary">INVENTORY AGENT</h4>
+<span class="text-[11px] font-code text-indigo-300">Stage 04B • Stock Prediction</span>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 text-[10px] font-semibold">Active</span>
+</div>
+<div class="py-2 space-y-1 text-label-sm">
+<div class="flex justify-between text-text-secondary"><span class="text-text-muted">Target:</span><span class="font-medium text-text-primary">SKU Run-rate &amp; Buffer</span></div>
+<div class="flex justify-between text-text-secondary"><span class="text-text-muted">Model:</span><span class="font-code text-secondary-fixed-dim">GPT-4o Mini Swarm</span></div>
+<div class="flex justify-between text-text-secondary"><span class="text-text-muted">Risk Status:</span><span class="text-amber-400 font-semibold">Low (3 SKUs low)</span></div>
+</div>
+<div class="pt-2 border-t border-border-subtle/60 flex items-center gap-1.5 flex-wrap">
+<span class="px-2 py-0.5 rounded bg-surface-container text-[10px] font-code text-text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] text-indigo-400">warehouse</span>SAP ERP Hook
+            </span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-[10px] font-code text-text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] text-reasoning-accent">database</span>Redis Cache
+            </span>
+</div>
+<div class="absolute -right-2 top-1/2 -translate-y-1/2 w-3.5 h-3.5 rounded-full bg-surface-card border-2 border-indigo-400"></div>
+</div>
+<!-- Agent 3: FINANCE AGENT -->
+<div class="absolute left-[1220px] top-[455px] w-[310px] z-10 bg-surface-card/95 backdrop-blur-md rounded-2xl border border-emerald-500/40 p-3.5 shadow-xl hover:border-emerald-400 transition-all group">
+<div class="absolute -left-2 top-1/2 -translate-y-1/2 w-3.5 h-3.5 rounded-full bg-surface-card border-2 border-emerald-400"></div>
+<div class="flex items-center justify-between pb-2 border-b border-border-subtle">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
+<span class="material-symbols-outlined text-title-md">account_balance</span>
+</div>
+<div>
+<h4 class="font-title-md text-body-sm font-bold text-text-primary">FINANCE AGENT</h4>
+<span class="text-[11px] font-code text-emerald-300">Stage 04C • Cash Flow</span>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 text-[10px] font-semibold">Active</span>
+</div>
+<div class="py-2 space-y-1 text-label-sm">
+<div class="flex justify-between text-text-secondary"><span class="text-text-muted">Target:</span><span class="font-medium text-text-primary">Working Capital &amp; Burn</span></div>
+<div class="flex justify-between text-text-secondary"><span class="text-text-muted">Model:</span><span class="font-code text-secondary-fixed-dim">Llama-3.3 70B</span></div>
+<div class="flex justify-between text-text-secondary"><span class="text-text-muted">Variance:</span><span class="text-emerald-400 font-semibold">+$240,000 MoM</span></div>
+</div>
+<div class="pt-2 border-t border-border-subtle/60 flex items-center gap-1.5 flex-wrap">
+<span class="px-2 py-0.5 rounded bg-surface-container text-[10px] font-code text-text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] text-emerald-400">payments</span>Stripe &amp; Ledger
+            </span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-[10px] font-code text-text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] text-reasoning-accent">database</span>Vector State
+            </span>
+</div>
+<div class="absolute -right-2 top-1/2 -translate-y-1/2 w-3.5 h-3.5 rounded-full bg-surface-card border-2 border-emerald-400"></div>
+</div>
+<!-- ================= STAGE 5: SHARED STATE ================= -->
+<div class="absolute left-[1620px] top-[275px] w-72 z-10 bg-surface-card/95 backdrop-blur-md rounded-2xl border border-border-subtle p-3.5 shadow-xl hover:border-reasoning-accent transition-all">
+<div class="absolute -left-2 top-1/2 -translate-y-1/2 w-3.5 h-3.5 rounded-full bg-surface-card border-2 border-reasoning-accent"></div>
+<div class="flex items-center justify-between pb-2 border-b border-border-subtle">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-red-500/20 text-red-400 flex items-center justify-center">
+<span class="material-symbols-outlined text-body-md">dns</span>
+</div>
+<div>
+<h4 class="font-title-md text-label-md font-semibold text-text-primary">SHARED STATE</h4>
+<span class="text-[10px] font-code text-text-muted">Stage 05 • Redis &amp; Vector Sync</span>
+</div>
+</div>
+<span class="px-1.5 py-0.5 rounded bg-surface-container text-text-secondary text-[10px] font-code">12ms</span>
+</div>
+<div class="pt-2 flex items-center justify-between text-label-sm">
+<span class="text-text-muted">Lock State:</span>
+<span class="text-emerald-400 font-code font-medium">Unlocked (Zero Drift)</span>
+</div>
+<div class="pt-1.5 flex items-center justify-between text-label-sm">
+<span class="text-text-muted">Context Merge:</span>
+<span class="text-reasoning-accent font-code font-medium">Synchronized</span>
+</div>
+<div class="absolute -right-2 top-1/2 -translate-y-1/2 w-3.5 h-3.5 rounded-full bg-surface-card border-2 border-reasoning-accent"></div>
+</div>
+<!-- ================= STAGE 6: DECISION ENGINE ================= -->
+<div class="absolute left-[1960px] top-[265px] w-[300px] z-10 bg-surface-card/95 backdrop-blur-md rounded-2xl border border-border-subtle p-3.5 shadow-xl hover:border-border-hover transition-all">
+<div class="absolute -left-2 top-1/2 -translate-y-1/2 w-3.5 h-3.5 rounded-full bg-surface-card border-2 border-reasoning-accent"></div>
+<div class="flex items-center justify-between pb-2 border-b border-border-subtle">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center">
+<span class="material-symbols-outlined text-body-md">tune</span>
+</div>
+<div>
+<h4 class="font-title-md text-label-md font-semibold text-text-primary">DECISION ENGINE</h4>
+<span class="text-[10px] font-code text-text-muted">Stage 06 • Policy &amp; Rules</span>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-300 text-[10px] font-medium">Active</span>
+</div>
+<div class="py-2.5 flex items-center justify-center gap-1.5 flex-wrap">
+<span class="px-2 py-0.5 rounded-full bg-surface-container-high border border-border-subtle text-[10px] font-code text-text-secondary flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>Rules Engine
+            </span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-high border border-border-subtle text-[10px] font-code text-text-secondary flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-sky-400"></span>Pareto Opt
+            </span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-high border border-border-subtle text-[10px] font-code text-text-secondary flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-rose-400"></span>Risk Score
+            </span>
+</div>
+<div class="absolute -right-2 top-[55px] w-3.5 h-3.5 rounded-full bg-surface-card border-2 border-reasoning-accent"></div>
+<div class="absolute -right-2 bottom-[55px] w-3.5 h-3.5 rounded-full bg-surface-card border-2 border-amber-400"></div>
+</div>
+<!-- ================= STAGE 7: LLM EXPLANATION ================= -->
+<div class="absolute left-[2310px] top-[140px] w-80 z-10 bg-surface-card/95 backdrop-blur-md rounded-2xl border border-border-subtle p-3.5 shadow-xl hover:border-reasoning-accent transition-all">
+<div class="absolute -left-2 top-1/2 -translate-y-1/2 w-3.5 h-3.5 rounded-full bg-surface-card border-2 border-reasoning-accent"></div>
+<div class="flex items-center justify-between pb-2 border-b border-border-subtle">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-400 flex items-center justify-center">
+<span class="material-symbols-outlined text-body-md">format_quote</span>
+</div>
+<div>
+<h4 class="font-title-md text-label-md font-semibold text-text-primary">LLM EXPLANATION</h4>
+<span class="text-[10px] font-code text-text-muted">Stage 07 • Audit Synthesis</span>
+</div>
+</div>
+<span class="text-[10px] font-code text-reasoning-accent">Confidence: 99.1%</span>
+</div>
+<p class="pt-2 text-label-sm text-text-secondary italic leading-relaxed">
+            "Reallocating $150k capital mitigates 504 timeout load by 40% with zero cash risk."
+          </p>
+<div class="absolute -right-2 top-1/2 -translate-y-1/2 w-3.5 h-3.5 rounded-full bg-surface-card border-2 border-indigo-400"></div>
+</div>
+<!-- ================= STAGE 8: HUMAN APPROVAL (Executive Gate) ================= -->
+<div class="absolute left-[2310px] top-[340px] w-80 z-20 bg-surface-card/95 backdrop-blur-xl rounded-2xl border-2 border-amber-500/70 p-4 shadow-[0_0_30px_rgba(245,158,11,0.18)] hover:border-amber-400 transition-all">
+<div class="absolute -left-2.5 top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-amber-400 border-2 border-surface-card"></div>
+<div class="flex items-center justify-between pb-2.5 border-b border-border-subtle">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center">
+<span class="material-symbols-outlined text-title-md">verified_user</span>
+</div>
+<div>
+<h4 class="font-title-md text-label-md font-bold text-text-primary">HUMAN APPROVAL</h4>
+<span class="text-[10px] font-code text-amber-300">Stage 08 • CEO Gatekeeper</span>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 text-[10px] font-bold uppercase tracking-wider animate-pulse">Action Req</span>
+</div>
+<div class="pt-3 flex items-center gap-2">
+<button class="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-surface-dark font-title-md text-[12px] font-bold transition-all shadow-md active:scale-95">
+<span class="material-symbols-outlined text-label-md fill">check_circle</span>
+<span class="">Approve</span>
+</button>
+<button class="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-surface-container-high hover:bg-surface-bright text-text-primary font-title-md text-[12px] font-semibold border border-border-subtle transition-all active:scale-95">
+<span class="material-symbols-outlined text-label-md text-rose-400">cancel</span>
+<span class="">Override</span>
+</button>
+</div>
+<div class="absolute -right-2 top-1/2 -translate-y-1/2 w-3.5 h-3.5 rounded-full bg-surface-card border-2 border-amber-400"></div>
+</div>
+<!-- ================= STAGE 9: ACTION & ACTUAL OUTCOME ================= -->
+<div class="absolute left-[2680px] top-[220px] w-80 z-10 bg-surface-card/95 backdrop-blur-md rounded-2xl border border-emerald-500/40 p-4 shadow-xl hover:border-emerald-400 transition-all">
+<div class="absolute -left-2 top-1/2 -translate-y-1/2 w-3.5 h-3.5 rounded-full bg-surface-card border-2 border-emerald-400"></div>
+<div class="flex items-center justify-between pb-2 border-b border-border-subtle">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center">
+<span class="material-symbols-outlined text-body-md">smart_toy</span>
+</div>
+<div>
+<h4 class="font-title-md text-label-md font-semibold text-text-primary">ACTION &amp; OUTCOME</h4>
+<span class="text-[10px] font-code text-text-muted">Stage 09 • Execution &amp; Telemetry</span>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 text-[10px] font-semibold">Live Done</span>
+</div>
+<div class="space-y-2 pt-2.5 text-label-sm font-code">
+<div class="flex items-center justify-between text-text-secondary text-[11px] bg-surface-container/60 p-1.5 rounded">
+<span class="">HPA Node Rebalance</span>
+<span class="text-emerald-400 font-semibold">0.3s executed</span>
+</div>
+<div class="flex items-center justify-between text-text-secondary text-[11px] bg-surface-container/60 p-1.5 rounded">
+<span class="">p99 Latency: 45ms (was 8.2s)</span>
+<span class="text-emerald-400 font-bold">-99.4%</span>
+</div>
+</div>
+<div class="absolute -right-2 top-1/2 -translate-y-1/2 w-3.5 h-3.5 rounded-full bg-surface-card border-2 border-purple-400"></div>
+</div>
+<!-- ================= STAGE 10: AI MEMORY & CONTINUOUS LEARNING ================= -->
+<div class="absolute left-[3050px] top-[260px] w-80 z-20 bg-surface-card/95 backdrop-blur-md rounded-2xl border-2 border-reasoning-accent/80 p-4 shadow-[0_0_25px_rgba(168,199,250,0.2)] hover:border-reasoning-accent transition-all">
+<div class="absolute -left-2.5 top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-surface-card border-2 border-reasoning-accent"></div>
+<div class="flex items-center justify-between pb-2 border-b border-border-subtle">
+<div class="flex items-center gap-2">
+<div class="w-9 h-9 rounded-xl bg-reasoning-accent/20 text-reasoning-accent flex items-center justify-center">
+<span class="material-symbols-outlined text-body-md fill">all_inclusive</span>
+</div>
+<div>
+<h4 class="font-title-md text-label-md font-bold text-text-primary">AI MEMORY LOOP</h4>
+<span class="text-[10px] font-code text-reasoning-accent">Stage 10 • Episodic RAG</span>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container/20 text-reasoning-accent text-[10px] font-semibold border border-reasoning-accent/30">Continuous</span>
+</div>
+<div class="pt-2.5 space-y-1.5 text-label-sm font-code">
+<div class="flex justify-between text-text-muted">
+<span class="">State Vector:</span>
+<span class="text-secondary-fixed-dim">Stored in Pinecone</span>
+</div>
+<div class="flex justify-between text-text-muted">
+<span class="">Feedback Loop:</span>
+<span class="text-emerald-400">Active -&gt; Orchestrator</span>
+</div>
+</div>
+<div class="mt-2.5 pt-2 border-t border-border-subtle text-[11px] text-reasoning-accent/90 italic">
+            Feedback pulse recalibrates DAG planner for future supply chain variance.
+          </div>
+<!-- Loop pin at bottom right -->
+<div class="absolute -bottom-2 right-1/2 translate-x-1/2 w-4 h-4 rounded-full bg-reasoning-accent border-2 border-surface-card"></div>
+</div>
+</div>
+</div>
+<!-- ================= CANVAS CONTROLS (BOTTOM-RIGHT) ================= -->
+<div class="absolute bottom-6 right-6 z-30 flex items-center gap-1.5 bg-surface-card/95 backdrop-blur-md p-1.5 rounded-2xl border border-border-subtle shadow-2xl">
+<button class="w-8 h-8 rounded-xl flex items-center justify-center text-text-secondary hover:text-text-primary hover:bg-surface-container transition-colors" id="btn-zoom-out" title="Zoom Out">
+<span class="material-symbols-outlined text-body-md">remove</span>
+</button>
+<span class="px-2 font-code text-label-sm text-text-primary font-medium select-none w-12 text-center" id="zoom-indicator">88%</span>
+<button class="w-8 h-8 rounded-xl flex items-center justify-center text-text-secondary hover:text-text-primary hover:bg-surface-container transition-colors" id="btn-zoom-in" title="Zoom In">
+<span class="material-symbols-outlined text-body-md">add</span>
+</button>
+<div class="w-px h-5 bg-border-subtle"></div>
+<button class="w-8 h-8 rounded-xl flex items-center justify-center text-text-secondary hover:text-text-primary hover:bg-surface-container transition-colors" id="btn-fit-screen" title="Fit to Screen (View All Stages)">
+<span class="material-symbols-outlined text-body-md">fit_screen</span>
+</button>
+<button class="w-8 h-8 rounded-xl flex items-center justify-center text-reasoning-accent hover:bg-surface-container transition-colors" id="btn-toggle-minimap" title="Toggle Mini-map">
+<span class="material-symbols-outlined text-body-md">map</span>
+</button>
+</div>
+<!-- ================= FLOATING MINI-MAP (BOTTOM-LEFT) ================= -->
+<div class="absolute bottom-6 left-6 z-30 flex flex-col items-start gap-2" id="history-log-widget"><div class="hidden w-80 bg-surface-card/95 backdrop-blur-md rounded-2xl border border-border-subtle shadow-2xl overflow-hidden mb-1 flex-col" id="history-log-panel"><div class="flex items-center justify-between px-3.5 py-2.5 bg-surface-container/60 border-b border-border-subtle"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-body-md text-reasoning-accent">history</span><span class="font-title-md text-[12px] font-semibold text-text-primary">Execution History</span><span class="px-1.5 py-0.5 rounded-full text-[10px] bg-reasoning-accent/15 text-reasoning-accent font-code font-semibold">Live (12)</span></div><button class="material-symbols-outlined text-[14px] text-text-muted hover:text-text-primary cursor-pointer p-0.5 rounded hover:bg-surface-container" id="btn-close-history-panel">close</button></div><div class="p-2.5 space-y-2 max-h-56 overflow-y-auto font-code text-[11px]"><div class="flex items-start gap-2 p-1.5 rounded-lg bg-surface-container/40 border border-border-subtle/40 hover:bg-surface-container/70 transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-1.5 flex-shrink-0"></span><div class="flex-1 min-w-0"><div class="flex items-center justify-between text-text-muted text-[10px]"><span class="">14:02:18</span><span class="text-emerald-400 font-medium">Completed</span></div><p class="text-text-primary truncate font-medium mt-0.5">AI Orchestrator DAG branched</p><span class="text-[9px] text-text-secondary">Stage 03 -&gt; 04A/B/C dispatched</span></div></div><div class="flex items-start gap-2 p-1.5 rounded-lg bg-surface-container/40 border border-border-subtle/40 hover:bg-surface-container/70 transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-teal-400 mt-1.5 flex-shrink-0"></span><div class="flex-1 min-w-0"><div class="flex items-center justify-between text-text-muted text-[10px]"><span class="">14:02:15</span><span class="text-teal-400 font-medium">200 OK</span></div><p class="text-text-primary truncate font-medium mt-0.5">FastAPI webhook ingress received</p><span class="text-[9px] text-text-secondary">Payload validated • 4.2kb</span></div></div><div class="flex items-start gap-2 p-1.5 rounded-lg bg-surface-container/40 border border-border-subtle/40 hover:bg-surface-container/70 transition-colors"><span class="w-1.5 h-1.5 rounded-full bg-amber-400 mt-1.5 flex-shrink-0"></span><div class="flex-1 min-w-0"><div class="flex items-center justify-between text-text-muted text-[10px]"><span class="">14:02:10</span><span class="text-amber-300 font-medium">Dispatched</span></div><p class="text-text-primary truncate font-medium mt-0.5">Trigger prompt dispatched by Rahul M.</p><span class="text-[9px] text-text-secondary">Priority: Executive Directive</span></div></div></div><div class="px-3 py-1.5 bg-surface-container-high/60 border-t border-border-subtle flex items-center justify-between text-[10px] font-code text-text-muted"><span class="">Auto-refresh: 1s</span><span class="text-reasoning-accent hover:underline cursor-pointer flex items-center gap-1"><span class="material-symbols-outlined text-[12px]">open_in_new</span>Full Log View</span></div></div><button class="flex items-center gap-2 px-3 py-2 rounded-2xl bg-surface-card/95 hover:bg-surface-bright border border-border-subtle backdrop-blur-md text-text-primary text-[12px] font-code shadow-2xl transition-all active:scale-95 group" id="history-log-toggle"><span class="material-symbols-outlined text-body-md text-reasoning-accent group-hover:rotate-12 transition-transform">history</span><span class="font-medium text-text-primary">Execution History Log</span><span class="px-1.5 py-0.5 rounded-full text-[10px] bg-reasoning-accent/20 text-reasoning-accent font-semibold">12</span></button></div><div class="absolute bottom-20 right-6 z-30 bg-surface-card/95 backdrop-blur-md p-2.5 rounded-2xl border border-border-subtle shadow-2xl hidden md:flex flex-col gap-1.5 w-56" id="minimap-container"><div class="flex items-center justify-between text-[11px] font-medium text-text-muted px-1"><span class="flex items-center gap-1.5 text-text-primary font-semibold"><span class="material-symbols-outlined text-[14px] text-reasoning-accent">view_compact</span>Swarm Navigator (10 Stages)</span><button class="material-symbols-outlined text-[13px] text-text-muted hover:text-text-primary cursor-pointer" id="btn-close-minimap">close</button></div><div class="w-full h-24 rounded-lg bg-surface-dark/95 border border-border-subtle/50 relative overflow-hidden flex items-center justify-between p-2"><div class="w-full flex items-center justify-between gap-1 opacity-90"><div class="w-2.5 h-6 bg-amber-400/80 rounded" title="Stage 1: USER"></div><div class="flex flex-col gap-1"><div class="w-3 h-3 bg-sky-400/80 rounded" title="Stage 2: Dashboard"></div><div class="w-3 h-3 bg-teal-400/80 rounded" title="Stage 2: API"></div></div><div class="w-5 h-9 bg-reasoning-accent rounded ring-1 ring-reasoning-accent" title="Stage 3: Orchestrator"></div><div class="flex flex-col gap-0.5"><div class="w-3.5 h-2.5 bg-sky-400/80 rounded" title="Stage 4: Sales"></div><div class="w-3.5 h-2.5 bg-indigo-400/80 rounded" title="Stage 4: Inventory"></div><div class="w-3.5 h-2.5 bg-emerald-400/80 rounded" title="Stage 4: Finance"></div></div><div class="w-3 h-6 bg-rose-400/80 rounded" title="Stage 5: Shared State"></div><div class="w-3 h-6 bg-amber-400/80 rounded" title="Stage 6: Decision Engine"></div><div class="flex flex-col gap-1"><div class="w-3.5 h-3 bg-indigo-400/80 rounded" title="Stage 7: LLM Explanation"></div><div class="w-3.5 h-3 bg-amber-400/90 rounded" title="Stage 8: Human Approval"></div></div><div class="w-3.5 h-7 bg-emerald-400/80 rounded" title="Stage 9: Action &amp; Outcome"></div><div class="w-3.5 h-7 bg-purple-400/90 rounded ring-1 ring-reasoning-accent" title="Stage 10: AI Memory"></div></div><div class="absolute top-1 bottom-1 left-1 w-20 border-2 border-reasoning-accent rounded pointer-events-none bg-reasoning-accent/15 transition-all" id="minimap-lens"></div></div></div>
+<!-- ================= EXECUTION LOGS BOTTOM PREVIEW DRAWER ================= -->
+<div class="absolute bottom-0 left-64 right-64 z-20 bg-surface-card/95 backdrop-blur-md rounded-t-2xl border-t border-x border-border-subtle px-4 py-2 flex items-center justify-between shadow-2xl">
+<div class="flex items-center gap-3">
+<span class="flex items-center gap-1.5 text-label-sm font-code text-text-primary">
+<span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+          Swarm Engine: Ready
+        </span>
+<span class="text-border-subtle">|</span>
+<span class="text-label-sm font-code text-text-muted truncate max-w-md">
+          [14:02:18] Horizontal Swarm Pipeline Active. Dispatching sub-plans across 10 stages LTR.
+        </span>
+</div>
+<div class="flex items-center gap-2">
+<button class="text-label-sm font-medium text-reasoning-accent hover:underline flex items-center gap-1">
+<span class="material-symbols-outlined text-label-md">terminal</span>
+<span class="">Open Live Logs</span>
+</button>
+<button class="p-1 rounded text-text-muted hover:text-text-primary">
+<span class="material-symbols-outlined text-label-md">expand_less</span>
+</button>
+</div>
+</div>
+</main>
+</div>
+<!-- Interactive Pan, Zoom, and Fit Scripts -->
+<script>
+  (function() {
+    const scroller = document.getElementById('canvas-scroller');
+    const stage = document.getElementById('canvas-stage');
+    const zoomIndicator = document.getElementById('zoom-indicator');
+    const btnZoomIn = document.getElementById('btn-zoom-in');
+    const btnZoomOut = document.getElementById('btn-zoom-out');
+    const btnFitScreen = document.getElementById('btn-fit-screen');
+    const btnToggleMinimap = document.getElementById('btn-toggle-minimap');
+    const btnCloseMinimap = document.getElementById('btn-close-minimap');
+    const minimapContainer = document.getElementById('minimap-container');
+    const minimapLens = document.getElementById('minimap-lens');
+    const btnAutoLayout = document.getElementById('btn-autolayout');
+
+    let currentScale = 0.88;
+    const minScale = 0.35;
+    const maxScale = 1.4;
+
+    function setScale(scale) {
+      currentScale = Math.max(minScale, Math.min(maxScale, scale));
+      stage.style.transform = `scale(${currentScale})`;
+      zoomIndicator.textContent = `${Math.round(currentScale * 100)}%`;
+      updateMinimapLens();
+    }
+
+    btnZoomIn.addEventListener('click', () => {
+      setScale(currentScale + 0.1);
+    });
+
+    btnZoomOut.addEventListener('click', () => {
+      setScale(currentScale - 0.1);
+    });
+
+    // Auto-fit function: calculates ratio so all 10 stages fit immediately on screen
+    function fitToScreen() {
+      const containerWidth = scroller.clientWidth;
+      const stageFullWidth = 3450;
+      // Calculate scale to show the whole width with padding
+      const fitScale = Math.max(0.38, Math.min(1.0, (containerWidth - 60) / stageFullWidth));
+      setScale(fitScale);
+      scroller.scrollTo({ left: 0, top: 0, behavior: 'smooth' });
+    }
+
+    btnFitScreen.addEventListener('click', fitToScreen);
+    if (btnAutoLayout) {
+      btnAutoLayout.addEventListener('click', fitToScreen);
+    }
+
+    // Toggle Minimap
+    if (btnToggleMinimap && minimapContainer) {
+      btnToggleMinimap.addEventListener('click', () => {
+        minimapContainer.classList.toggle('hidden');
+      });
+    }
+    if (btnCloseMinimap && minimapContainer) {
+      btnCloseMinimap.addEventListener('click', () => {
+        minimapContainer.classList.add('hidden');
+      });
+    }
+
+    // Update minimap lens position based on scroll
+    function updateMinimapLens() {
+      if (!minimapLens || !scroller) return;
+      const scrollRatio = scroller.scrollLeft / (scroller.scrollWidth - scroller.clientWidth || 1);
+      const trackWidth = 140; // approx width for minimap lens range
+      const lensPos = Math.max(4, Math.min(150, 4 + scrollRatio * trackWidth));
+      minimapLens.style.left = `${lensPos}px`;
+    }
+
+    scroller.addEventListener('scroll', updateMinimapLens);
+
+    // Mouse Drag-to-Pan Implementation
+    let isDown = false;
+    let startX, startY, scrollLeft, scrollTop;
+
+    scroller.addEventListener('mousedown', (e) => {
+      // Don't drag if clicking buttons, inputs or interactables
+      if (e.target.closest('button, a, input, [role="button"]')) return;
+      isDown = true;
+      scroller.classList.add('canvas-panning');
+      startX = e.pageX - scroller.offsetLeft;
+      startY = e.pageY - scroller.offsetTop;
+      scrollLeft = scroller.scrollLeft;
+      scrollTop = scroller.scrollTop;
+    });
+
+    window.addEventListener('mouseup', () => {
+      if (!isDown) return;
+      isDown = false;
+      scroller.classList.remove('canvas-panning');
+    });
+
+    scroller.addEventListener('mouseleave', () => {
+      if (isDown) {
+        isDown = false;
+        scroller.classList.remove('canvas-panning');
+      }
+    });
+
+    scroller.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - scroller.offsetLeft;
+      const y = e.pageY - scroller.offsetTop;
+      const walkX = (x - startX) * 1.35; // pan multiplier
+      const walkY = (y - startY) * 1.35;
+      scroller.scrollLeft = scrollLeft - walkX;
+      scroller.scrollTop = scrollTop - walkY;
+    });
+
+    // Initial positioning: gentle initial fit or left offset
+    window.addEventListener('load', () => {
+      updateMinimapLens();
+    });
+  })();
+</script>
+
+
+</body></html>

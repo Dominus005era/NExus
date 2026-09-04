@@ -1,0 +1,592 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Nexus AI — Frontier Intelligence with Action</title><link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&amp;family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS with custom theme config -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "error-container": "#93000a",
+            "on-primary-container": "#45687d",
+            "border-hover": "rgba(255, 255, 255, 0.16)",
+            "primary-container": "#c2e7ff",
+            "background": "#131313",
+            "surface-card": "#1E1F20",
+            "on-tertiary-fixed-variant": "#584417",
+            "on-primary": "#0a3447",
+            "surface-tint": "#a7cbe3",
+            "tertiary-fixed": "#fedea3",
+            "on-background": "#e5e2e1",
+            "on-primary-fixed": "#001e2c",
+            "primary-fixed-dim": "#a7cbe3",
+            "primary": "#fffeff",
+            "secondary-fixed-dim": "#b2c5ff",
+            "surface-container-highest": "#353535",
+            "text-secondary": "#C4C7C5",
+            "error": "#ffb4ab",
+            "primary-fixed": "#c3e7ff",
+            "on-primary-fixed-variant": "#264b5e",
+            "inverse-primary": "#3f6377",
+            "code-surface": "#0F0F10",
+            "surface-capsule": "#282A2C",
+            "text-primary": "#E3E3E3",
+            "border-subtle": "rgba(255, 255, 255, 0.08)",
+            "surface": "#131313",
+            "secondary-container": "#0054cd",
+            "surface-container-lowest": "#0e0e0e",
+            "surface-variant": "#353535",
+            "on-secondary-fixed-variant": "#0040a1",
+            "on-secondary": "#002b72",
+            "surface-container": "#202020",
+            "on-surface-variant": "#c2c7cc",
+            "secondary-fixed": "#dae2ff",
+            "inverse-surface": "#e5e2e1",
+            "reasoning-accent": "#A8C7FA",
+            "surface-bright": "#393939",
+            "outline-variant": "#42484c",
+            "on-tertiary": "#402d03",
+            "surface-container-high": "#2a2a2a",
+            "on-secondary-container": "#c6d4ff",
+            "on-tertiary-container": "#786131",
+            "surface-dark": "#131314",
+            "secondary": "#b2c5ff",
+            "text-muted": "#747775",
+            "on-surface": "#e5e2e1",
+            "tertiary": "#fffeff",
+            "surface-container-low": "#1b1b1c",
+            "tertiary-container": "#fedea3",
+            "on-error": "#690005",
+            "inverse-on-surface": "#303030",
+            "on-secondary-fixed": "#001847",
+            "outline": "#8c9196",
+            "surface-dim": "#131313",
+            "tertiary-fixed-dim": "#e1c38a",
+            "on-error-container": "#ffdad6",
+            "on-tertiary-fixed": "#261900"
+          },
+          "borderRadius": {
+            "DEFAULT": "1rem",
+            "lg": "2rem",
+            "xl": "3rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-lg": "1.5rem",
+            "space-2xl": "3rem",
+            "space-3xl": "4rem",
+            "sidebar-collapsed": "4.25rem",
+            "prompt-max-width": "52rem",
+            "space-2xs": "0.25rem",
+            "chat-max-width": "50rem",
+            "space-xl": "2rem",
+            "sidebar-expanded": "17.5rem",
+            "space-md": "1rem",
+            "space-xs": "0.5rem",
+            "space-sm": "0.75rem"
+          },
+          "fontFamily": {
+            "code": ["jetbrainsMono", "monospace"],
+            "label-md": ["inter", "sans-serif"],
+            "body-md": ["inter", "sans-serif"],
+            "headline-sm": ["plusJakartaSans", "sans-serif"],
+            "body-sm": ["inter", "sans-serif"],
+            "body-lg": ["inter", "sans-serif"],
+            "headline-xl": ["plusJakartaSans", "sans-serif"],
+            "headline-xl-mobile": ["plusJakartaSans", "sans-serif"],
+            "label-sm": ["inter", "sans-serif"],
+            "headline-lg": ["plusJakartaSans", "sans-serif"],
+            "title-md": ["inter", "sans-serif"]
+          },
+          "fontSize": {
+            "code": ["13px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+            "body-md": ["14px", { "lineHeight": "22px", "fontWeight": "400" }],
+            "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "500" }],
+            "body-sm": ["13px", { "lineHeight": "18px", "fontWeight": "400" }],
+            "body-lg": ["16px", { "lineHeight": "26px", "fontWeight": "400" }],
+            "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "headline-xl-mobile": ["30px", { "lineHeight": "38px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.03em", "fontWeight": "500" }],
+            "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+            "title-md": ["16px", { "lineHeight": "24px", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    @keyframes pulseAura {
+      0%, 100% { opacity: 0.35; transform: scale(1); }
+      50% { opacity: 0.55; transform: scale(1.06); }
+    }
+    .ambient-glow {
+      animation: pulseAura 8s ease-in-out infinite;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="bg-surface-container-lowest text-text-primary antialiased selection:bg-reasoning-accent/30 selection:text-primary min-h-screen flex flex-col font-body-md text-body-md overflow-x-hidden">
+<!-- TOP APP BAR (Shared Component Execution) -->
+<header class="docked full-width top-0 sticky z-50 bg-surface/80 dark:bg-surface/80 backdrop-blur-md border-b border-border-subtle dark:border-border-subtle">
+<div class="flex justify-between items-center w-full px-space-lg md:px-space-2xl py-space-sm max-w-7xl mx-auto">
+<!-- Brand Logo Anchor -->
+<a class="flex items-center gap-space-xs group" href="#">
+<span class="material-symbols-outlined text-reasoning-accent group-hover:rotate-45 transition-transform duration-300" data-icon="spark">spark</span>
+<span class="text-headline-sm font-headline-sm font-semibold text-text-primary dark:text-text-primary tracking-tight">Nexus AI</span>
+</a>
+<!-- Navigation Links (Active state mapped to Landing/Models showcase) -->
+<nav class="hidden md:flex items-center gap-space-lg">
+<a class="text-text-primary dark:text-text-primary font-medium border-b-2 border-reasoning-accent pb-1 font-label-md text-label-md" href="#models">Models</a>
+<a class="text-text-secondary dark:text-text-secondary hover:text-text-primary dark:hover:text-text-primary transition-colors pb-1 font-label-md text-label-md" href="#capabilities">Capabilities</a>
+<a class="text-text-secondary dark:text-text-secondary hover:text-text-primary dark:hover:text-text-primary transition-colors pb-1 font-label-md text-label-md" href="#research">Research</a>
+<a class="text-text-secondary dark:text-text-secondary hover:text-text-primary dark:hover:text-text-primary transition-colors pb-1 font-label-md text-label-md" href="#benchmarks">Benchmarks</a>
+<a class="text-text-secondary dark:text-text-secondary hover:text-text-primary dark:hover:text-text-primary transition-colors pb-1 font-label-md text-label-md" href="#safety">Safety</a>
+</nav>
+<!-- Trailing Icon & Primary Actions -->
+<div class="flex items-center gap-space-xs md:gap-space-sm">
+<button aria-label="Auto theme" class="p-space-xs rounded-full text-text-secondary hover:text-text-primary hover:bg-surface-capsule/60 transition-all duration-200 ease-out active:scale-95">
+<span class="material-symbols-outlined" data-icon="brightness_auto">brightness_auto</span>
+</button>
+<button aria-label="Code playground" class="p-space-xs rounded-full text-text-secondary hover:text-text-primary hover:bg-surface-capsule/60 transition-all duration-200 ease-out active:scale-95">
+<span class="material-symbols-outlined" data-icon="code">code</span>
+</button>
+<a class="hidden sm:inline-flex items-center justify-center px-space-md py-space-xs rounded-full text-text-secondary hover:text-text-primary border border-border-subtle hover:border-border-hover bg-surface-card hover:bg-surface-capsule/60 transition-all duration-200 ease-out active:scale-95 font-label-md text-label-md" href="#workspace">
+          Launch Workspace
+        </a>
+<a class="inline-flex items-center justify-center px-space-md py-space-xs rounded-full bg-primary-container text-on-primary-fixed hover:bg-reasoning-accent transition-all duration-200 ease-out active:scale-95 font-title-md text-label-md shadow-sm" href="#try">
+          Try Nexus
+        </a>
+</div>
+</div>
+</header>
+<main class="flex-1 w-full">
+<!-- HERO SECTION -->
+<section class="relative pt-space-2xl pb-space-3xl px-space-lg md:px-space-2xl overflow-hidden">
+<!-- Atmospheric Gradient Backdrops -->
+<div class="ambient-glow pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[450px] bg-radial from-secondary-container/20 via-reasoning-accent/10 to-transparent blur-3xl opacity-40"></div>
+<div class="pointer-events-none absolute top-32 left-1/4 w-[350px] h-[350px] bg-secondary-fixed-dim/5 blur-[100px] rounded-full"></div>
+<div class="max-w-7xl mx-auto flex flex-col items-center text-center relative z-10">
+<!-- Tagline Pill -->
+<div class="inline-flex items-center gap-space-xs px-space-md py-space-2xs rounded-full bg-surface-capsule border border-border-subtle shadow-sm mb-space-lg">
+<span class="w-2 h-2 rounded-full bg-reasoning-accent animate-ping"></span>
+<span class="w-2 h-2 -ml-3.5 rounded-full bg-reasoning-accent"></span>
+<span class="text-text-secondary font-label-sm text-label-sm">Nexus 2.5 Series • Now Available</span>
+</div>
+<!-- Main Headline -->
+<h1 class="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-[-0.035em] leading-[1.08] max-w-4xl mb-space-md text-transparent bg-clip-text bg-gradient-to-b from-[#FFFFFF] via-[#F1F5F9] to-[#94A3B8]">Nexus <span class="text-[#747775] font-light">—</span> Frontier intelligence with action</h1>
+<!-- Subheading -->
+<p class="font-body-lg text-body-lg text-text-secondary max-w-2xl mb-space-xl">
+          Built from the ground up for agentic execution, multi-turn reasoning, and complex systems diagnostics. Designed to transform how engineers build and debug.
+        </p>
+<!-- Primary CTA Group -->
+<div class="flex flex-col sm:flex-row items-center gap-space-md mb-space-3xl">
+<a class="flex items-center gap-space-xs px-space-xl py-space-sm rounded-full bg-primary-container text-on-primary-fixed hover:bg-reasoning-accent transition-all duration-200 shadow-lg shadow-reasoning-accent/15 group active:scale-95" href="#playground">
+<span class="font-title-md text-title-md">Try Nexus Chat</span>
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</a>
+<a class="px-space-xl py-space-sm rounded-full bg-surface-card border border-border-subtle hover:border-border-hover text-text-primary hover:bg-surface-capsule transition-all duration-200 font-title-md text-title-md" href="#models">
+            Explore Models
+          </a>
+</div>
+<!-- Teaser Note -->
+<p class="text-text-muted font-label-sm text-label-sm -mt-space-xl mb-space-2xl">
+          Launches Desktop Nexus AI Chat Interface • Instant zero-setup sandbox
+        </p>
+<!-- HERO ARTIFACT: Glassmorphic Interactive Preview Teaser -->
+<div class="w-full max-w-5xl rounded-lg bg-surface-card/60 backdrop-blur-xl border border-border-subtle shadow-2xl p-space-xs sm:p-space-md relative text-left overflow-hidden">
+<!-- Terminal / Window Chrome -->
+<div class="flex items-center justify-between px-space-sm py-space-xs border-b border-border-subtle mb-space-md bg-surface-dark/50 rounded-t">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-[#ff5f56]/70"></div>
+<div class="w-3 h-3 rounded-full bg-[#ffbd2e]/70"></div>
+<div class="w-3 h-3 rounded-full bg-[#27c93f]/70"></div>
+<span class="text-text-muted font-code text-code ml-2 hidden sm:inline">nexus-session-v2.5-pro • telemetry: 42ms TTFT</span>
+</div>
+<!-- Model Selector Pill in Teaser -->
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-capsule border border-border-subtle text-text-primary text-label-sm font-label-sm cursor-pointer hover:border-reasoning-accent/50 transition-colors">
+<span class="material-symbols-outlined text-reasoning-accent text-sm" data-icon="neurology">neurology</span>
+<span class="">Nexus 2.5 Pro</span>
+<span class="material-symbols-outlined text-xs text-text-muted" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+<!-- Chat Teaser Stage -->
+<div class="space-y-space-md px-space-xs sm:px-space-sm pb-space-sm">
+<!-- User Prompt -->
+<div class="flex items-start gap-space-sm max-w-2xl ml-auto justify-end">
+<div class="bg-surface-capsule border border-border-subtle rounded-2xl rounded-tr-sm px-space-md py-space-xs text-text-primary">
+<p class="font-body-md text-body-md">Analyze high p99 latency in production Kubernetes ingress cluster. Generate root-cause graph and verify rollback safety.</p>
+</div>
+<div class="w-8 h-8 rounded-full bg-surface-bright flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-text-secondary text-sm" data-icon="person">person</span>
+</div>
+</div>
+<!-- Assistant Reasoning Accordion -->
+<div class="flex items-start gap-space-sm max-w-3xl">
+<div class="w-8 h-8 rounded-full bg-reasoning-accent/20 border border-reasoning-accent/30 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-reasoning-accent text-sm" data-icon="spark">spark</span>
+</div>
+<div class="space-y-space-xs flex-1">
+<!-- Reasoning Disclosure Step -->
+<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-capsule/80 border border-reasoning-accent/30 text-reasoning-accent text-label-sm font-label-sm">
+<span class="material-symbols-outlined text-xs animate-spin" data-icon="progress_activity">progress_activity</span>
+<span class="">Thought for 3.4 seconds • Multi-hop log correlation &amp; kernel trace derivation</span>
+<span class="material-symbols-outlined text-xs" data-icon="expand_less">expand_less</span>
+</div>
+<!-- Code block with action toolbar -->
+<div class="rounded-DEFAULT bg-code-surface border border-border-subtle overflow-hidden mt-space-xs">
+<div class="flex items-center justify-between px-space-md py-space-xs bg-surface-dark border-b border-border-subtle font-code text-code text-text-muted">
+<span class="flex items-center gap-1.5 text-text-secondary">
+<span class="material-symbols-outlined text-xs text-reasoning-accent" data-icon="terminal">terminal</span>
+                      diagnostics.sh (Auto-remediation playbook)
+                    </span>
+<button class="flex items-center gap-1 text-label-sm hover:text-text-primary transition-colors">
+<span class="material-symbols-outlined text-xs" data-icon="content_copy">content_copy</span>
+<span class="">Copy code</span>
+</button>
+</div>
+<pre class="p-space-md text-text-primary font-code text-code overflow-x-auto"><code><span class="text-secondary"># Nexus autonomous diagnostic daemon</span>
+$ nexus cluster inspect --namespace prod-eu-west --trace-window 15m
+<span class="text-text-muted">✔ Correlating Envoy proxy buffer overflows with Node pool c5.4xlarge throttles</span>
+<span class="text-reasoning-accent">[ACTION TAKEN]</span> Applying dynamic ring-buffer patch and routing ingress spillover to fallback zone.</code></pre>
+</div>
+</div>
+</div>
+<!-- Floating Prompt Capsule Preview Mock -->
+<div class="mt-space-md pt-space-xs">
+<div class="bg-surface-capsule/90 backdrop-blur-md rounded-full border border-border-hover p-space-2xs flex items-center justify-between shadow-xl">
+<div class="flex items-center gap-2 pl-space-sm text-text-muted text-body-sm">
+<span class="material-symbols-outlined text-base" data-icon="attach_file">attach_file</span>
+<span class="">Ask Nexus to orchestrate scripts, run evals, or debug systems...</span>
+</div>
+<div class="flex items-center gap-space-xs pr-1">
+<div class="px-space-xs py-1 rounded-full bg-surface-card border border-border-subtle text-text-secondary text-label-sm">
+                    ⌘K Tools
+                  </div>
+<button class="w-8 h-8 rounded-full bg-primary-container text-on-primary-fixed flex items-center justify-center hover:bg-reasoning-accent transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="arrow_upward">arrow_upward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- MODEL LINEUP SECTION -->
+<section class="py-space-3xl px-space-lg md:px-space-2xl bg-surface-dark border-t border-border-subtle" id="models">
+<div class="max-w-7xl mx-auto">
+<div class="mb-space-2xl flex flex-col md:flex-row md:items-end justify-between gap-space-md">
+<div><div class="kicker-label text-reasoning-accent inline-flex items-center gap-1.5 mb-space-xs"><span class="w-1.5 h-1.5 rounded-full bg-reasoning-accent"></span>FRONTIER ARCHITECTURES</div><h2 class="font-headline-lg text-headline-lg md:text-4xl text-primary font-semibold tracking-[-0.025em] leading-tight">Explore the Nexus Models</h2><p class="text-text-secondary mt-space-xs max-w-xl font-body-md text-body-md leading-relaxed">From low-latency execution to trillion-parameter architectural reasoning, discover the right model configuration for your workflow.</p></div>
+<a class="inline-flex items-center gap-1 text-reasoning-accent hover:underline font-label-md text-label-md" href="#">
+<span class="">Compare full benchmark evaluations</span>
+<span class="material-symbols-outlined text-sm" data-icon="arrow_outward">arrow_outward</span>
+</a>
+</div>
+<!-- 3 Model Tier Cards Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-space-lg">
+<!-- Nexus 2.5 Pro (Featured) -->
+<div class="relative rounded-lg bg-surface-card border border-reasoning-accent/40 p-space-xl flex flex-col justify-between hover:border-reasoning-accent transition-all duration-300 shadow-xl group">
+<div class="absolute -top-3 right-6 bg-reasoning-accent text-on-primary-fixed px-3 py-0.5 rounded-full text-label-sm font-label-sm font-semibold uppercase tracking-wider">
+              Most Popular
+            </div>
+<div>
+<div class="flex items-center gap-space-xs mb-space-md">
+<span class="material-symbols-outlined text-reasoning-accent" data-icon="psychology">psychology</span>
+<h3 class="font-headline-sm text-headline-sm text-primary">Nexus 2.5 Pro</h3>
+</div>
+<p class="text-text-secondary font-body-md text-body-md mb-space-lg">
+                Best for complex reasoning, architectural design, and deep codebase telemetry analysis. Excels in long-running agentic tasks.
+              </p>
+<!-- Specs -->
+<div class="space-y-space-xs border-y border-border-subtle py-space-md mb-space-xl font-label-sm text-label-sm">
+<div class="flex justify-between items-center text-text-secondary">
+<span class="">Context Window</span>
+<span class="text-primary font-medium">2M Tokens</span>
+</div>
+<div class="flex justify-between items-center text-text-secondary">
+<span class="">Reasoning Mode</span>
+<span class="text-reasoning-accent font-medium">Native Multimodal CoT</span>
+</div>
+<div class="flex justify-between items-center text-text-secondary">
+<span class="">Tool Integration</span>
+<span class="text-primary font-medium">Parallel Function Calling</span>
+</div>
+<div class="flex justify-between items-center text-text-secondary">
+<span class="">Architecture</span>
+<span class="text-text-secondary font-medium">Mixture of Experts (MoE)</span>
+</div>
+</div>
+</div>
+<a class="w-full inline-flex items-center justify-center gap-2 py-space-sm rounded-full bg-primary-container text-on-primary-fixed hover:bg-reasoning-accent font-title-md text-label-md transition-all" href="#playground">
+<span class="">Launch in Nexus Chat</span>
+<span class="material-symbols-outlined text-sm" data-icon="open_in_new">open_in_new</span>
+</a>
+</div>
+<!-- Nexus 2.5 Flash -->
+<div class="rounded-lg bg-surface-card border border-border-subtle hover:border-border-hover p-space-xl flex flex-col justify-between transition-all duration-300 group">
+<div>
+<div class="flex items-center gap-space-xs mb-space-md">
+<span class="material-symbols-outlined text-secondary" data-icon="bolt">bolt</span>
+<h3 class="font-headline-sm text-headline-sm text-primary">Nexus 2.5 Flash</h3>
+</div>
+<p class="text-text-secondary font-body-md text-body-md mb-space-lg">
+                Built for high-throughput execution, ultra-low latency queries, and rapid tool calling across high-volume pipelines.
+              </p>
+<!-- Specs -->
+<div class="space-y-space-xs border-y border-border-subtle py-space-md mb-space-xl font-label-sm text-label-sm">
+<div class="flex justify-between items-center text-text-secondary">
+<span class="">Time-To-First-Token</span>
+<span class="text-secondary font-medium">&lt; 180ms TTFT</span>
+</div>
+<div class="flex justify-between items-center text-text-secondary">
+<span class="">Context Window</span>
+<span class="text-primary font-medium">1M Tokens</span>
+</div>
+<div class="flex justify-between items-center text-text-secondary">
+<span class="">Efficiency Ratio</span>
+<span class="text-primary font-medium">10x Cost Optimized</span>
+</div>
+<div class="flex justify-between items-center text-text-secondary">
+<span class="">Task Fit</span>
+<span class="text-text-secondary font-medium">Streaming Ingestion &amp; OCR</span>
+</div>
+</div>
+</div>
+<a class="w-full inline-flex items-center justify-center gap-2 py-space-sm rounded-full bg-surface-capsule border border-border-subtle hover:border-border-hover text-text-primary hover:bg-surface-bright font-title-md text-label-md transition-all" href="#playground">
+<span class="">Try Flash</span>
+<span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+<!-- Nexus 3.1 Deep Think -->
+<div class="rounded-lg bg-surface-card border border-border-subtle hover:border-border-hover p-space-xl flex flex-col justify-between transition-all duration-300 group">
+<div>
+<div class="flex items-center gap-space-xs mb-space-md">
+<span class="material-symbols-outlined text-tertiary-fixed" data-icon="model_training">model_training</span>
+<h3 class="font-headline-sm text-headline-sm text-primary">Nexus 3.1 Deep Think</h3>
+</div>
+<p class="text-text-secondary font-body-md text-body-md mb-space-lg">
+                Specialized for mission-critical IT infrastructure, automated incident recovery, formal verification, and algorithmic synthesis.
+              </p>
+<!-- Specs -->
+<div class="space-y-space-xs border-y border-border-subtle py-space-md mb-space-xl font-label-sm text-label-sm">
+<div class="flex justify-between items-center text-text-secondary">
+<span class="">Verification Guarantee</span>
+<span class="text-tertiary-fixed font-medium">Formal Math &amp; Sandbox Run</span>
+</div>
+<div class="flex justify-between items-center text-text-secondary">
+<span class="">Context Window</span>
+<span class="text-primary font-medium">4M Tokens Extended</span>
+</div>
+<div class="flex justify-between items-center text-text-secondary">
+<span class="">Derivation Tree</span>
+<span class="text-primary font-medium">Search-Guided RL</span>
+</div>
+<div class="flex justify-between items-center text-text-secondary">
+<span class="">Specialization</span>
+<span class="text-text-secondary font-medium">Cybersecurity &amp; Distributed Infra</span>
+</div>
+</div>
+</div>
+<a class="w-full inline-flex items-center justify-center gap-2 py-space-sm rounded-full bg-surface-capsule border border-border-subtle hover:border-border-hover text-text-primary hover:bg-surface-bright font-title-md text-label-md transition-all" href="#playground">
+<span class="">Explore Deep Think</span>
+<span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- CAPABILITIES SECTION (Bento Grid) -->
+<section class="py-space-3xl px-space-lg md:px-space-2xl bg-surface" id="capabilities">
+<div class="max-w-7xl mx-auto">
+<div class="mb-space-2xl text-center md:text-left"><div class="kicker-label text-reasoning-accent inline-flex items-center gap-1.5 mb-space-xs"><span class="w-1.5 h-1.5 rounded-full bg-reasoning-accent"></span>CORE ARCHITECTURE</div><h2 class="font-headline-lg text-headline-lg md:text-4xl text-primary font-semibold tracking-[-0.025em] leading-tight">Built for Autonomous Execution</h2><p class="text-text-secondary mt-space-xs max-w-2xl font-body-md text-body-md leading-relaxed">Nexus doesn't just predict the next token—it observes environmental telemetry, synthesizes executable mitigation strategies, and interacts natively with cloud stacks.</p></div>
+<!-- 4-Card Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-space-lg">
+<!-- Card 1: Agentic Coding (span 7) -->
+<div class="md:col-span-7 rounded-lg bg-surface-card border border-border-subtle p-space-xl flex flex-col justify-between hover:border-border-hover transition-all">
+<div class="mb-space-lg">
+<div class="w-10 h-10 rounded-full bg-surface-capsule flex items-center justify-center mb-space-md">
+<span class="material-symbols-outlined text-reasoning-accent" data-icon="terminal">terminal</span>
+</div>
+<h3 class="font-title-md text-title-md text-primary mb-space-xs">Agentic Coding &amp; Remediation</h3>
+<p class="text-text-secondary font-body-md text-body-md">
+                Autonomous multi-step root-cause diagnostics and patch creation. Nexus executes unit tests in parallel sandboxes before submitting reviewed GitHub pull requests.
+              </p>
+</div>
+<!-- Interactive Visual Preview -->
+<div class="rounded-DEFAULT bg-code-surface p-space-md border border-border-subtle font-code text-code">
+<div class="flex items-center justify-between pb-space-xs mb-space-xs border-b border-border-subtle text-text-muted">
+<span class="">test-harness-run #8912</span>
+<span class="text-secondary font-medium">PASSED (14/14)</span>
+</div>
+<div class="text-text-secondary text-sm space-y-1">
+<p class=""><span class="text-reasoning-accent">→</span> Identifying memory leak in ConnectionPool.drain()</p>
+<p class=""><span class="text-reasoning-accent">→</span> Generated hotfix: PR #402 created with automated test assertion</p>
+</div>
+</div>
+</div>
+<!-- Card 2: Multimodal Observability (span 5) -->
+<div class="md:col-span-5 rounded-lg bg-surface-card border border-border-subtle p-space-xl flex flex-col justify-between hover:border-border-hover transition-all">
+<div>
+<div class="w-10 h-10 rounded-full bg-surface-capsule flex items-center justify-center mb-space-md">
+<span class="material-symbols-outlined text-secondary" data-icon="monitoring">monitoring</span>
+</div>
+<h3 class="font-title-md text-title-md text-primary mb-space-xs">Multimodal Observability</h3>
+<p class="text-text-secondary font-body-md text-body-md mb-space-md">
+                Correlating architectural diagrams, Prometheus/Grafana charts, and container logs in real time to locate system anomalies instantly.
+              </p>
+</div>
+<div class="p-space-md rounded-DEFAULT bg-surface-dark border border-border-subtle flex items-center justify-between">
+<div class="flex items-center gap-2 text-text-secondary">
+<span class="material-symbols-outlined text-reasoning-accent" data-icon="multimodal">check_indeterminate_small</span>
+<span class="font-label-sm text-label-sm">Image + Graph + Traces</span>
+</div>
+<span class="text-label-sm font-label-sm text-reasoning-accent bg-reasoning-accent/10 px-2 py-0.5 rounded">Synced</span>
+</div>
+</div>
+<!-- Card 3: Long Horizon Workflows (span 5) -->
+<div class="md:col-span-5 rounded-lg bg-surface-card border border-border-subtle p-space-xl flex flex-col justify-between hover:border-border-hover transition-all">
+<div>
+<div class="w-10 h-10 rounded-full bg-surface-capsule flex items-center justify-center mb-space-md">
+<span class="material-symbols-outlined text-tertiary-fixed" data-icon="account_tree">account_tree</span>
+</div>
+<h3 class="font-title-md text-title-md text-primary mb-space-xs">Long Horizon Workflows</h3>
+<p class="text-text-secondary font-body-md text-body-md mb-space-md">
+                Coordinating multi-day distributed migrations, version bumps, and safe canary deployments with zero human intervention required during verification loops.
+              </p>
+</div>
+<div class="flex items-center gap-2 text-text-muted font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-xs text-reasoning-accent" data-icon="check_circle">check_circle</span>
+<span class="">Context retention preserved across &gt;100 execution steps</span>
+</div>
+</div>
+<!-- Card 4: Native Tool Calling (span 7) -->
+<div class="md:col-span-7 rounded-lg bg-surface-card border border-border-subtle p-space-xl flex flex-col justify-between hover:border-border-hover transition-all">
+<div class="mb-space-md">
+<div class="w-10 h-10 rounded-full bg-surface-capsule flex items-center justify-center mb-space-md">
+<span class="material-symbols-outlined text-reasoning-accent" data-icon="integration_instructions">integration_instructions</span>
+</div>
+<h3 class="font-title-md text-title-md text-primary mb-space-xs">Native Cloud &amp; Infrastructure Tooling</h3>
+<p class="text-text-secondary font-body-md text-body-md">
+                Deep schema awareness for Kubernetes, Terraform, AWS IAM, GCP Cloud Run, and Datadog APIs. Dispatches validated JSON payloads without formatting hallucinations.
+              </p>
+</div>
+<!-- Tool Badge Ribbon -->
+<div class="flex flex-wrap gap-space-xs">
+<span class="px-3 py-1 rounded-full bg-surface-capsule border border-border-subtle text-text-primary text-label-sm">Kubernetes CRDs</span>
+<span class="px-3 py-1 rounded-full bg-surface-capsule border border-border-subtle text-text-primary text-label-sm">Terraform HCL</span>
+<span class="px-3 py-1 rounded-full bg-surface-capsule border border-border-subtle text-text-primary text-label-sm">Docker Engine</span>
+<span class="px-3 py-1 rounded-full bg-surface-capsule border border-border-subtle text-text-primary text-label-sm">GitHub Actions</span>
+<span class="px-3 py-1 rounded-full bg-surface-capsule border border-border-subtle text-text-primary text-label-sm">AWS CLI</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- RESEARCH & BENCHMARKS TEASER STRIP -->
+<section class="py-space-2xl px-space-lg md:px-space-2xl border-t border-border-subtle bg-surface-dark" id="benchmarks">
+<div class="max-w-7xl mx-auto">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-space-md text-center"><div class="p-space-md rounded-lg bg-surface-card border border-border-subtle"><div class="text-4xl md:text-5xl font-semibold text-reasoning-accent font-mono-tech tabular-nums">91.4%</div><div class="text-label-sm font-semibold uppercase tracking-wider text-text-secondary mt-2">SWE-bench Verified</div><div class="text-text-muted text-xs mt-0.5 font-mono-tech">SOTA Autonomous Coding</div></div><div class="p-space-md rounded-lg bg-surface-card border border-border-subtle"><div class="text-4xl md:text-5xl font-semibold text-primary font-mono-tech tabular-nums">89.8%</div><div class="text-label-sm font-semibold uppercase tracking-wider text-text-secondary mt-2">GPQA Diamond</div><div class="text-text-muted text-xs mt-0.5 font-mono-tech">PhD-level Science &amp; Reasoning</div></div><div class="p-space-md rounded-lg bg-surface-card border border-border-subtle"><div class="text-4xl md:text-5xl font-semibold text-secondary font-mono-tech tabular-nums">4.0M</div><div class="text-label-sm font-semibold uppercase tracking-wider text-text-secondary mt-2">Extended Context Window</div><div class="text-text-muted text-xs mt-0.5 font-mono-tech">Full Codebase Comprehension</div></div><div class="p-space-md rounded-lg bg-surface-card border border-border-subtle"><div class="text-4xl md:text-5xl font-semibold text-tertiary-fixed font-mono-tech tabular-nums">99.7%</div><div class="text-label-sm font-semibold uppercase tracking-wider text-text-secondary mt-2">Multi-Turn Tool Accuracy</div><div class="text-text-muted text-xs mt-0.5 font-mono-tech">Zero Syntax Deviations</div></div></div>
+</div>
+</section>
+<!-- INTERACTIVE PLAYGROUND TEASER SECTION -->
+<section class="py-space-3xl px-space-lg md:px-space-2xl bg-surface relative" id="playground">
+<div class="max-w-5xl mx-auto">
+<!-- Floating Prompt Capsule Container -->
+<div class="rounded-lg bg-gradient-to-b from-surface-card to-surface-container-high border border-reasoning-accent/30 p-space-xl shadow-2xl relative overflow-hidden">
+<div class="absolute -right-20 -bottom-20 w-64 h-64 bg-reasoning-accent/10 rounded-full blur-3xl pointer-events-none"></div>
+<div class="text-center max-w-2xl mx-auto mb-space-xl">
+<h2 class="text-3xl md:text-4xl font-semibold tracking-[-0.025em] text-primary mb-space-xs">Ready to experience Nexus?</h2>
+<p class="text-text-secondary font-body-md text-body-md">
+              Try Nexus now in your workspace. Select a prompt or test a live query below to initiate multi-turn execution.
+            </p>
+</div>
+<!-- Quick Suggestion Chips -->
+<div class="flex flex-wrap justify-center gap-space-xs mb-space-xl">
+<button class="px-space-md py-space-xs rounded-full bg-surface-card hover:bg-surface-capsule border border-border-subtle hover:border-reasoning-accent/40 text-text-secondary hover:text-text-primary text-body-sm transition-all -translate-y-0 hover:-translate-y-0.5">
+              ⚡ "Diagnose Redis cache stampede under 10k RPS"
+            </button>
+<button class="px-space-md py-space-xs rounded-full bg-surface-card hover:bg-surface-capsule border border-border-subtle hover:border-reasoning-accent/40 text-text-secondary hover:text-text-primary text-body-sm transition-all -translate-y-0 hover:-translate-y-0.5">
+              🛡 "Generate hardened IAM policy for zero-trust S3 bucket"
+            </button>
+<button class="px-space-md py-space-xs rounded-full bg-surface-card hover:bg-surface-capsule border border-border-subtle hover:border-reasoning-accent/40 text-text-secondary hover:text-text-primary text-body-sm transition-all -translate-y-0 hover:-translate-y-0.5">
+              🔬 "Derive optimal PostgreSQL indexing from query plan EXPLAIN"
+            </button>
+</div>
+<!-- Prompt Interactive Mock Dock -->
+<div class="max-w-3xl mx-auto rounded-DEFAULT bg-surface-dark/90 border border-border-hover p-space-sm shadow-inner">
+<div class="flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-text-muted mt-1" data-icon="terminal">terminal</span>
+<textarea class="w-full bg-transparent border-none text-text-primary placeholder:text-text-muted focus:ring-0 resize-none font-body-md text-body-md" placeholder="Ask Nexus to run reasoning or write production code..." rows="2"></textarea>
+</div>
+<div class="flex items-center justify-between pt-space-xs border-t border-border-subtle mt-space-xs">
+<div class="flex items-center gap-space-xs">
+<!-- Inline Model Selector -->
+<div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-card border border-border-subtle text-text-primary text-label-sm">
+<span class="material-symbols-outlined text-reasoning-accent text-xs" data-icon="spark">spark</span>
+<span class="">Nexus 2.5 Pro</span>
+</div>
+<button class="p-1.5 rounded-full hover:bg-surface-capsule text-text-muted hover:text-text-primary transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="attach_file">attach_file</span>
+</button>
+</div>
+<a class="inline-flex items-center gap-2 px-space-md py-space-2xs rounded-full bg-primary-container text-on-primary-fixed hover:bg-reasoning-accent font-title-md text-label-md transition-all" href="#chat-active">
+<span class="">Send</span>
+<span class="material-symbols-outlined text-sm" data-icon="arrow_upward">arrow_upward</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SAFETY & RESPONSIBILITY CALLOUT -->
+<section class="py-space-2xl px-space-lg md:px-space-2xl border-t border-border-subtle bg-surface-dark" id="safety">
+<div class="max-w-4xl mx-auto text-center">
+<span class="material-symbols-outlined text-reasoning-accent mb-space-xs" data-icon="verified_user">verified_user</span>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-space-xs">Proactive Frontier AI Safety</h3>
+<p class="text-text-secondary font-body-md text-body-md mb-space-md">
+          Every Nexus autonomous action runs within an ephemeral, deterministic hypervisor sandbox with continuous human-in-the-loop validation policies for state modifications.
+        </p>
+<a class="inline-flex items-center gap-1 text-reasoning-accent hover:underline font-label-md text-label-md" href="#">
+<span class="">Read our Frontier Safety Framework Report</span>
+<span class="material-symbols-outlined text-sm" data-icon="arrow_outward">arrow_outward</span>
+</a>
+</div>
+</section>
+</main>
+<!-- FOOTER (Shared Component Execution) -->
+<footer class="docked full-width bottom bg-surface-dark dark:bg-surface-dark border-t border-border-subtle dark:border-border-subtle">
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-space-lg md:px-space-2xl py-space-xl max-w-7xl mx-auto gap-space-md">
+<!-- Brand & Copyright -->
+<div class="flex flex-col sm:flex-row items-center gap-space-sm text-center sm:text-left">
+<span class="text-headline-sm font-headline-sm font-medium text-text-primary dark:text-text-primary">Nexus AI</span>
+<span class="hidden sm:inline text-text-muted">•</span>
+<span class="text-text-muted font-body-sm text-body-sm">© 2025 Nexus AI Labs. All rights reserved.</span>
+</div>
+<!-- Footer Navigation Links -->
+<div class="flex flex-wrap justify-center items-center gap-space-md font-label-sm text-label-sm">
+<a class="text-text-muted dark:text-text-muted hover:text-text-secondary dark:hover:text-text-secondary transition-colors" href="#privacy">Privacy Policy</a>
+<a class="text-text-muted dark:text-text-muted hover:text-text-secondary dark:hover:text-text-secondary transition-colors" href="#terms">Terms of Service</a>
+<a class="text-text-muted dark:text-text-muted hover:text-text-secondary dark:hover:text-text-secondary transition-colors" href="#responsible">Responsible AI Practices</a>
+<a class="text-text-muted dark:text-text-muted hover:text-text-secondary dark:hover:text-text-secondary transition-colors" href="#status">System Status</a>
+<a class="text-text-muted dark:text-text-muted hover:text-text-secondary dark:hover:text-text-secondary transition-colors" href="#docs">Documentation</a>
+</div>
+</div>
+</footer>
+
+
+</body></html>

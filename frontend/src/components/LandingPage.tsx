@@ -20,6 +20,11 @@ import {
   Star,
   Check,
   TrendingUp,
+  Share2,
+  HelpCircle,
+  Copy,
+  Brain,
+  Code2,
 } from 'lucide-react';
 
 interface LandingPageProps {
@@ -35,6 +40,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
 }) => {
   const [emailInput, setEmailInput] = useState('');
   const [subscribed, setSubscribed] = useState(false);
+  const [copiedCode, setCopiedCode] = useState(false);
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
@@ -43,156 +49,207 @@ export const LandingPage: React.FC<LandingPageProps> = ({
     setTimeout(() => setSubscribed(false), 3000);
   };
 
-  return (
-    <div className="min-h-screen bg-[#06080e] text-zinc-100 flex flex-col selection:bg-indigo-500 selection:text-white relative overflow-hidden font-sans">
-      {/* Background Ambient Spotlights & Dotted Grid */}
-      <div className="absolute inset-0 bg-canvas-dots opacity-40 pointer-events-none" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[520px] bg-gradient-to-b from-indigo-600/18 via-cyan-500/10 to-transparent blur-[140px] pointer-events-none -z-10 rounded-full" />
-      <div className="absolute top-1/3 -right-40 w-[500px] h-[500px] bg-purple-600/10 blur-[140px] pointer-events-none -z-10 rounded-full" />
-      <div className="absolute top-2/3 -left-40 w-[500px] h-[500px] bg-blue-600/10 blur-[140px] pointer-events-none -z-10 rounded-full" />
+  const handleCopyCode = () => {
+    navigator.clipboard.writeText(`nexus cluster inspect --namespace prod-eu-west --trace-window 15m\n[ACTION TAKEN] Applying dynamic ring-buffer patch and routing ingress spillover to fallback zone.`);
+    setCopiedCode(true);
+    setTimeout(() => setCopiedCode(false), 2000);
+  };
 
-      {/* ================= TOP NAVBAR ================= */}
-      <header className="border-b border-white/[0.06] backdrop-blur-2xl sticky top-0 z-50 bg-[#06080e]/85 px-6 py-3.5">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          {/* Logo & Brand */}
-          <div className="flex items-center space-x-3 cursor-pointer" onClick={onGetStarted}>
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-cyan-400 via-blue-500 to-indigo-600 p-[1.5px] shadow-lg shadow-cyan-500/20">
-              <div className="w-full h-full bg-[#070b14] rounded-[10px] flex items-center justify-center">
-                <Sparkles className="w-4 h-4 text-cyan-400" />
-              </div>
-            </div>
-            <div className="flex items-center space-x-2">
-              <span className="text-lg font-bold tracking-tight text-white">
-                Nexus AI
-              </span>
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-cyan-950/80 text-cyan-300 border border-cyan-800/60 font-semibold">
-                v2.5 Frontier
-              </span>
-            </div>
+  return (
+    <div className="min-h-screen bg-[#131313] text-[#E3E3E3] antialiased selection:bg-[#A8C7FA]/30 selection:text-white flex flex-col font-sans overflow-x-hidden">
+      {/* ================= TOP APP BAR ================= */}
+      <header className="sticky top-0 z-50 bg-[#131313]/85 backdrop-blur-md border-b border-white/[0.08]">
+        <div className="flex justify-between items-center w-full px-6 md:px-10 py-3.5 max-w-7xl mx-auto">
+          {/* Brand Logo Anchor */}
+          <div className="flex items-center gap-2 group cursor-pointer" onClick={onGetStarted}>
+            <span className="material-symbols-outlined text-[#A8C7FA] group-hover:rotate-45 transition-transform duration-300">
+              spark
+            </span>
+            <span className="text-xl font-semibold text-white tracking-tight">
+              Nexus AI
+            </span>
+            <span className="ml-2 text-[10px] font-mono px-2 py-0.5 rounded-full bg-[#1E1F20] text-[#A8C7FA] border border-white/10 font-semibold">
+              v2.5 Frontier
+            </span>
           </div>
 
-          {/* Nav Links */}
-          <nav className="hidden md:flex items-center space-x-8 text-xs font-medium text-zinc-400">
-            <a href="#models" className="hover:text-white transition-colors">Models</a>
-            <a href="#architecture" className="hover:text-white transition-colors">Architecture</a>
-            <a href="#benchmarks" className="hover:text-white transition-colors">Benchmarks</a>
-            <a href="#bento" className="hover:text-white transition-colors">Capabilities</a>
+          {/* Navigation Links */}
+          <nav className="hidden md:flex items-center gap-6 text-xs font-medium text-[#C4C7C5]">
+            <a href="#models" className="text-white border-b-2 border-[#A8C7FA] pb-1">Models</a>
+            <a href="#capabilities" className="hover:text-white transition-colors pb-1">Capabilities</a>
+            <a href="#research" className="hover:text-white transition-colors pb-1">Research</a>
+            <a href="#benchmarks" className="hover:text-white transition-colors pb-1">Benchmarks</a>
+            <a href="#safety" className="hover:text-white transition-colors pb-1">Safety</a>
             <button
               onClick={onOpenDeploymentGuide}
-              className="text-emerald-400 hover:text-emerald-300 font-mono text-xs flex items-center space-x-1 transition-colors"
+              className="text-emerald-400 hover:text-emerald-300 font-mono text-xs flex items-center gap-1 transition-colors cursor-pointer"
             >
               <span>100% Free Live Guide</span>
               <ChevronRight className="w-3.5 h-3.5" />
             </button>
           </nav>
 
-          {/* Right Action CTA */}
-          <div className="flex items-center space-x-3">
+          {/* Trailing Icon & Primary Actions */}
+          <div className="flex items-center gap-2.5">
             <button
               onClick={onGetStarted}
-              className="px-4 py-2 rounded-xl text-xs font-semibold bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-white shadow-lg shadow-cyan-500/25 transition-all transform active:scale-95 flex items-center space-x-2"
+              className="hidden sm:inline-flex items-center justify-center px-4 py-1.5 rounded-full text-[#C4C7C5] hover:text-white border border-white/10 hover:border-white/20 bg-[#1E1F20] hover:bg-[#282A2C] transition-all text-xs font-medium cursor-pointer"
             >
-              <span>Launch Workspace</span>
-              <ArrowRight className="w-3.5 h-3.5" />
+              Launch Workspace
+            </button>
+            <button
+              onClick={onGetStarted}
+              className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-[#C2E7FF] text-[#001E2C] hover:bg-[#A8C7FA] transition-all text-xs font-semibold shadow-sm cursor-pointer"
+            >
+              Try Nexus
             </button>
           </div>
         </div>
       </header>
 
       {/* ================= HERO SECTION ================= */}
-      <main className="flex-1">
-        <section className="relative pt-24 pb-16 px-6">
-          <div className="max-w-4xl mx-auto text-center space-y-7">
-            {/* Top Pill Badge */}
-            <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.08] text-cyan-300 text-xs font-medium backdrop-blur-md shadow-inner">
-              <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-              <span>Frontier Intelligence 2.5 Active</span>
+      <main className="flex-1 w-full">
+        <section className="relative pt-16 pb-20 px-6 md:px-10 overflow-hidden">
+          {/* Atmospheric Gradient Backdrops */}
+          <div className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 w-[750px] h-[450px] bg-gradient-to-b from-[#0054CD]/20 via-[#A8C7FA]/10 to-transparent blur-3xl opacity-40 -z-10" />
+          <div className="pointer-events-none absolute top-32 left-1/4 w-[350px] h-[350px] bg-[#B2C5FF]/5 blur-[100px] rounded-full -z-10" />
+
+          <div className="max-w-6xl mx-auto flex flex-col items-center text-center relative z-10">
+            {/* Tagline Pill */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#282A2C] border border-white/10 shadow-sm mb-6">
+              <span className="w-2 h-2 rounded-full bg-[#A8C7FA] animate-ping" />
+              <span className="w-2 h-2 -ml-3.5 rounded-full bg-[#A8C7FA]" />
+              <span className="text-[#C4C7C5] text-xs font-mono">Nexus 2.5 Series • Now Available</span>
             </div>
 
-            {/* Main Headline (Exact Match to Stitch Screen 1) */}
-            <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight leading-[1.08] text-white">
-              Nexus — Frontier intelligence <br />
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-300 via-indigo-300 to-purple-400">
-                with action
-              </span>
+            {/* Main Headline */}
+            <h1 className="text-4xl sm:text-6xl md:text-7xl font-semibold tracking-[-0.035em] leading-[1.08] max-w-4xl mb-4 text-transparent bg-clip-text bg-gradient-to-b from-[#FFFFFF] via-[#F1F5F9] to-[#94A3B8]">
+              Nexus <span className="text-[#747775] font-light">—</span> Frontier intelligence with action
             </h1>
 
-            {/* Subtitle */}
-            <p className="text-sm sm:text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed font-normal">
-              Autonomous multi-agent operating system engineered for enterprise decisions, multi-step non-linear reasoning, complex system integration, transparent automated execution and mathematical safety.
+            {/* Subheading */}
+            <p className="text-sm sm:text-base text-[#C4C7C5] max-w-2xl mb-8 leading-relaxed font-normal">
+              Built from the ground up for agentic execution, multi-turn reasoning, and complex systems diagnostics. Designed to transform how engineers build, operate, and solve business trade-offs.
             </p>
 
-            {/* CTAs */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 pt-2">
+            {/* Primary CTA Group */}
+            <div className="flex flex-col sm:flex-row items-center gap-3.5 mb-8">
               <button
                 onClick={onGetStarted}
-                className="w-full sm:w-auto px-7 py-3.5 rounded-xl font-semibold text-xs bg-white text-black hover:bg-zinc-200 shadow-2xl shadow-white/10 transition-all flex items-center justify-center space-x-2 active:scale-95 cursor-pointer"
+                className="flex items-center gap-2 px-7 py-3 rounded-full bg-[#C2E7FF] text-[#001E2C] hover:bg-[#A8C7FA] transition-all font-semibold text-xs shadow-lg shadow-[#A8C7FA]/15 group cursor-pointer active:scale-95"
               >
                 <span>Try Nexus Chat</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
               </button>
-              <button
-                onClick={onGetStarted}
-                className="w-full sm:w-auto px-6 py-3.5 rounded-xl font-medium text-xs bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.1] text-zinc-300 transition-all flex items-center justify-center space-x-2 cursor-pointer"
+              <a
+                href="#models"
+                className="px-6 py-3 rounded-full bg-[#1E1F20] border border-white/10 hover:border-white/20 text-white hover:bg-[#282A2C] transition-all text-xs font-semibold"
               >
-                <span>Explore Demos</span>
-              </button>
+                Explore Models
+              </a>
             </div>
 
-            {/* ================= INTERACTIVE MOCK CONSOLE CARD (Matching Stitch Screen 1 Preview) ================= */}
-            <div className="pt-8 max-w-3xl mx-auto">
-              <div className="bg-[#0b0e17]/90 border border-white/10 rounded-2xl p-5 shadow-2xl backdrop-blur-xl text-left space-y-4 glow-primary">
-                {/* Mock Card Header */}
-                <div className="flex items-center justify-between border-b border-white/5 pb-3">
-                  <div className="flex items-center space-x-2">
-                    <div className="w-2.5 h-2.5 rounded-full bg-rose-500/80" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
-                    <span className="text-[11px] font-mono text-zinc-400 ml-2 font-medium">
-                      nexus-executive-console v2.5
-                    </span>
-                  </div>
-                  <div className="flex items-center space-x-2 text-[10px] font-mono text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-800/40">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                    <span>Neon PostgreSQL Live</span>
-                  </div>
-                </div>
+            {/* Teaser Note */}
+            <p className="text-[#747775] text-[11px] font-mono -mt-4 mb-10">
+              Launches Desktop Nexus AI Chat Interface • Instant zero-setup sandbox
+            </p>
 
-                {/* Mock Prompt Preview */}
-                <div className="p-3 rounded-xl bg-white/[0.03] border border-white/[0.06] text-xs font-mono text-zinc-300 flex items-center justify-between">
-                  <div className="flex items-center space-x-2 truncate">
-                    <span className="text-cyan-400 font-bold">$</span>
-                    <span className="truncate">Resolve stockout of 750 Future Trend TVs with 99.4% SLA for Q3 spike...</span>
-                  </div>
-                  <span className="text-[10px] px-2 py-0.5 rounded bg-cyan-950 text-cyan-300 font-semibold border border-cyan-800">
-                    Executed
+            {/* HERO ARTIFACT: Glassmorphic Interactive Preview Teaser */}
+            <div className="w-full max-w-4xl rounded-2xl bg-[#1E1F20]/75 backdrop-blur-xl border border-white/10 shadow-2xl p-4 sm:p-6 text-left overflow-hidden">
+              {/* Terminal / Window Chrome */}
+              <div className="flex items-center justify-between px-3 py-2 border-b border-white/10 mb-4 bg-[#131314]/60 rounded-xl">
+                <div className="flex items-center gap-2">
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#ff5f56]" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#27c93f]" />
+                  <span className="text-[#747775] font-mono text-[11px] ml-2 hidden sm:inline">
+                    nexus-session-v2.5-pro • telemetry: 42ms TTFT • Neon DB Connected
                   </span>
                 </div>
+                {/* Model Selector Pill in Teaser */}
+                <div
+                  onClick={onGetStarted}
+                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#282A2C] border border-white/10 text-white text-xs font-mono cursor-pointer hover:border-[#A8C7FA]/50 transition-colors"
+                >
+                  <span className="material-symbols-outlined text-[#A8C7FA] text-sm">neurology</span>
+                  <span>Nexus 2.5 Pro</span>
+                  <span className="material-symbols-outlined text-xs text-[#747775]">expand_more</span>
+                </div>
+              </div>
 
-                {/* Mock Multi-Agent Status Chips */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-[11px] font-mono">
-                  <div className="p-2.5 rounded-xl bg-[#091610] border border-emerald-500/30 text-emerald-300 flex items-center justify-between">
-                    <div className="flex items-center space-x-1.5">
-                      <TrendingUp className="w-3.5 h-3.5 text-emerald-400" />
-                      <span>Sales Forecast</span>
-                    </div>
-                    <span className="font-bold">+70.6%</span>
+              {/* Chat Teaser Stage */}
+              <div className="space-y-4 px-1 pb-2">
+                {/* User Prompt */}
+                <div className="flex items-start gap-3 max-w-2xl ml-auto justify-end">
+                  <div className="bg-[#282A2C] border border-white/10 rounded-2xl rounded-tr-sm px-4 py-3 text-[#E3E3E3] text-xs sm:text-sm leading-relaxed">
+                    Analyze high p99 latency in production Kubernetes ingress cluster. Generate root-cause graph, verify rollback safety, and optimize purchase orders within ₹1.80L cash cap.
                   </div>
-
-                  <div className="p-2.5 rounded-xl bg-[#1a1408] border border-amber-500/30 text-amber-300 flex items-center justify-between">
-                    <div className="flex items-center space-x-1.5">
-                      <Zap className="w-3.5 h-3.5 text-amber-400" />
-                      <span>Stockout Horizon</span>
-                    </div>
-                    <span className="font-bold">1.17 Days</span>
+                  <div className="w-8 h-8 rounded-full bg-[#393939] flex items-center justify-center shrink-0">
+                    <span className="material-symbols-outlined text-[#C4C7C5] text-sm">person</span>
                   </div>
+                </div>
 
-                  <div className="p-2.5 rounded-xl bg-[#08151f] border border-cyan-500/30 text-cyan-300 flex items-center justify-between">
-                    <div className="flex items-center space-x-1.5">
-                      <ShieldCheck className="w-3.5 h-3.5 text-cyan-400" />
-                      <span>OR-Tools Solver</span>
+                {/* Assistant Reasoning Accordion */}
+                <div className="flex items-start gap-3 max-w-3xl">
+                  <div className="w-8 h-8 rounded-full bg-[#A8C7FA]/20 border border-[#A8C7FA]/30 flex items-center justify-center shrink-0">
+                    <span className="material-symbols-outlined text-[#A8C7FA] text-sm">spark</span>
+                  </div>
+                  <div className="space-y-3 flex-1">
+                    {/* Reasoning Disclosure Step */}
+                    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#282A2C]/80 border border-[#A8C7FA]/30 text-[#A8C7FA] text-xs font-mono">
+                      <span className="material-symbols-outlined text-xs animate-spin">progress_activity</span>
+                      <span>Thought for 3.4 seconds • Multi-hop log correlation & OR-Tools integer solver</span>
+                      <span className="material-symbols-outlined text-xs">expand_less</span>
                     </div>
-                    <span className="font-bold">Optimal PO</span>
+
+                    {/* Code block with action toolbar */}
+                    <div className="rounded-xl bg-[#0F0F10] border border-white/10 overflow-hidden">
+                      <div className="flex items-center justify-between px-4 py-2 bg-[#1E1F20] border-b border-white/10 font-mono text-xs text-[#747775]">
+                        <span className="flex items-center gap-1.5 text-[#C4C7C5]">
+                          <span className="material-symbols-outlined text-xs text-[#A8C7FA]">terminal</span>
+                          diagnostics.sh (Auto-remediation & PO playbook)
+                        </span>
+                        <button
+                          onClick={handleCopyCode}
+                          className="flex items-center gap-1 text-xs hover:text-white transition-colors cursor-pointer text-[#C4C7C5]"
+                        >
+                          <span className="material-symbols-outlined text-xs">
+                            {copiedCode ? 'check' : 'content_copy'}
+                          </span>
+                          <span>{copiedCode ? 'Copied' : 'Copy code'}</span>
+                        </button>
+                      </div>
+                      <pre className="p-4 text-white font-mono text-xs overflow-x-auto leading-relaxed">
+                        <code>
+                          <span className="text-[#8c9196]"># Nexus autonomous diagnostic daemon</span>{'\n'}
+                          $ nexus cluster inspect --namespace prod-eu-west --trace-window 15m{'\n'}
+                          <span className="text-[#747775]">✔ Correlating Envoy buffer overflows with Node pool c5.4xlarge throttles</span>{'\n'}
+                          <span className="text-[#A8C7FA]">[ACTION TAKEN]</span> Applying dynamic ring-buffer patch and routing ingress spillover to fallback zone.{'\n'}
+                          <span className="text-emerald-400">[OR-TOOLS SOLVER]</span> Purchase order split: 400 units (Net-30) + 445 units (Advance).
+                        </code>
+                      </pre>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Floating Prompt Capsule Preview Mock */}
+                <div className="pt-2">
+                  <div className="bg-[#282A2C]/90 backdrop-blur-md rounded-full border border-white/15 p-1.5 flex items-center justify-between shadow-xl">
+                    <div className="flex items-center gap-2 pl-3 text-[#747775] text-xs truncate">
+                      <span className="material-symbols-outlined text-sm">attach_file</span>
+                      <span className="truncate">Ask Nexus to orchestrate scripts, run evals, or solve supply chain trade-offs...</span>
+                    </div>
+                    <div className="flex items-center gap-2 pr-1">
+                      <div className="px-2.5 py-0.5 rounded-full bg-[#1E1F20] border border-white/10 text-[#C4C7C5] text-[10px] font-mono">
+                        ⌘K Tools
+                      </div>
+                      <button
+                        onClick={onGetStarted}
+                        className="w-7 h-7 rounded-full bg-[#C2E7FF] text-[#001E2C] flex items-center justify-center hover:bg-[#A8C7FA] transition-colors cursor-pointer"
+                      >
+                        <span className="material-symbols-outlined text-xs font-bold">arrow_upward</span>
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -200,226 +257,228 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           </div>
         </section>
 
-        {/* ================= EXPLORE THE NEXUS MODELS SECTION (Exact Match to Stitch Screen 1) ================= */}
-        <section id="models" className="py-20 px-6 border-t border-white/[0.06] bg-[#070a12]/60">
-          <div className="max-w-6xl mx-auto space-y-12">
-            <div className="text-center space-y-3">
-              <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-indigo-950/60 border border-indigo-800/40 text-indigo-300 text-xs font-mono">
-                <Bot className="w-3.5 h-3.5 text-indigo-400" />
-                <span>Foundation Model Matrix</span>
+        {/* ================= MODEL LINEUP SECTION ================= */}
+        <section className="py-20 px-6 md:px-10 bg-[#131314] border-t border-white/[0.08]" id="models">
+          <div className="max-w-7xl mx-auto">
+            <div className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-4">
+              <div>
+                <div className="text-[#A8C7FA] inline-flex items-center gap-1.5 mb-2 font-mono text-xs font-semibold">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#A8C7FA]" />
+                  FRONTIER ARCHITECTURES
+                </div>
+                <h2 className="text-3xl sm:text-4xl text-white font-semibold tracking-[-0.025em]">
+                  Explore the Nexus Models
+                </h2>
+                <p className="text-[#C4C7C5] mt-1 max-w-xl text-xs sm:text-sm leading-relaxed">
+                  From low-latency execution to trillion-parameter architectural reasoning, discover the right model configuration for your workflow.
+                </p>
               </div>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-                Explore the Nexus Models
-              </h2>
-              <p className="text-zinc-400 text-xs sm:text-sm max-w-xl mx-auto leading-relaxed">
-                From standard reasoning to complex multi-step orchestration, explore our family of frontier models built for zero-hallucination execution.
-              </p>
+              <button
+                onClick={onGetStarted}
+                className="inline-flex items-center gap-1 text-[#A8C7FA] hover:underline text-xs font-semibold cursor-pointer"
+              >
+                <span>Compare full benchmark evaluations</span>
+                <span className="material-symbols-outlined text-sm">arrow_outward</span>
+              </button>
             </div>
 
-            {/* 3 Model Cards Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {/* Card 1: Nexus 2.5 Flash */}
-              <div className="glass-panel rounded-3xl p-6 space-y-5 border border-white/[0.08] hover:border-cyan-500/50 transition-all flex flex-col justify-between group">
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-mono font-bold text-cyan-400 bg-cyan-950/80 px-2.5 py-0.5 rounded-full border border-cyan-800">
-                      Lightweight & Fast
-                    </span>
-                    <Sparkles className="w-4 h-4 text-cyan-400 group-hover:scale-110 transition-transform" />
+            {/* 3 Model Tier Cards Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              {/* Nexus 2.5 Pro (Featured) */}
+              <div className="relative rounded-2xl bg-[#1E1F20] border border-[#A8C7FA]/40 p-6 flex flex-col justify-between hover:border-[#A8C7FA] transition-all duration-300 shadow-xl group">
+                <div className="absolute -top-3 right-6 bg-[#A8C7FA] text-[#001E2C] px-3 py-0.5 rounded-full text-[10px] font-mono font-semibold uppercase tracking-wider">
+                  Most Popular
+                </div>
+                <div>
+                  <div className="flex items-center gap-2 mb-4">
+                    <span className="material-symbols-outlined text-[#A8C7FA]">psychology</span>
+                    <h3 className="text-lg font-semibold text-white">Nexus 2.5 Pro</h3>
                   </div>
-
-                  <div>
-                    <h3 className="text-lg font-bold text-white tracking-tight">Nexus 2.5 Flash</h3>
-                    <p className="text-xs text-zinc-400 leading-relaxed mt-1">
-                      Fast & lightweight intelligence for real-time actions, sub-second latency, optimal token throughput.
-                    </p>
-                  </div>
-
-                  <div className="border-t border-white/5 pt-3 space-y-2 text-[11px] font-mono text-zinc-400">
-                    <div className="flex justify-between">
-                      <span>Context Window:</span>
-                      <span className="text-white font-semibold">1M Tokens</span>
+                  <p className="text-[#C4C7C5] text-xs mb-6 leading-relaxed">
+                    Best for complex reasoning, architectural design, and deep codebase telemetry analysis. Excels in long-running agentic tasks.
+                  </p>
+                  {/* Specs */}
+                  <div className="space-y-2 border-y border-white/10 py-4 mb-6 text-xs font-mono">
+                    <div className="flex justify-between items-center text-[#C4C7C5]">
+                      <span>Context Window</span>
+                      <span className="text-white font-medium">2M Tokens</span>
                     </div>
-                    <div className="flex justify-between">
-                      <span>Output Rate:</span>
-                      <span className="text-cyan-300 font-semibold">185 tps</span>
+                    <div className="flex justify-between items-center text-[#C4C7C5]">
+                      <span>Reasoning Mode</span>
+                      <span className="text-[#A8C7FA] font-medium">Native Multimodal CoT</span>
                     </div>
-                    <div className="flex justify-between">
-                      <span>Latency:</span>
-                      <span className="text-emerald-400 font-semibold">&lt; 420ms</span>
+                    <div className="flex justify-between items-center text-[#C4C7C5]">
+                      <span>Tool Integration</span>
+                      <span className="text-white font-medium">Parallel Function Calling</span>
+                    </div>
+                    <div className="flex justify-between items-center text-[#C4C7C5]">
+                      <span>Architecture</span>
+                      <span className="text-[#747775] font-medium">Mixture of Experts (MoE)</span>
                     </div>
                   </div>
                 </div>
-
                 <button
                   onClick={onGetStarted}
-                  className="w-full py-2.5 rounded-xl bg-white/[0.05] hover:bg-cyan-500 hover:text-black border border-white/10 hover:border-cyan-400 text-xs font-semibold text-white transition-all flex items-center justify-center space-x-1.5 cursor-pointer"
+                  className="w-full inline-flex items-center justify-center gap-2 py-2.5 rounded-full bg-[#C2E7FF] text-[#001E2C] hover:bg-[#A8C7FA] font-semibold text-xs transition-all cursor-pointer"
                 >
-                  <span>Launch in Copilot</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
+                  <span>Launch in Nexus Chat</span>
+                  <span className="material-symbols-outlined text-sm">open_in_new</span>
                 </button>
               </div>
 
-              {/* Card 2: Nexus 1.5 Pro */}
-              <div className="glass-panel rounded-3xl p-6 space-y-5 border border-indigo-500/30 hover:border-indigo-500/60 transition-all flex flex-col justify-between group relative glow-primary">
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-mono font-bold text-indigo-300 bg-indigo-950/80 px-2.5 py-0.5 rounded-full border border-indigo-700">
-                      Frontier Reasoning
-                    </span>
-                    <Bot className="w-4 h-4 text-indigo-400 group-hover:scale-110 transition-transform" />
+              {/* Nexus 2.5 Flash */}
+              <div className="rounded-2xl bg-[#1E1F20] border border-white/10 hover:border-white/20 p-6 flex flex-col justify-between transition-all duration-300 group">
+                <div>
+                  <div className="flex items-center gap-2 mb-4">
+                    <span className="material-symbols-outlined text-[#B2C5FF]">bolt</span>
+                    <h3 className="text-lg font-semibold text-white">Nexus 2.5 Flash</h3>
                   </div>
-
-                  <div>
-                    <h3 className="text-lg font-bold text-white tracking-tight">Nexus 1.5 Pro</h3>
-                    <p className="text-xs text-zinc-400 leading-relaxed mt-1">
-                      Deep reasoning & high-parameter synthesis for complex enterprise workflows, multi-modal analysis.
-                    </p>
-                  </div>
-
-                  <div className="border-t border-white/5 pt-3 space-y-2 text-[11px] font-mono text-zinc-400">
-                    <div className="flex justify-between">
-                      <span>Context Window:</span>
-                      <span className="text-white font-semibold">2M Tokens</span>
+                  <p className="text-[#C4C7C5] text-xs mb-6 leading-relaxed">
+                    Built for high-throughput execution, ultra-low latency queries, and rapid tool calling across high-volume pipelines.
+                  </p>
+                  {/* Specs */}
+                  <div className="space-y-2 border-y border-white/10 py-4 mb-6 text-xs font-mono">
+                    <div className="flex justify-between items-center text-[#C4C7C5]">
+                      <span>Context Window</span>
+                      <span className="text-white font-medium">1M Tokens</span>
                     </div>
-                    <div className="flex justify-between">
-                      <span>Output Rate:</span>
-                      <span className="text-indigo-300 font-semibold">95 tps</span>
+                    <div className="flex justify-between items-center text-[#C4C7C5]">
+                      <span>TTFT Latency</span>
+                      <span className="text-emerald-400 font-medium">&lt; 180ms</span>
                     </div>
-                    <div className="flex justify-between">
-                      <span>Reasoning Depth:</span>
-                      <span className="text-indigo-300 font-semibold">Level 5</span>
+                    <div className="flex justify-between items-center text-[#C4C7C5]">
+                      <span>Cost Efficiency</span>
+                      <span className="text-white font-medium">10x Optimized</span>
+                    </div>
+                    <div className="flex justify-between items-center text-[#C4C7C5]">
+                      <span>Throughput</span>
+                      <span className="text-[#747775] font-medium">High-Concurrency Streaming</span>
                     </div>
                   </div>
                 </div>
-
                 <button
                   onClick={onGetStarted}
-                  className="w-full py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-500 hover:to-blue-500 text-xs font-semibold text-white shadow-lg shadow-indigo-600/30 transition-all flex items-center justify-center space-x-1.5 cursor-pointer"
+                  className="w-full inline-flex items-center justify-center gap-2 py-2.5 rounded-full bg-[#1E1F20] border border-white/15 text-white hover:bg-[#282A2C] font-semibold text-xs transition-all cursor-pointer"
                 >
-                  <span>Launch in Copilot</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
+                  <span>Launch in Nexus Chat</span>
+                  <span className="material-symbols-outlined text-sm">open_in_new</span>
                 </button>
               </div>
 
-              {/* Card 3: Nexus 2.0 Flash / Thinking */}
-              <div className="glass-panel rounded-3xl p-6 space-y-5 border border-white/[0.08] hover:border-amber-500/50 transition-all flex flex-col justify-between group">
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-mono font-bold text-amber-400 bg-amber-950/80 px-2.5 py-0.5 rounded-full border border-amber-800">
-                      Mathematical Engine
-                    </span>
-                    <Cpu className="w-4 h-4 text-amber-400 group-hover:scale-110 transition-transform" />
+              {/* Nexus 3.1 Deep Think */}
+              <div className="rounded-2xl bg-[#1E1F20] border border-white/10 hover:border-white/20 p-6 flex flex-col justify-between transition-all duration-300 group">
+                <div>
+                  <div className="flex items-center gap-2 mb-4">
+                    <span className="material-symbols-outlined text-amber-400">precision_manufacturing</span>
+                    <h3 className="text-lg font-semibold text-white">Nexus 3.1 Deep Think</h3>
                   </div>
-
-                  <div>
-                    <h3 className="text-lg font-bold text-white tracking-tight">Nexus 2.0 Flash (Thinking)</h3>
-                    <p className="text-xs text-zinc-400 leading-relaxed mt-1">
-                      Advanced mathematical OR-Tools solver & dynamic tool calling for zero-hallucination execution.
-                    </p>
-                  </div>
-
-                  <div className="border-t border-white/5 pt-3 space-y-2 text-[11px] font-mono text-zinc-400">
-                    <div className="flex justify-between">
-                      <span>Context Window:</span>
-                      <span className="text-white font-semibold">1M Tokens</span>
+                  <p className="text-[#C4C7C5] text-xs mb-6 leading-relaxed">
+                    Specialized in mathematical formal verification, self-correcting DAG logic, and deterministic OR-Tools integer optimization.
+                  </p>
+                  {/* Specs */}
+                  <div className="space-y-2 border-y border-white/10 py-4 mb-6 text-xs font-mono">
+                    <div className="flex justify-between items-center text-[#C4C7C5]">
+                      <span>Context Window</span>
+                      <span className="text-white font-medium">4M Tokens</span>
                     </div>
-                    <div className="flex justify-between">
-                      <span>Optimization Engine:</span>
-                      <span className="text-amber-300 font-semibold">OR-Tools v9.8</span>
+                    <div className="flex justify-between items-center text-[#C4C7C5]">
+                      <span>Constraint Engine</span>
+                      <span className="text-amber-300 font-medium">Google OR-Tools v9.8</span>
                     </div>
-                    <div className="flex justify-between">
-                      <span>Accuracy:</span>
-                      <span className="text-emerald-400 font-semibold">99.7% Exact</span>
+                    <div className="flex justify-between items-center text-[#C4C7C5]">
+                      <span>Verification Mode</span>
+                      <span className="text-white font-medium">Formal Sandbox Execution</span>
+                    </div>
+                    <div className="flex justify-between items-center text-[#C4C7C5]">
+                      <span>Search Method</span>
+                      <span className="text-[#747775] font-medium">Tree-of-Thought RL</span>
                     </div>
                   </div>
                 </div>
-
                 <button
                   onClick={onGetStarted}
-                  className="w-full py-2.5 rounded-xl bg-white/[0.05] hover:bg-amber-500 hover:text-black border border-white/10 hover:border-amber-400 text-xs font-semibold text-white transition-all flex items-center justify-center space-x-1.5 cursor-pointer"
+                  className="w-full inline-flex items-center justify-center gap-2 py-2.5 rounded-full bg-[#1E1F20] border border-white/15 text-white hover:bg-[#282A2C] font-semibold text-xs transition-all cursor-pointer"
                 >
-                  <span>Launch in Studio</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
+                  <span>Launch in Swarm Studio</span>
+                  <span className="material-symbols-outlined text-sm">open_in_new</span>
                 </button>
               </div>
             </div>
           </div>
         </section>
 
-        {/* ================= BENTO GRID: BUILT FOR AUTONOMOUS EXECUTION ================= */}
-        <section id="bento" className="py-20 px-6 border-t border-white/[0.06] bg-[#05070f]">
-          <div className="max-w-6xl mx-auto space-y-12">
-            <div className="text-center space-y-3">
-              <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-800/40 text-cyan-300 text-xs font-mono">
-                <Workflow className="w-3.5 h-3.5 text-cyan-400" />
-                <span>Engineered for Reliability</span>
+        {/* ================= CAPABILITIES BENTO GRID ================= */}
+        <section className="py-20 px-6 md:px-10 bg-[#131313] border-t border-white/[0.08]" id="capabilities">
+          <div className="max-w-7xl mx-auto space-y-12">
+            <div className="text-center space-y-2">
+              <div className="text-[#A8C7FA] inline-flex items-center gap-1.5 font-mono text-xs font-semibold">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#A8C7FA]" />
+                AUTONOMOUS SYSTEM CAPABILITIES
               </div>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-                Built for Autonomous Execution
+              <h2 className="text-3xl sm:text-4xl text-white font-semibold tracking-tight">
+                Architected for Verifiable Operations
               </h2>
-              <p className="text-zinc-400 text-xs sm:text-sm max-w-xl mx-auto">
+              <p className="text-[#C4C7C5] text-xs sm:text-sm max-w-xl mx-auto">
                 No hallucinated calculations. Every decision is grounded in real SQL data and solved via mathematical linear optimization.
               </p>
             </div>
 
-            {/* 4 Bento Cards (2x2 Grid) */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Bento Card 1: Agentic Strategy Orchestration */}
-              <div className="glass-panel rounded-3xl p-7 space-y-4 border border-white/[0.08] hover:border-indigo-500/40 transition-all group">
-                <div className="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center shadow-md">
-                  <Workflow className="w-6 h-6" />
+              {/* Card 1 */}
+              <div className="rounded-2xl bg-[#1E1F20] border border-white/10 p-7 space-y-3 hover:border-[#A8C7FA]/40 transition-all">
+                <div className="w-10 h-10 rounded-xl bg-[#A8C7FA]/10 border border-[#A8C7FA]/20 text-[#A8C7FA] flex items-center justify-center">
+                  <span className="material-symbols-outlined">hub</span>
                 </div>
-                <h3 className="text-lg font-bold text-white tracking-tight">Agentic Strategy Orchestration</h3>
-                <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
-                  Real-time multi-agent coordination with hierarchical sub-agents (Sales, Inventory, Finance, Suppliers) sharing typed Pydantic payloads.
+                <h3 className="text-base font-semibold text-white">Agentic Strategy Orchestration</h3>
+                <p className="text-xs text-[#C4C7C5] leading-relaxed">
+                  Real-time multi-agent coordination with hierarchical sub-agents (Sales, Inventory, Finance, Suppliers) communicating via strict Pydantic schemas.
                 </p>
-                <div className="pt-2 text-[10px] font-mono text-indigo-300 flex items-center space-x-2">
-                  <span className="w-2 h-2 rounded-full bg-indigo-400" />
-                  <span>3 Specialized Agents • Swarm Sync: &lt; 12ms</span>
+                <div className="pt-1 text-[11px] font-mono text-[#A8C7FA] flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-[#A8C7FA]" />
+                  <span>3 Specialized Agents • Swarm Latency &lt; 12ms</span>
                 </div>
               </div>
 
-              {/* Bento Card 2: Non-linear Reasoning */}
-              <div className="glass-panel rounded-3xl p-7 space-y-4 border border-white/[0.08] hover:border-cyan-500/40 transition-all group">
-                <div className="w-12 h-12 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center shadow-md">
-                  <GitBranch className="w-6 h-6" />
+              {/* Card 2 */}
+              <div className="rounded-2xl bg-[#1E1F20] border border-white/10 p-7 space-y-3 hover:border-[#A8C7FA]/40 transition-all">
+                <div className="w-10 h-10 rounded-xl bg-[#B2C5FF]/10 border border-[#B2C5FF]/20 text-[#B2C5FF] flex items-center justify-center">
+                  <span className="material-symbols-outlined">account_tree</span>
                 </div>
-                <h3 className="text-lg font-bold text-white tracking-tight">Non-linear Reasoning</h3>
-                <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
-                  Tree-of-thought DAG planner with backtrack capability, adaptive self-correction, and chronological audit trail logging.
+                <h3 className="text-base font-semibold text-white">Non-Linear Reasoning & Backtracking</h3>
+                <p className="text-xs text-[#C4C7C5] leading-relaxed">
+                  Tree-of-thought DAG planner with rollback capability, adaptive self-correction, and chronological audit trail logging across all stages.
                 </p>
-                <div className="pt-2 text-[10px] font-mono text-cyan-300 flex items-center space-x-2">
-                  <span className="w-2 h-2 rounded-full bg-cyan-400" />
+                <div className="pt-1 text-[11px] font-mono text-[#B2C5FF] flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-[#B2C5FF]" />
                   <span>DAG Depth: 4 Nodes • Backtrack Capable</span>
                 </div>
               </div>
 
-              {/* Bento Card 3: Dynamic Tools Integration */}
-              <div className="glass-panel rounded-3xl p-7 space-y-4 border border-white/[0.08] hover:border-purple-500/40 transition-all group">
-                <div className="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center shadow-md">
-                  <Database className="w-6 h-6" />
+              {/* Card 3 */}
+              <div className="rounded-2xl bg-[#1E1F20] border border-white/10 p-7 space-y-3 hover:border-[#A8C7FA]/40 transition-all">
+                <div className="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center">
+                  <span className="material-symbols-outlined">database</span>
                 </div>
-                <h3 className="text-lg font-bold text-white tracking-tight">Dynamic Tools Integration</h3>
-                <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
-                  Plug-and-play API tool calling for ERP, Neon Cloud PostgreSQL, SAP, Shopify, and custom webhooks with strict role-based access.
+                <h3 className="text-base font-semibold text-white">Dynamic Tools & Neon PostgreSQL Integration</h3>
+                <p className="text-xs text-[#C4C7C5] leading-relaxed">
+                  Plug-and-play API tool calling for ERP, Neon Cloud PostgreSQL, SAP, Shopify, and custom webhooks with strict RBAC permission racks.
                 </p>
-                <div className="pt-2 text-[10px] font-mono text-purple-300 flex items-center space-x-2">
+                <div className="pt-1 text-[11px] font-mono text-purple-300 flex items-center gap-1.5">
                   <span className="w-2 h-2 rounded-full bg-purple-400" />
                   <span>Neon PostgreSQL • REST APIs • Document Racks</span>
                 </div>
               </div>
 
-              {/* Bento Card 4: Zero-Hallucination Execution Engine */}
-              <div className="glass-panel rounded-3xl p-7 space-y-4 border border-white/[0.08] hover:border-emerald-500/40 transition-all group">
-                <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center shadow-md">
-                  <ShieldCheck className="w-6 h-6" />
+              {/* Card 4 */}
+              <div className="rounded-2xl bg-[#1E1F20] border border-white/10 p-7 space-y-3 hover:border-emerald-500/40 transition-all">
+                <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center">
+                  <span className="material-symbols-outlined">verified_user</span>
                 </div>
-                <h3 className="text-lg font-bold text-white tracking-tight">Zero-Hallucination Execution Engine</h3>
-                <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
+                <h3 className="text-base font-semibold text-white">Zero-Hallucination Integer Linear Solver</h3>
+                <p className="text-xs text-[#C4C7C5] leading-relaxed">
                   Deterministic mathematical constraint solver (Google OR-Tools) guarantees allocations respect statutory liquidity and supplier caps.
                 </p>
-                <div className="pt-2 text-[10px] font-mono text-emerald-300 flex items-center space-x-2">
+                <div className="pt-1 text-[11px] font-mono text-emerald-300 flex items-center gap-1.5">
                   <span className="w-2 h-2 rounded-full bg-emerald-400" />
                   <span>Exact Integer Linear Programming (ILP)</span>
                 </div>
@@ -428,85 +487,79 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           </div>
         </section>
 
-        {/* ================= METRICS & BENCHMARK BANNER (Exact Match to Stitch Screen 1) ================= */}
-        <section id="benchmarks" className="py-14 px-6 border-t border-white/[0.06] bg-[#060810]">
+        {/* ================= BENCHMARKS RIBBON ================= */}
+        <section className="py-14 px-6 md:px-10 bg-[#131314] border-t border-white/[0.08]" id="benchmarks">
           <div className="max-w-5xl mx-auto">
-            <div className="glass-panel rounded-3xl p-8 border border-white/10 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            <div className="rounded-2xl bg-[#1E1F20] p-8 border border-white/10 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
               <div className="space-y-1">
-                <div className="text-3xl sm:text-4xl font-extrabold text-white font-mono tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-400">
+                <div className="text-3xl sm:text-4xl font-semibold text-white font-mono tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[#A8C7FA] to-[#B2C5FF]">
                   91.4%
                 </div>
-                <div className="text-[11px] text-zinc-400 font-mono">Multi-Agent Benchmark</div>
+                <div className="text-[11px] text-[#747775] font-mono">SWE-bench Verified</div>
               </div>
 
               <div className="space-y-1">
-                <div className="text-3xl sm:text-4xl font-extrabold text-white font-mono tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-400">
+                <div className="text-3xl sm:text-4xl font-semibold text-white font-mono tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[#B2C5FF] to-[#C2E7FF]">
                   89.8%
                 </div>
-                <div className="text-[11px] text-zinc-400 font-mono">Complex Reasoning Score</div>
+                <div className="text-[11px] text-[#747775] font-mono">GPQA Diamond Score</div>
               </div>
 
               <div className="space-y-1">
-                <div className="text-3xl sm:text-4xl font-extrabold text-white font-mono tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-400">
+                <div className="text-3xl sm:text-4xl font-semibold text-white font-mono tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[#C2E7FF] to-[#A8C7FA]">
                   4.0M
                 </div>
-                <div className="text-[11px] text-zinc-400 font-mono">Production Context</div>
+                <div className="text-[11px] text-[#747775] font-mono">Production Context</div>
               </div>
 
               <div className="space-y-1">
-                <div className="text-3xl sm:text-4xl font-extrabold text-white font-mono tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-teal-400">
+                <div className="text-3xl sm:text-4xl font-semibold text-white font-mono tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-teal-400">
                   99.7%
                 </div>
-                <div className="text-[11px] text-zinc-400 font-mono">Constraint Satisfaction</div>
+                <div className="text-[11px] text-[#747775] font-mono">Constraint Feasibility</div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* ================= BOTTOM CTA CARD (Exact Match to Stitch Screen 1) ================= */}
-        <section className="py-20 px-6 border-t border-white/[0.06] bg-[#03050a] relative">
-          <div className="max-w-4xl mx-auto">
-            <div className="glass-panel rounded-3xl p-10 border border-white/10 text-center space-y-6 shadow-2xl relative overflow-hidden">
-              <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-48 bg-cyan-500/20 blur-[100px] pointer-events-none" />
-
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-                Ready to experience Nexus?
-              </h2>
-
-              <p className="text-xs sm:text-sm text-zinc-400 max-w-lg mx-auto leading-relaxed">
-                Get instant access to autonomous enterprise workflows and state-of-the-art multi-agent swarm orchestration.
-              </p>
-
-              <form onSubmit={handleSubscribe} className="max-w-md mx-auto flex flex-col sm:flex-row gap-2.5">
-                <input
-                  type="email"
-                  value={emailInput}
-                  onChange={(e) => setEmailInput(e.target.value)}
-                  placeholder="Enter your enterprise email..."
-                  className="flex-1 px-4 py-3 rounded-xl bg-white/[0.05] border border-white/10 text-white text-xs focus:outline-none focus:border-cyan-400 font-mono placeholder:text-zinc-500"
-                />
-                <button
-                  type="button"
-                  onClick={onGetStarted}
-                  className="px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-semibold text-xs shadow-lg shadow-cyan-500/20 transition-all flex items-center justify-center space-x-1.5 cursor-pointer"
-                >
-                  <span>{subscribed ? 'Access Granted' : 'Get Started Free'}</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </button>
-              </form>
-            </div>
+        {/* ================= BOTTOM CTA ================= */}
+        <section className="py-20 px-6 md:px-10 bg-[#0e0e0e] border-t border-white/[0.08]">
+          <div className="max-w-3xl mx-auto text-center space-y-6">
+            <h2 className="text-3xl sm:text-4xl font-semibold text-white tracking-tight">
+              Ready to experience Nexus?
+            </h2>
+            <p className="text-xs sm:text-sm text-[#C4C7C5] max-w-lg mx-auto leading-relaxed">
+              Get instant access to autonomous enterprise workflows and state-of-the-art multi-agent swarm orchestration.
+            </p>
+            <form onSubmit={handleSubscribe} className="max-w-md mx-auto flex flex-col sm:flex-row gap-2">
+              <input
+                type="email"
+                value={emailInput}
+                onChange={(e) => setEmailInput(e.target.value)}
+                placeholder="Enter enterprise email..."
+                className="flex-1 px-4 py-2.5 rounded-full bg-[#1E1F20] border border-white/10 text-white text-xs focus:outline-none focus:border-[#A8C7FA] font-mono placeholder:text-[#747775]"
+              />
+              <button
+                type="button"
+                onClick={onGetStarted}
+                className="px-6 py-2.5 rounded-full bg-[#C2E7FF] hover:bg-[#A8C7FA] text-[#001E2C] font-semibold text-xs shadow-md transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+              >
+                <span>{subscribed ? 'Access Granted' : 'Get Started Free'}</span>
+                <span className="material-symbols-outlined text-xs">arrow_forward</span>
+              </button>
+            </form>
           </div>
         </section>
       </main>
 
       {/* ================= FOOTER ================= */}
-      <footer className="border-t border-white/[0.06] bg-[#020408] py-10 px-6 text-xs text-zinc-500">
+      <footer className="border-t border-white/[0.08] bg-[#0c0d10] py-8 px-6 text-xs text-[#747775]">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center space-x-2.5">
-            <Sparkles className="w-4 h-4 text-cyan-400" />
-            <span className="font-bold text-zinc-300">Nexus Autonomous Operating System 2.0</span>
+          <div className="flex items-center gap-2">
+            <span className="material-symbols-outlined text-[#A8C7FA] text-sm">spark</span>
+            <span className="font-semibold text-[#E3E3E3]">Nexus Autonomous Operating System 2.0</span>
           </div>
-          <div className="text-[11px] font-mono text-zinc-500">
+          <div className="font-mono text-[11px]">
             Built for Frontier AI Safety • HackVilla 2026 • 100% Free Hosting Ready
           </div>
         </div>

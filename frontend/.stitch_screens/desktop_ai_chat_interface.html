@@ -1,0 +1,701 @@
+<!DOCTYPE html><html class="dark" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Nexus Pro - Workspace</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Plus+Jakarta+Sans:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "text-primary": "#E3E3E3",
+            "outline": "#8c9196",
+            "surface-bright": "#393939",
+            "secondary-fixed-dim": "#b2c5ff",
+            "reasoning-accent": "#A8C7FA",
+            "primary-fixed-dim": "#a7cbe3",
+            "surface-container-lowest": "#0e0e0e",
+            "primary": "#fffeff",
+            "border-subtle": "rgba(255, 255, 255, 0.08)",
+            "surface-card": "#1E1F20",
+            "border-hover": "rgba(255, 255, 255, 0.16)",
+            "background": "#131313",
+            "surface-container-high": "#2a2a2a",
+            "on-tertiary-fixed": "#261900",
+            "secondary": "#b2c5ff",
+            "tertiary": "#fffeff",
+            "secondary-fixed": "#dae2ff",
+            "on-tertiary-fixed-variant": "#584417",
+            "on-tertiary": "#402d03",
+            "surface-container-highest": "#353535",
+            "on-tertiary-container": "#786131",
+            "inverse-surface": "#e5e2e1",
+            "surface-tint": "#a7cbe3",
+            "on-surface-variant": "#c2c7cc",
+            "secondary-container": "#0054cd",
+            "surface": "#131313",
+            "text-secondary": "#C4C7C5",
+            "outline-variant": "#42484c",
+            "error": "#ffb4ab",
+            "surface-dim": "#131313",
+            "surface-variant": "#353535",
+            "on-background": "#e5e2e1",
+            "primary-fixed": "#c3e7ff",
+            "on-secondary-fixed-variant": "#0040a1",
+            "surface-container-low": "#1b1b1c",
+            "inverse-on-surface": "#303030",
+            "inverse-primary": "#3f6377",
+            "on-secondary": "#002b72",
+            "on-primary-container": "#45687d",
+            "on-surface": "#e5e2e1",
+            "on-primary-fixed": "#001e2c",
+            "tertiary-fixed-dim": "#e1c38a",
+            "surface-container": "#202020",
+            "on-error-container": "#ffdad6",
+            "on-secondary-fixed": "#001847",
+            "primary-container": "#c2e7ff",
+            "surface-capsule": "#282A2C",
+            "surface-dark": "#131314",
+            "on-primary": "#0a3447",
+            "tertiary-container": "#fedea3",
+            "on-secondary-container": "#c6d4ff",
+            "code-surface": "#0F0F10",
+            "tertiary-fixed": "#fedea3",
+            "text-muted": "#747775",
+            "on-error": "#690005",
+            "error-container": "#93000a",
+            "on-primary-fixed-variant": "#264b5e"
+          },
+          "borderRadius": {
+            "DEFAULT": "1rem",
+            "lg": "2rem",
+            "xl": "3rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-sm": "0.75rem",
+            "space-3xl": "4rem",
+            "space-xl": "2rem",
+            "sidebar-collapsed": "4.25rem",
+            "space-lg": "1.5rem",
+            "chat-max-width": "50rem",
+            "space-2xs": "0.25rem",
+            "prompt-max-width": "52rem",
+            "space-md": "1rem",
+            "space-2xl": "3rem",
+            "sidebar-expanded": "17.5rem",
+            "space-xs": "0.5rem"
+          },
+          "fontFamily": {
+            "title-md": ["Inter", "sans-serif"],
+            "body-md": ["Inter", "sans-serif"],
+            "headline-xl-mobile": ["Plus Jakarta Sans", "sans-serif"],
+            "headline-lg": ["Plus Jakarta Sans", "sans-serif"],
+            "label-sm": ["Inter", "sans-serif"],
+            "headline-sm": ["Plus Jakarta Sans", "sans-serif"],
+            "body-lg": ["Inter", "sans-serif"],
+            "code": ["JetBrains Mono", "monospace"],
+            "label-md": ["Inter", "sans-serif"],
+            "body-sm": ["Inter", "sans-serif"],
+            "headline-xl": ["Plus Jakarta Sans", "sans-serif"]
+          },
+          "fontSize": {
+            "title-md": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+            "body-md": ["14px", { "lineHeight": "22px", "fontWeight": "400" }],
+            "headline-xl-mobile": ["30px", { "lineHeight": "38px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.03em", "fontWeight": "500" }],
+            "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "500" }],
+            "body-lg": ["16px", { "lineHeight": "26px", "fontWeight": "400" }],
+            "code": ["13px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+            "body-sm": ["13px", { "lineHeight": "18px", "fontWeight": "400" }],
+            "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .material-symbols-outlined.fill {
+      font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+    }
+    /* Custom subtle scrollbar */
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.22);
+    }
+  </style>
+</head>
+<body class="bg-background text-text-primary antialiased font-body-md text-body-md h-screen w-screen overflow-hidden flex selection:bg-secondary-container selection:text-text-primary">
+<!-- ================= SIDEBAR (Shared Component: SideNavBar) ================= -->
+<aside class="fixed top-0 left-0 h-screen w-sidebar-expanded flex flex-col justify-between p-3 z-50 bg-surface-card border-r border-border-subtle transition-all duration-300" id="main-sidebar">
+<!-- Top Block: Header + Action CTA -->
+<div class="flex flex-col gap-3">
+<!-- Sidebar Header -->
+<div class="flex items-center justify-between px-2 py-1.5">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-reasoning-accent border border-border-subtle shadow-sm">
+<span class="material-symbols-outlined text-title-md font-title-md fill" style="font-variation-settings: &quot;FILL&quot; 1;">auto_awesome</span>
+</div>
+<div>
+<h1 class="text-headline-sm font-headline-sm font-semibold text-text-primary tracking-tight leading-none">Nexus Workspace</h1>
+<p class="text-label-sm font-label-sm text-text-muted mt-0.5">Nexus Pro 2.5</p>
+</div>
+</div>
+<button class="text-text-secondary hover:text-text-primary hover:bg-surface-container-high p-1.5 rounded-full transition-colors duration-150" id="sidebar-toggle" title="Collapse sidebar">
+<span class="material-symbols-outlined text-title-md font-title-md">menu_open</span>
+</button>
+</div>
+<!-- Primary CTA: '+ New chat' -->
+<button class="flex items-center gap-3 px-4 py-3 rounded-full bg-surface-capsule hover:bg-surface-bright text-text-primary font-title-md text-title-md border border-border-subtle hover:border-border-hover transition-all duration-150 active:scale-95 shadow-sm group">
+<span class="material-symbols-outlined text-reasoning-accent group-hover:rotate-90 transition-transform duration-200">add</span>
+<span class="font-title-md text-title-md">New chat</span>
+</button>
+<!-- Primary Nav Anchors (from SideNavBar JSON) -->
+<nav class="flex flex-col gap-1 mt-1">
+<!-- Tab 0: Recent Chats (Active) -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-full bg-surface-capsule text-text-primary font-body-md text-body-md" href="#recent">
+<span class="material-symbols-outlined text-title-md font-title-md text-reasoning-accent">chat_bubble</span>
+<span class="font-body-md text-body-md font-medium">Recent Chats</span>
+</a>
+<!-- Tab 1: Custom Gems -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-full text-text-secondary font-body-md text-body-md hover:bg-surface-container-high hover:text-text-primary transition-all duration-150" href="#gems">
+<span class="material-symbols-outlined text-title-md font-title-md">auto_awesome</span>
+<span class="font-body-md text-body-md">Custom Gems</span>
+</a>
+<!-- Tab 2: Prompt Library -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-full text-text-secondary font-body-md text-body-md hover:bg-surface-container-high hover:text-text-primary transition-all duration-150" href="#prompts">
+<span class="material-symbols-outlined text-title-md font-title-md">bookmark</span>
+<span class="font-body-md text-body-md">Prompt Library</span>
+</a>
+<!-- Tab 3: Help & Activity -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-full text-text-secondary font-body-md text-body-md hover:bg-surface-container-high hover:text-text-primary transition-all duration-150" href="#history">
+<span class="material-symbols-outlined text-title-md font-title-md">history</span>
+<span class="font-body-md text-body-md">Help &amp; Activity</span>
+</a>
+</nav>
+<!-- Pinned Gems Section -->
+<div class="mt-2 px-3">
+<div class="flex items-center justify-between text-label-sm font-label-sm text-text-muted mb-1.5 uppercase tracking-wider">Nexus Pro 2.5</div>
+<div class="flex flex-col gap-0.5">
+<a class="flex items-center gap-2.5 px-2.5 py-1.5 rounded-DEFAULT text-text-secondary hover:text-text-primary hover:bg-surface-container-high font-body-sm text-body-sm transition-colors group" href="#">
+<span class="material-symbols-outlined text-label-md font-label-md text-reasoning-accent">terminal</span>
+<span class="truncate">IT DevOps Architect</span>
+</a>
+<a class="flex items-center gap-2.5 px-2.5 py-1.5 rounded-DEFAULT text-text-secondary hover:text-text-primary hover:bg-surface-container-high font-body-sm text-body-sm transition-colors group" href="#">
+<span class="material-symbols-outlined text-label-md font-label-md text-error">emergency</span>
+<span class="truncate">Incident Response Bot</span>
+</a>
+<a class="flex items-center gap-2.5 px-2.5 py-1.5 rounded-DEFAULT text-text-secondary hover:text-text-primary hover:bg-surface-container-high font-body-sm text-body-sm transition-colors group" href="#">
+<span class="material-symbols-outlined text-label-md font-label-md text-secondary">rate_review</span>
+<span class="truncate">Code Reviewer</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Middle Block: Chronological Chat List -->
+<div class="flex-1 overflow-y-auto px-2 my-2 pr-1 space-y-3">
+<!-- Section: Today -->
+<div>
+<div class="px-2 py-1 text-label-sm font-label-sm text-text-muted">Nexus Pro 2.5</div>
+<div class="flex flex-col gap-0.5">
+<!-- Active thread -->
+<div class="group flex items-center justify-between px-2.5 py-2 rounded-DEFAULT bg-surface-capsule text-text-primary border border-border-subtle">
+<span class="truncate font-body-sm text-body-sm font-medium">Kubernetes Memory Leak Diagnosis</span>
+<button class="opacity-0 group-hover:opacity-100 text-text-secondary hover:text-text-primary transition-opacity p-0.5" title="Thread options">
+<span class="material-symbols-outlined text-title-md font-title-md">more_vert</span>
+</button>
+</div>
+<div class="group flex items-center justify-between px-2.5 py-2 rounded-DEFAULT text-text-secondary hover:text-text-primary hover:bg-surface-container-high transition-colors">
+<span class="truncate font-body-sm text-body-sm">Terraform AWS VPC Module</span>
+<button class="opacity-0 group-hover:opacity-100 text-text-muted hover:text-text-primary transition-opacity p-0.5">
+<span class="material-symbols-outlined text-title-md font-title-md">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Section: Previous 7 Days -->
+<div>
+<div class="px-2 py-1 text-label-sm font-label-sm text-text-muted">Nexus Pro 2.5</div>
+<div class="flex flex-col gap-0.5">
+<div class="group flex items-center justify-between px-2.5 py-2 rounded-DEFAULT text-text-secondary hover:text-text-primary hover:bg-surface-container-high transition-colors">
+<span class="truncate font-body-sm text-body-sm">PostgreSQL Query Optimization</span>
+<button class="opacity-0 group-hover:opacity-100 text-text-muted hover:text-text-primary transition-opacity p-0.5">
+<span class="material-symbols-outlined text-title-md font-title-md">more_vert</span>
+</button>
+</div>
+<div class="group flex items-center justify-between px-2.5 py-2 rounded-DEFAULT text-text-secondary hover:text-text-primary hover:bg-surface-container-high transition-colors">
+<span class="truncate font-body-sm text-body-sm">OAuth2 SSO Config</span>
+<button class="opacity-0 group-hover:opacity-100 text-text-muted hover:text-text-primary transition-opacity p-0.5">
+<span class="material-symbols-outlined text-title-md font-title-md">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Footer Block (SideNavBar JSON footer tabs + User Profile) -->
+<div class="border-t border-border-subtle pt-2 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded-full text-text-secondary font-body-md text-body-md hover:bg-surface-container-high hover:text-text-primary transition-all duration-150" href="#settings">
+<span class="material-symbols-outlined text-title-md font-title-md">settings</span>
+<span class="font-body-md text-body-md">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-full text-text-secondary font-body-md text-body-md hover:bg-surface-container-high hover:text-text-primary transition-all duration-150" href="#storage">
+<span class="material-symbols-outlined text-title-md font-title-md">cloud</span>
+<span class="font-body-md text-body-md">Storage &amp; Plan</span>
+</a>
+<!-- Profile Avatar Pill -->
+<div class="flex items-center justify-between px-2 py-2 mt-1 rounded-DEFAULT bg-surface-container hover:bg-surface-bright transition-colors border border-border-subtle">
+<div class="flex items-center gap-2.5 min-w-0">
+<img alt="User profile avatar" class="w-8 h-8 rounded-full object-cover border border-border-hover flex-shrink-0" data-alt="Close up photograph of a thoughtful senior technology engineer with subtle eyeglasses, soft moody ambient lighting matching modern dark UI interfaces, hyper realistic details." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDU0Hln4VsQlileqMR-lAycSFZJAUwYeqbdFpgRYm9pzYXzqHxSKvPCHl-f7fR5FhEzXD8WpZK82kX8vKqZgBA_dI_VNyzoFBP_1IT4s2J-SLBp6p5CmSLqveyqb2yfMsh2iy-W0g5BTq4QlYjiZGNFYIZ3AMwoG54irLU0QGJTRIe7UlxZb0sa_8Hy6Qk1ShrNMIjegWifWCIn7KP1Cwf04z6X1-wjRTOXxMaNwniyTwLdhh2inLZk">
+<div class="min-w-0">
+<p class="font-title-md text-body-sm font-medium text-text-primary truncate">Alex Vance</p>
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm text-reasoning-accent">
+<span class="material-symbols-outlined text-label-sm font-label-sm fill" style="font-variation-settings: &quot;FILL&quot; 1;">stars</span>
+              Gemini Advanced
+            </span>
+</div>
+</div>
+<span class="material-symbols-outlined text-text-muted text-title-md font-title-md">unfold_more</span>
+</div>
+</div>
+</aside>
+<!-- ================= MAIN VIEWPORT / WORKSPACE ================= -->
+<div class="flex-1 flex flex-col pl-sidebar-expanded w-full h-screen overflow-hidden bg-background">
+<!-- ================= TOP NAV BAR (Shared Component: TopNavBar) ================= -->
+<header class="flex justify-between items-center w-full h-14 px-4 bg-surface border-b border-border-subtle z-40 flex-shrink-0">
+<!-- Left: Brand + Model Selector Pill -->
+<div class="flex items-center gap-4">
+<!-- Mobile Sidebar Toggle -->
+<button class="md:hidden text-text-secondary hover:text-text-primary p-1.5 rounded-full hover:bg-surface-container">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="flex items-center gap-2">
+<span class="text-title-md font-title-md font-semibold text-text-primary tracking-tight">Nexus Workspace</span>
+</div>
+<!-- Model Selector Pill (Prominent Feature) -->
+<div class="relative" id="model-selector-dropdown">
+  <button id="model-selector-btn" class="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-card hover:bg-surface-bright border border-reasoning-accent/40 hover:border-reasoning-accent text-text-primary transition-all shadow-sm focus:outline-none focus:ring-1 focus:ring-reasoning-accent/50 group" aria-haspopup="true" aria-expanded="true">
+    <span class="w-2 h-2 rounded-full bg-reasoning-accent animate-pulse">Nexus Workspace</span>
+    <span class="material-symbols-outlined text-reasoning-accent text-body-md font-body-md fill" style="font-variation-settings: &quot;FILL&quot; 1;">Nexus Workspace</span>
+    <span class="font-title-md text-body-sm font-semibold tracking-tight text-text-primary">Nexus 2.5 Pro</span>
+    <span class="text-label-sm font-label-sm px-1.5 py-0.2 rounded bg-secondary-container/40 text-secondary-fixed-dim font-medium border border-border-subtle">Nexus Workspace</span>
+    <span class="material-symbols-outlined text-label-md font-label-md text-text-secondary group-hover:text-text-primary transition-transform duration-150">Nexus Workspace</span>
+  </button>
+
+  <!-- Model Dropdown & Tuning Panel -->
+  <div id="model-dropdown-menu" class="absolute top-full left-0 mt-2 w-80 bg-surface-card/95 backdrop-blur-xl border border-border-hover rounded-2xl shadow-[0_12px_40px_rgba(0,0,0,0.65)] p-2 z-50 flex flex-col gap-2 animate-in fade-in slide-in-from-top-1 duration-150">
+    <!-- Header / Category -->
+    <div class="flex items-center justify-between px-2.5 pt-1.5 pb-1">
+      <span class="text-label-sm font-label-sm uppercase tracking-wider text-text-muted font-medium">Select Model</span>
+      <span class="text-label-sm font-label-sm text-reasoning-accent bg-surface-dark px-2 py-0.5 rounded-full border border-border-subtle">2.5 Active</span>
+    </div>
+
+    <!-- Options list -->
+    <div class="flex flex-col gap-1">
+      <!-- Item 1: Gemini 2.5 Pro (Active) -->
+      <button class="flex items-start justify-between p-2.5 rounded-DEFAULT bg-surface-capsule border border-reasoning-accent/30 text-left transition-colors w-full group">
+        <div class="flex items-start gap-2.5 min-w-0">
+          <div class="mt-0.5 w-7 h-7 rounded-full bg-surface-container flex items-center justify-center text-reasoning-accent border border-border-subtle shrink-0">
+            <span class="material-symbols-outlined text-body-md font-body-md fill" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+          </div>
+          <div class="min-w-0 flex-1">
+            <div class="flex items-center gap-1.5">
+              <span class="font-title-md text-body-sm font-semibold text-text-primary">Gemini 2.5 Pro</span>
+              <span class="text-label-sm font-label-sm px-1.5 py-0.2 rounded bg-reasoning-accent/15 text-reasoning-accent font-medium">Thinking</span>
+            </div>
+            <p class="text-body-sm font-body-sm text-text-muted mt-0.5 leading-snug">Deep reasoning, complex architectures &amp; full codebase analysis</p>
+          </div>
+        </div>
+        <span class="material-symbols-outlined text-title-md text-reasoning-accent mt-0.5 ml-1 shrink-0">check_circle</span>
+      </button>
+
+      <!-- Item 2: Gemini 2.5 Flash -->
+      <button class="flex items-start justify-between p-2.5 rounded-DEFAULT hover:bg-surface-container border border-transparent hover:border-border-subtle text-left transition-colors w-full group">
+        <div class="flex items-start gap-2.5 min-w-0">
+          <div class="mt-0.5 w-7 h-7 rounded-full bg-surface-container-high flex items-center justify-center text-secondary shrink-0">
+            <span class="material-symbols-outlined text-body-md font-body-md">bolt</span>
+          </div>
+          <div class="min-w-0 flex-1">
+            <div class="flex items-center gap-1.5">
+              <span class="font-title-md text-body-sm font-medium text-text-primary group-hover:text-text-primary">Gemini 2.5 Flash</span>
+              <span class="text-label-sm font-label-sm px-1.5 py-0.2 rounded bg-surface-container-high text-secondary font-medium">Fast</span>
+            </div>
+            <p class="text-body-sm font-body-sm text-text-muted mt-0.5 leading-snug">High-speed execution, live debugging &amp; quick queries</p>
+          </div>
+        </div>
+      </button>
+
+      <!-- Item 3: Gemini 1.5 Ultra -->
+      <button class="flex items-start justify-between p-2.5 rounded-DEFAULT hover:bg-surface-container border border-transparent hover:border-border-subtle text-left transition-colors w-full group">
+        <div class="flex items-start gap-2.5 min-w-0">
+          <div class="mt-0.5 w-7 h-7 rounded-full bg-surface-container-high flex items-center justify-center text-text-secondary shrink-0">
+            <span class="material-symbols-outlined text-body-md font-body-md">neurology</span>
+          </div>
+          <div class="min-w-0 flex-1">
+            <div class="flex items-center gap-1.5">
+              <span class="font-title-md text-body-sm font-medium text-text-primary group-hover:text-text-primary">Gemini 1.5 Ultra</span>
+              <span class="text-label-sm font-label-sm px-1.5 py-0.2 rounded bg-surface-container-high text-text-muted font-medium">Legacy</span>
+            </div>
+            <p class="text-body-sm font-body-sm text-text-muted mt-0.5 leading-snug">High contextual capacity for legacy multi-modal payloads</p>
+          </div>
+        </div>
+      </button>
+    </div>
+
+    <!-- Model Parameter Adjustments Section -->
+    <div class="border-t border-border-subtle pt-2 px-2.5 pb-1.5 flex flex-col gap-2.5 bg-surface-dark/50 rounded-DEFAULT mt-0.5">
+      <div class="flex items-center justify-between text-label-sm font-label-sm">
+        <span class="text-text-secondary flex items-center gap-1.5">
+          <span class="material-symbols-outlined text-label-md text-reasoning-accent">psychology</span>
+          Thinking Budget
+        </span>
+        <span class="text-reasoning-accent font-code text-label-sm">High (64 tokens)</span>
+      </div>
+      <div class="grid grid-cols-3 gap-1">
+        <button class="px-2 py-1 rounded bg-surface-container text-label-sm font-label-sm text-text-muted hover:text-text-primary transition-colors text-center">Off</button>
+        <button class="px-2 py-1 rounded bg-surface-container text-label-sm font-label-sm text-text-muted hover:text-text-primary transition-colors text-center">Standard</button>
+        <button class="px-2 py-1 rounded bg-surface-capsule border border-border-hover text-label-sm font-label-sm text-reasoning-accent font-medium text-center shadow-sm">Extended</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<!-- Center: Top Navigation Links (Workspace Active) -->
+<nav class="hidden md:flex items-center gap-2">
+<!-- Active Nav: Workspace -->
+<a class="text-text-primary font-title-md text-title-md flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container border border-border-subtle" href="#workspace">
+<span class="material-symbols-outlined text-title-md font-title-md text-reasoning-accent">Nexus Workspace</span>
+<span class="">Nexus Workspace</span>
+</a>
+<a class="text-text-secondary font-label-md text-label-md hover:text-text-primary transition-colors duration-150 px-3 py-1.5 rounded-full hover:bg-surface-bright" href="#models">
+<span class="">Models</span>
+</a>
+<a class="text-text-secondary font-label-md text-label-md hover:text-text-primary transition-colors duration-150 px-3 py-1.5 rounded-full hover:bg-surface-bright" href="#gems-nav">
+<span class="">Gems</span>
+</a>
+</nav>
+<!-- Right Actions: Secondary Action ('Share') + Trailing Icon Actions -->
+<div class="flex items-center gap-2">
+<!-- Trailing Secondary Action -->
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container hover:bg-surface-bright text-text-primary border border-border-subtle hover:border-border-hover transition-all text-body-sm font-body-sm active:scale-95">
+<span class="material-symbols-outlined text-body-md font-body-md">share</span>
+<span class="font-label-md text-label-md">Share</span>
+</button>
+<!-- Trailing Icon Actions: tune, dark_mode, help -->
+<button class="p-2 rounded-full text-text-secondary hover:text-text-primary hover:bg-surface-container transition-colors" title="Workspace Parameters">
+<span class="material-symbols-outlined text-title-md font-title-md">tune</span>
+</button>
+<button class="p-2 rounded-full text-text-secondary hover:text-text-primary hover:bg-surface-container transition-colors" title="Toggle Theme">
+<span class="material-symbols-outlined text-title-md font-title-md">dark_mode</span>
+</button>
+<button class="p-2 rounded-full text-text-secondary hover:text-text-primary hover:bg-surface-container transition-colors" title="Help &amp; Support">
+<span class="material-symbols-outlined text-title-md font-title-md">help</span>
+</button>
+<!-- Small profile avatar indicator -->
+<div class="ml-1 w-8 h-8 rounded-full border border-border-subtle overflow-hidden">
+<img alt="User profile avatar" class="w-full h-full object-cover" data-alt="Subtle clean aesthetic avatar of a professional developer in soft cinematic rim light with charcoal dark background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfVLcsPTGh8dlj81hGsX-dqNZGE2KDaSGTmb_cCU4qoEybhKL4Dl4CWW_nc4dIQJQhbYJ-Rq2zUqp-V0iq0AX68eTQWRa9aOtgAav6sGDDOQbdDzjFbTCrP7QqU-_OXUpPQsDAOGI9wV8e5wrRiOyKAuX4GMsHHPYlWSXxltl3zOfg1MZQWX-7Lk9d37oGULiiZU9qx48DM0pZvCkkNZq6A7XWchkhQJNFBJyPE4lcqaMF0Sx2LNKO">
+</div>
+</div>
+</header>
+<!-- ================= CONVERSATION CANVAS ================= -->
+<main class="flex-1 overflow-y-auto px-4 md:px-8 pt-6 pb-40">
+<div class="max-w-chat-max-width mx-auto space-y-8">
+<!-- 1. USER MESSAGE -->
+<article class="flex items-start gap-4 justify-end">
+<div class="max-w-2xl bg-surface-container-high text-text-primary rounded-2xl rounded-tr-sm px-5 py-4 border border-border-subtle shadow-sm">
+<p class="font-body-md text-body-md leading-relaxed">
+              We are experiencing an intermittent 504 gateway timeout and memory spike in our production auth microservice on Kubernetes. Can you analyze the symptoms and provide an immediate mitigation plan and observability script?
+            </p>
+</div>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-border-hover flex-shrink-0 mt-1">
+<img alt="User profile avatar" class="w-full h-full object-cover" data-alt="Portrait avatar of software architect with dark aesthetic and calm confident expression in professional corporate setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxvpf4HjU2zLTGMCpCXOoOYMQ5fxDbm5AMwQ2frk9c11RwoCpx6t2wWcWcf1hvaJq-CcJLn4CMr5PJAGZbAYyW6wsi8whBvTQtO058eQPw484tF1Vj80eV13K7OJNWy1dQoIJU9_59i2LnhU75wqImHGvtnrRTaPoe9up9FeuAOGj8pkHovZzfTZNbCZmaa-mm5OkIQUxqxo3ZjH0bFZOQUAogsrdZbYysfaj3RDArKiUShEJ9NzyA">
+</div>
+</article>
+<!-- 2. ASSISTANT MESSAGE -->
+<article class="flex items-start gap-4 justify-start group">
+<!-- Sparkle AI Avatar -->
+<div class="w-9 h-9 rounded-full bg-gradient-to-tr from-secondary-container to-surface-card flex items-center justify-center text-reasoning-accent border border-border-subtle flex-shrink-0 mt-1 shadow-sm">
+<span class="material-symbols-outlined text-title-md font-title-md fill" style="font-variation-settings: &quot;FILL&quot; 1;">auto_awesome</span>
+</div>
+<!-- Message Body -->
+<div class="flex-1 min-w-0 space-y-4">
+<!-- Reasoning Disclosure Accordion -->
+<div class="inline-block rounded-DEFAULT bg-surface-card border border-border-subtle hover:border-border-hover transition-colors overflow-hidden">
+<details class="group/details" open="">
+<summary class="flex items-center gap-2 px-3 py-1.5 cursor-pointer text-text-secondary hover:text-text-primary select-none font-label-md text-label-md">
+<span class="w-2 h-2 rounded-full bg-reasoning-accent animate-pulse"></span>
+<span class="font-medium text-reasoning-accent">Thought for 3 seconds</span>
+<span class="material-symbols-outlined text-label-md font-label-md transition-transform group-open/details:rotate-180">expand_more</span>
+</summary>
+<div class="px-3.5 py-2.5 border-t border-border-subtle bg-surface-dark font-code text-code text-text-secondary space-y-1.5">
+<div class="flex items-center gap-2">
+<span class="text-outline">1.</span>
+<span class="">Correlating Ingress NGINX 504 timeout logs with upstream TCP keep-alive resets.</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-outline">2.</span>
+<span class="">Evaluating pod eviction metrics: Pod OOMKilled vs GC sweep pause latency spikes.</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-outline">3.</span>
+<span class="">Analyzing Goroutine leak vectors in JWT verification connection pool.</span>
+</div>
+</div>
+</details>
+</div>
+<!-- Assistant Synthesis Content -->
+<div class="space-y-4 text-text-primary">
+<p class="font-body-lg text-body-lg leading-relaxed text-text-primary">
+                Based on the coexistence of <strong class="text-reasoning-accent font-medium">504 Gateway Timeouts</strong> and rapid <strong class="text-reasoning-accent font-medium">RAM escalation</strong> in a Kubernetes auth microservice, the primary culprit is typically a blocking upstream connection pool causing queued requests and cascading thread/goroutine heap bloat.
+              </p>
+<!-- Bento / Key Root-Cause Hypotheses -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-3 my-4">
+<div class="p-3.5 rounded-DEFAULT bg-surface-card border border-border-subtle">
+<div class="flex items-center gap-2 text-error mb-1">
+<span class="material-symbols-outlined text-body-md font-body-md">arrow_top_left</span>
+<h2 class="font-title-md text-body-sm font-semibold text-text-primary">Pool Exhaustion</h2>
+</div>
+<p class="text-body-sm font-body-sm text-text-secondary">
+                    Redis or Postgres authentication connection pools are saturating, holding pending HTTP connections until the Ingress 60s proxy deadline expires.
+                  </p>
+</div>
+<div class="p-3.5 rounded-DEFAULT bg-surface-card border border-border-subtle">
+<div class="flex items-center gap-2 text-tertiary-container mb-1">
+<span class="material-symbols-outlined text-body-md font-body-md">memory</span>
+<h2 class="font-title-md text-body-sm font-semibold text-text-primary">OOMKilled Cycles</h2>
+</div>
+<p class="text-body-sm font-body-sm text-text-secondary">
+                    Unbounded buffering of concurrent authentication requests pushes pod heap consumption beyond container cgroup limits, triggering evictions.
+                  </p>
+</div>
+<div class="p-3.5 rounded-DEFAULT bg-surface-card border border-border-subtle">
+<div class="flex items-center gap-2 text-secondary mb-1">
+<span class="material-symbols-outlined text-body-md font-body-md">cached</span>
+<h2 class="font-title-md text-body-sm font-semibold text-text-primary">Unbounded Token Cache</h2>
+</div>
+<p class="text-body-sm font-body-sm text-text-secondary">
+                    In-memory JWKS public key rotation or revoked token cache lacking TTL eviction policies under elevated peak load.
+                  </p>
+</div>
+</div>
+<!-- Interactive Step-by-Step Mitigation Checklist -->
+<div class="bg-surface-card rounded-DEFAULT border border-border-subtle p-4 space-y-3">
+<div class="flex items-center justify-between border-b border-border-subtle pb-2">
+<span class="font-title-md text-body-md font-semibold text-text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-reasoning-accent">task_alt</span>
+                    Immediate Incident Mitigation Plan
+                  </span>
+<span class="text-label-sm font-label-sm px-2 py-0.5 rounded-full bg-surface-bright text-text-secondary">P0 Action Items</span>
+</div>
+<div class="space-y-2">
+<label class="flex items-start gap-3 p-2 rounded hover:bg-surface-container cursor-pointer transition-colors">
+<input checked="" class="mt-1 rounded bg-surface-dark border-outline text-reasoning-accent focus:ring-0 focus:ring-offset-0" type="checkbox">
+<div class="flex-1">
+<div class="flex items-center gap-2">
+<span class="font-title-md text-body-sm font-medium text-text-primary">Bump Horizontal Pod Autoscaler (HPA) Floor</span>
+<span class="text-label-sm font-label-sm px-1.5 py-0.2 rounded bg-surface-container-high text-reasoning-accent">Applied</span>
+</div>
+<p class="text-body-sm font-body-sm text-text-muted">Scale minimum replicas from 4 to 12 immediately to disperse connection contention across nodes.</p>
+</div>
+</label>
+<label class="flex items-start gap-3 p-2 rounded hover:bg-surface-container cursor-pointer transition-colors">
+<input checked="" class="mt-1 rounded bg-surface-dark border-outline text-reasoning-accent focus:ring-0 focus:ring-offset-0" type="checkbox">
+<div class="flex-1">
+<div class="flex items-center gap-2">
+<span class="font-title-md text-body-sm font-medium text-text-primary">Enable Ingress Upstream Circuit Breaking</span>
+<span class="text-label-sm font-label-sm px-1.5 py-0.2 rounded bg-surface-container-high text-reasoning-accent">Active</span>
+</div>
+<p class="text-body-sm font-body-sm text-text-muted">Short-circuit pending requests with 429 status code instead of letting backend pods queue to death.</p>
+</div>
+</label>
+<label class="flex items-start gap-3 p-2 rounded hover:bg-surface-container cursor-pointer transition-colors">
+<input class="mt-1 rounded bg-surface-dark border-outline text-reasoning-accent focus:ring-0 focus:ring-offset-0" type="checkbox">
+<div class="flex-1">
+<div class="flex items-center gap-2">
+<span class="font-title-md text-body-sm font-medium text-text-primary">Capture Heap Dump &amp; Goroutine Profile</span>
+<span class="text-label-sm font-label-sm px-1.5 py-0.2 rounded bg-surface-container-high text-outline">Pending</span>
+</div>
+<p class="text-body-sm font-body-sm text-text-muted">Execute `pprof` profile collection on the hottest pod before graceful rolling restart.</p>
+</div>
+</label>
+</div>
+</div>
+<!-- High-Fidelity Code Block -->
+<div class="rounded-DEFAULT overflow-hidden border border-border-subtle bg-code-surface my-4">
+<!-- Toolbar Header -->
+<div class="flex items-center justify-between px-4 py-2.5 bg-surface-card border-b border-border-subtle">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-body-sm font-body-sm text-reasoning-accent">terminal</span>
+<span class="font-code text-label-md font-label-md text-text-secondary">k8s-auth-diagnostics.sh</span>
+<span class="text-label-sm font-label-sm px-2 py-0.5 rounded bg-surface-dark text-text-muted font-code">bash</span>
+</div>
+<button class="flex items-center gap-1 text-label-md font-label-md text-text-secondary hover:text-text-primary px-2.5 py-1 rounded bg-surface-container hover:bg-surface-bright transition-colors" id="copy-btn" onclick="const btn = this; btn.innerHTML = '&lt;span class=\'material-symbols-outlined text-label-md\'&gt;check&lt;/span&gt; Copied!'; setTimeout(() =&gt; btn.innerHTML = '&lt;span class=\'material-symbols-outlined text-label-md\'&gt;content_copy&lt;/span&gt; Copy code', 2000);">
+<span class="material-symbols-outlined text-label-md font-label-md">content_copy</span>
+<span class="">Copy code</span>
+</button>
+</div>
+<!-- Code Viewport -->
+<pre class="p-4 font-code text-code text-text-primary overflow-x-auto leading-relaxed"><code><span class="text-outline">#!/usr/bin/env bash</span>
+<span class="text-reasoning-accent">set</span> -euo pipefail
+
+NAMESPACE=<span class="text-secondary-fixed-dim">"production"</span>
+DEPLOYMENT=<span class="text-secondary-fixed-dim">"auth-microservice"</span>
+
+<span class="text-outline"># 1. Immediate Pod Memory Spike Inspection</span>
+echo <span class="text-secondary-fixed-dim">"=== Pod Top Memory Usage ==="</span>
+kubectl top pods -n <span class="text-secondary-fixed-dim">"$NAMESPACE"</span> -l app=<span class="text-secondary-fixed-dim">"$DEPLOYMENT"</span> --sort-by=memory
+
+<span class="text-outline"># 2. Check for recent OOMKilled events and exit code 137</span>
+echo <span class="text-secondary-fixed-dim">"=== Inspecting Exit Codes and Restarts ==="</span>
+kubectl get pods -n <span class="text-secondary-fixed-dim">"$NAMESPACE"</span> -l app=<span class="text-secondary-fixed-dim">"$DEPLOYMENT"</span> \
+  -o jsonpath=<span class="text-secondary-fixed-dim">'{range .items[*]}{.metadata.name}{"\tRestarts: "}{.status.containerStatuses[0].restartCount}{"\tLastState: "}{.status.containerStatuses[0].lastState.terminated.reason}{"\n"}{end}'</span>
+
+<span class="text-outline"># 3. Stream Live 504 NGINX Ingress Error Rate</span>
+echo <span class="text-secondary-fixed-dim">"=== Aggregating 5xx Ingress Upstream Timeouts ==="</span>
+kubectl logs -n ingress-nginx -l app.kubernetes.io/name=ingress-nginx --tail=200 \
+  | grep <span class="text-secondary-fixed-dim">" 504 "</span> | awk <span class="text-secondary-fixed-dim">'{print $1, $4, $7, $9}'</span> | head -n 10</code></pre>
+</div>
+<p class="font-body-md text-body-md text-text-secondary">
+                Would you like me to construct an instant <strong class="text-text-primary">Prometheus alerting rule</strong> for Goroutine runaway detection or draft the <strong class="text-text-primary">PagerDuty incident update</strong> for engineering stakeholders?
+              </p>
+</div>
+<!-- Assistant Response Action Toolbar -->
+<div class="flex items-center gap-1 pt-2 text-text-secondary">
+<button class="p-1.5 rounded-full hover:bg-surface-card hover:text-text-primary transition-colors" title="Good response">
+<span class="material-symbols-outlined text-title-md font-title-md">thumb_up</span>
+</button>
+<button class="p-1.5 rounded-full hover:bg-surface-card hover:text-text-primary transition-colors" title="Bad response">
+<span class="material-symbols-outlined text-title-md font-title-md">thumb_down</span>
+</button>
+<button class="p-1.5 rounded-full hover:bg-surface-card hover:text-text-primary transition-colors" title="Copy response">
+<span class="material-symbols-outlined text-title-md font-title-md">content_copy</span>
+</button>
+<button class="p-1.5 rounded-full hover:bg-surface-card hover:text-text-primary transition-colors" title="Share response">
+<span class="material-symbols-outlined text-title-md font-title-md">share</span>
+</button>
+<button class="flex items-center gap-1 px-2.5 py-1 rounded-full hover:bg-surface-card hover:text-text-primary transition-colors text-label-md font-label-md">
+<span class="material-symbols-outlined text-body-md font-body-md">tune</span>
+<span class="">Modify</span>
+</button>
+<button class="p-1.5 rounded-full hover:bg-surface-card hover:text-text-primary transition-colors ml-auto" title="Regenerate response">
+<span class="material-symbols-outlined text-title-md font-title-md">refresh</span>
+</button>
+</div>
+<!-- Follow-up Suggestion Chips Ribbon -->
+<div class="flex items-center gap-2 pt-3 flex-wrap">
+<button class="flex items-center gap-2 px-3.5 py-2 rounded-full bg-surface-card hover:bg-surface-bright border border-border-subtle hover:border-border-hover text-text-secondary hover:text-text-primary text-body-sm font-body-sm transition-all hover:-translate-y-0.5">
+<span class="material-symbols-outlined text-label-md font-label-md text-reasoning-accent">monitoring</span>
+<span class="">Generate Grafana alert rules</span>
+</button>
+<button class="flex items-center gap-2 px-3.5 py-2 rounded-full bg-surface-card hover:bg-surface-bright border border-border-subtle hover:border-border-hover text-text-secondary hover:text-text-primary text-body-sm font-body-sm transition-all hover:-translate-y-0.5">
+<span class="material-symbols-outlined text-label-md font-label-md text-error">assignment_add</span>
+<span class="">Create incident ticket</span>
+</button>
+<button class="flex items-center gap-2 px-3.5 py-2 rounded-full bg-surface-card hover:bg-surface-bright border border-border-subtle hover:border-border-hover text-text-secondary hover:text-text-primary text-body-sm font-body-sm transition-all hover:-translate-y-0.5">
+<span class="material-symbols-outlined text-label-md font-label-md text-secondary">summarize</span>
+<span class="">Draft postmortem summary</span>
+</button>
+</div>
+</div>
+</article>
+</div>
+</main>
+<!-- ================= FLOATING PROMPT INPUT CAPSULE ================= -->
+<div class="fixed bottom-0 left-sidebar-expanded right-0 p-4 pointer-events-none z-30 flex flex-col items-center justify-end">
+<div class="w-full max-w-prompt-max-width pointer-events-auto">
+<!-- Main Input Container with Glassmorphic Depth -->
+<div class="relative bg-surface-card/90 backdrop-blur-xl rounded-2xl border border-border-subtle hover:border-border-hover shadow-[0_8px_32px_rgba(0,0,0,0.45)] focus-within:ring-1 focus-within:ring-reasoning-accent/50 transition-all p-3 flex flex-col gap-2">
+<!-- Textarea Area -->
+<textarea class="w-full bg-transparent border-0 resize-none text-text-primary placeholder:text-text-muted focus:ring-0 focus:outline-none font-body-md text-body-md px-2 py-1 max-h-36" placeholder="Ask Nexus or type @ to mention an IT workspace tool..." rows="2"></textarea>
+<!-- Input Toolbar Controls -->
+<div class="flex items-center justify-between pt-1 border-t border-border-subtle/50">
+<!-- Left Tools: Attach, Web Search, Coding Canvas -->
+<div class="flex items-center gap-1.5">
+<button class="p-2 rounded-full text-text-secondary hover:text-text-primary hover:bg-surface-container transition-colors" title="Attach log or manifest">
+<span class="material-symbols-outlined text-title-md font-title-md">add_circle</span>
+</button>
+<button class="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-text-secondary hover:text-text-primary hover:bg-surface-container border border-border-subtle transition-colors text-label-md font-label-md">
+<span class="material-symbols-outlined text-body-md font-body-md text-reasoning-accent">language</span>
+<span class="">Search</span>
+</button>
+<button class="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-text-secondary hover:text-text-primary hover:bg-surface-container border border-border-subtle transition-colors text-label-md font-label-md">
+<span class="material-symbols-outlined text-body-md font-body-md text-secondary">code_blocks</span>
+<span class="">Canvas</span>
+</button>
+</div>
+<!-- Right Tools: Voice + Send Button -->
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-full text-text-secondary hover:text-text-primary hover:bg-surface-container transition-colors" title="Microphone dictation">
+<span class="material-symbols-outlined text-title-md font-title-md">mic</span>
+</button>
+<button class="w-9 h-9 rounded-full bg-surface-bright hover:bg-primary-container text-text-primary hover:text-on-primary-container flex items-center justify-center transition-all disabled:opacity-40 active:scale-95 shadow-sm" title="Send message">
+<span class="material-symbols-outlined text-title-md font-title-md">arrow_upward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- System Disclaimer -->
+<p class="text-center text-label-sm font-label-sm text-text-muted mt-2 tracking-wide">Nexus can make mistakes. Verify critical system commands and production playbooks.</p>
+</div>
+</div>
+</div>
+<!-- Micro-interactions Script -->
+<script>
+    // Sidebar Collapse Interaction
+    const sidebar = document.getElementById('main-sidebar');
+    const toggleBtn = document.getElementById('sidebar-toggle');
+    let isCollapsed = false;
+
+    if (toggleBtn && sidebar) {
+      toggleBtn.addEventListener('click', () => {
+        isCollapsed = !isCollapsed;
+        const mainViewport = document.querySelector('main').parentElement;
+        const bottomPrompt = document.querySelector('.fixed.bottom-0');
+        
+        if (isCollapsed) {
+          sidebar.classList.remove('w-sidebar-expanded');
+          sidebar.classList.add('w-16');
+          mainViewport.classList.remove('pl-sidebar-expanded');
+          mainViewport.classList.add('pl-16');
+          bottomPrompt.classList.remove('left-sidebar-expanded');
+          bottomPrompt.classList.add('left-16');
+        } else {
+          sidebar.classList.add('w-sidebar-expanded');
+          sidebar.classList.remove('w-16');
+          mainViewport.classList.add('pl-sidebar-expanded');
+          mainViewport.classList.remove('pl-16');
+          bottomPrompt.classList.add('left-sidebar-expanded');
+          bottomPrompt.classList.remove('left-16');
+        }
+      });
+    }
+  </script>
+
+
+</body></html>
