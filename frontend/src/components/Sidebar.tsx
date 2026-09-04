@@ -1,52 +1,41 @@
-import React, { useState } from 'react';
-import { UserProfile } from '../types';
-import {
-  HelpCircle,
-  Clock,
-  LogOut,
-  Settings,
-  PanelLeftClose,
-  PanelLeft,
-  ChevronRight,
-  Bot,
-  Sparkles,
-} from 'lucide-react';
+import React from 'react';
+import { UserProfile, ChatSession } from '../types';
+import { Clock } from 'lucide-react';
 
-interface SidebarProps {
+export interface SidebarProps {
   user: UserProfile;
   currentView: 'chat' | 'flow';
   onViewChange: (view: 'chat' | 'flow') => void;
+  onGoHome: () => void;
   onOpenDocs: () => void;
   onOpenGuide: () => void;
   onOpenAuth: () => void;
   onNewSession: () => void;
   onLogout: () => void;
+  isExpanded: boolean;
+  onToggleExpand: () => void;
+  sessions: ChatSession[];
+  activeSessionId: string | null;
+  onSelectSession: (id: string) => void;
+  onDeleteSession: (id: string, e: React.MouseEvent) => void;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({
   user,
   currentView,
   onViewChange,
+  onGoHome,
   onOpenDocs,
   onOpenGuide,
   onOpenAuth,
   onNewSession,
-  onLogout,
+  isExpanded,
+  onToggleExpand,
+  sessions,
+  activeSessionId,
+  onSelectSession,
+  onDeleteSession,
 }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
-
-  const recentChats = [
-    { title: 'Viral Demand Surge (P100)', time: '10m ago', status: 'Resolved' },
-    { title: 'Supplier B Net-30 Analysis', time: '2h ago', status: 'Optimal' },
-    { title: 'Kubernetes Ingress p99 Triage', time: 'Yesterday', status: 'Applied' },
-    { title: 'Q3 Buffer Cash Re-allocation', time: 'Aug 28', status: 'Approved' },
-  ];
-
-  const gemsList = [
-    { name: 'Incident Copilot', desc: 'Autonomous triage & RCA' },
-    { name: 'OR-Tools Integer Solver', desc: 'Deterministic PO math' },
-  ];
-
   return (
     <aside
       className={`h-screen flex flex-col justify-between py-4 px-2 z-50 bg-[#131314] border-r border-white/[0.08] transition-all duration-300 font-sans select-none flex-shrink-0 ${
@@ -55,23 +44,44 @@ export const Sidebar: React.FC<SidebarProps> = ({
       id="main-sidebar"
     >
       {/* Top Section */}
-      <div className="flex flex-col items-center gap-3 w-full">
-        {/* Brand Icon */}
-        <div
-          onClick={onNewSession}
-          className="w-10 h-10 rounded-full flex items-center justify-center text-[#A8C7FA] hover:bg-[#202020] transition-colors cursor-pointer group mb-1"
-          title="Nexus AI"
-        >
-          <span className="material-symbols-outlined text-xl group-hover:rotate-45 transition-transform duration-300">
-            auto_awesome
-          </span>
-        </div>
+      <div className="flex flex-col items-center gap-3 w-full min-h-0">
+        {/* Brand Icon / Title: Takes user to Landing Page */}
+        {isExpanded ? (
+          <div
+            onClick={onGoHome}
+            className="w-full flex items-center justify-between px-2.5 py-1.5 rounded-xl hover:bg-[#202020] transition-colors cursor-pointer group mb-0.5"
+            title="Return to Nexus Landing Page"
+          >
+            <div className="flex items-center gap-2">
+              <span className="material-symbols-outlined text-xl text-[#A8C7FA] group-hover:rotate-45 transition-transform duration-300">
+                auto_awesome
+              </span>
+              <div className="flex flex-col text-left">
+                <span className="text-xs font-semibold text-white tracking-tight">Nexus AI</span>
+                <span className="text-[9px] font-mono text-[#747775]">v2.5 Frontier</span>
+              </div>
+            </div>
+            <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-white/5 text-[#A8C7FA] border border-white/10 group-hover:bg-[#A8C7FA] group-hover:text-[#001E2C] transition-colors">
+              Home
+            </span>
+          </div>
+        ) : (
+          <div
+            onClick={onGoHome}
+            className="w-10 h-10 rounded-full flex items-center justify-center text-[#A8C7FA] hover:bg-[#202020] transition-colors cursor-pointer group mb-1"
+            title="Return to Nexus Landing Page"
+          >
+            <span className="material-symbols-outlined text-xl group-hover:rotate-45 transition-transform duration-300">
+              auto_awesome
+            </span>
+          </div>
+        )}
 
         {/* Action Buttons Rail */}
-        <div className="flex flex-col items-center gap-1.5 w-full">
+        <div className="flex flex-col items-center gap-1.5 w-full flex-shrink-0">
           {/* Expand/Collapse Toggle */}
           <button
-            onClick={() => setIsExpanded(!isExpanded)}
+            onClick={onToggleExpand}
             className="w-10 h-10 rounded-full flex items-center justify-center text-[#C4C7C5] hover:text-white hover:bg-[#202020] transition-all cursor-pointer"
             title={isExpanded ? 'Collapse sidebar' : 'Expand sidebar'}
           >
@@ -95,20 +105,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
               {isExpanded && <span className="text-xs font-semibold">New chat</span>}
             </div>
             {isExpanded && <span className="text-[10px] font-mono text-[#747775]">⌘K</span>}
-          </button>
-
-          {/* Search */}
-          <button
-            onClick={onNewSession}
-            className={`h-10 rounded-full flex items-center justify-center transition-all cursor-pointer ${
-              isExpanded
-                ? 'w-full px-3 text-[#C4C7C5] hover:text-white hover:bg-[#202020] justify-start gap-2.5'
-                : 'w-10 text-[#C4C7C5] hover:text-white hover:bg-[#202020]'
-            }`}
-            title="Search chats"
-          >
-            <span className="material-symbols-outlined text-lg">search</span>
-            {isExpanded && <span className="text-xs font-medium">Search</span>}
           </button>
 
           {/* Executive Copilot View */}
@@ -152,52 +148,58 @@ export const Sidebar: React.FC<SidebarProps> = ({
           </button>
         </div>
 
-        {/* Expanded Drawer Details */}
+        {/* Expanded Drawer Details: Real Sessions List (No Dummy Chats!) */}
         {isExpanded && (
-          <div className="w-full pt-3 space-y-4 border-t border-white/5 animate-in fade-in duration-200 overflow-y-auto max-h-[calc(100vh-340px)] pr-1">
+          <div className="w-full pt-3 space-y-3 border-t border-white/5 animate-in fade-in duration-200 overflow-y-auto flex-1 pr-1">
             {/* Recent Section */}
-            <div className="space-y-1">
+            <div className="space-y-1.5">
               <div className="text-[10px] font-mono uppercase tracking-wider text-[#747775] px-2 py-1 font-semibold flex items-center justify-between">
-                <span>Recent Chats</span>
+                <span>Recent Conversations</span>
                 <Clock className="w-3 h-3" />
               </div>
-              <div className="space-y-0.5">
-                {recentChats.map((chat, idx) => (
-                  <div
-                    key={idx}
-                    onClick={onNewSession}
-                    className="w-full px-2.5 py-1.5 rounded-xl text-xs text-[#C4C7C5] hover:text-white hover:bg-[#282A2C] transition-colors flex items-center justify-between cursor-pointer"
-                  >
-                    <span className="truncate max-w-[145px] text-[11px] font-medium">{chat.title}</span>
-                    <span className="text-[9px] font-mono px-1.5 py-0.2 rounded bg-white/5 text-emerald-400">
-                      {chat.status}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
 
-            {/* Gems Section */}
-            <div className="space-y-1">
-              <div className="text-[10px] font-mono uppercase tracking-wider text-[#747775] px-2 py-1 font-semibold flex items-center justify-between">
-                <span>Custom Gems</span>
-                <span className="material-symbols-outlined text-xs">apps</span>
-              </div>
-              <div className="space-y-0.5">
-                {gemsList.map((gem, idx) => (
-                  <div
-                    key={idx}
-                    onClick={onNewSession}
-                    className="w-full px-2.5 py-1.5 rounded-xl text-xs text-[#C4C7C5] hover:text-white hover:bg-[#282A2C] transition-colors flex items-center justify-between cursor-pointer"
-                  >
-                    <div className="space-y-0.5">
-                      <div className="text-[11px] font-semibold text-white">{gem.name}</div>
-                      <div className="text-[9px] text-[#747775]">{gem.desc}</div>
+              {sessions.length > 0 ? (
+                <div className="space-y-1">
+                  {sessions.map((session) => (
+                    <div
+                      key={session.id}
+                      onClick={() => onSelectSession(session.id)}
+                      className={`w-full px-2.5 py-2 rounded-xl text-xs transition-all flex items-center justify-between cursor-pointer group ${
+                        session.id === activeSessionId
+                          ? 'bg-[#282A2C] text-white border border-[#A8C7FA]/40 shadow-sm'
+                          : 'text-[#C4C7C5] hover:text-white hover:bg-[#202020]'
+                      }`}
+                    >
+                      <div className="flex items-center gap-2 min-w-0 flex-1 pr-1">
+                        <span className="material-symbols-outlined text-sm text-[#A8C7FA] flex-shrink-0">
+                          chat_bubble
+                        </span>
+                        <div className="flex flex-col min-w-0">
+                          <span className="truncate text-[11px] font-medium leading-tight">
+                            {session.title || 'Untitled Conversation'}
+                          </span>
+                          <span className="text-[9px] font-mono text-[#747775] mt-0.5">
+                            {session.timestamp}
+                          </span>
+                        </div>
+                      </div>
+                      <button
+                        onClick={(e) => onDeleteSession(session.id, e)}
+                        className="opacity-0 group-hover:opacity-100 p-1 hover:text-rose-400 rounded transition-opacity cursor-pointer flex-shrink-0"
+                        title="Delete conversation"
+                      >
+                        <span className="material-symbols-outlined text-xs">delete</span>
+                      </button>
                     </div>
-                    <span className="material-symbols-outlined text-sm text-[#A8C7FA]">spark</span>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="px-3 py-6 text-center rounded-xl bg-white/[0.02] border border-dashed border-white/10 space-y-1.5">
+                  <span className="material-symbols-outlined text-[#747775] text-lg">chat_bubble_outline</span>
+                  <div className="text-[11px] font-medium text-[#747775]">No recent chats</div>
+                  <div className="text-[10px] text-[#555]">Click "New chat" or type a prompt</div>
+                </div>
+              )}
             </div>
           </div>
         )}

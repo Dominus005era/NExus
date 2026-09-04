@@ -17,6 +17,7 @@ interface HeaderProps {
   user: UserProfile;
   currentView: 'chat' | 'flow';
   onViewChange: (view: 'chat' | 'flow') => void;
+  onGoHome: () => void;
   onOpenDocs: () => void;
   onToggleTimeline: () => void;
   onOpenGuide: () => void;
@@ -31,6 +32,7 @@ export const Header: React.FC<HeaderProps> = ({
   user,
   currentView,
   onViewChange,
+  onGoHome,
   onOpenDocs,
   onToggleTimeline,
   onOpenGuide,
@@ -53,8 +55,17 @@ export const Header: React.FC<HeaderProps> = ({
     <header className="flex justify-between items-center w-full h-14 px-4 bg-[#131313] border-b border-white/[0.08] z-40 flex-shrink-0 font-sans select-none">
       {/* Left: Brand + Model Selector Pill Capsule (Exact Match to Stitch Screen 2 & 4) */}
       <div className="flex items-center gap-4">
-        <div className="flex items-center gap-2">
-          <span className="text-base font-semibold text-white tracking-tight">Nexus</span>
+        <div
+          onClick={onGoHome}
+          className="flex items-center gap-2 cursor-pointer group hover:opacity-90 transition-opacity"
+          title="Return to Nexus Landing Page"
+        >
+          <span className="material-symbols-outlined text-sm text-[#A8C7FA] group-hover:rotate-45 transition-transform duration-300">
+            auto_awesome
+          </span>
+          <span className="text-base font-semibold text-white tracking-tight group-hover:text-[#A8C7FA] transition-colors">
+            Nexus
+          </span>
         </div>
 
         {/* Model Selector Pill Capsule */}
@@ -101,7 +112,13 @@ export const Header: React.FC<HeaderProps> = ({
       {/* Center: Top Navigation Breadcrumb */}
       <nav className="hidden md:flex items-center gap-2">
         <div className="flex items-center gap-2 text-xs text-[#C4C7C5]">
-          <span className="text-[#747775]">Nexus</span>
+          <span
+            onClick={onGoHome}
+            className="text-[#747775] hover:text-white cursor-pointer transition-colors"
+            title="Return to Nexus Landing Page"
+          >
+            Nexus
+          </span>
           <span className="material-symbols-outlined text-xs text-[#747775]">chevron_right</span>
           <span className="flex items-center gap-1.5 text-white font-medium px-2.5 py-1 rounded-full bg-[#202020] border border-white/10">
             <span className="material-symbols-outlined text-sm text-[#A8C7FA]">account_tree</span>

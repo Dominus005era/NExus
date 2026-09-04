@@ -110,6 +110,16 @@ export interface TimelineLogItem {
   modelUsed?: string;
 }
 
+export interface ChatSession {
+  id: string;
+  title: string;
+  query: string;
+  response: OrchestratorResponse | null;
+  timelineLogs: TimelineLogItem[];
+  timestamp: string;
+  createdAt: number;
+}
+
 export interface OverviewMetrics {
   cash_balance: number;
   safe_procurement_budget: number;

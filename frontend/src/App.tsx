@@ -6,6 +6,7 @@ import {
   AvailableModel,
   TimelineLogItem,
   OverviewMetrics,
+  ChatSession,
 } from './types';
 import { api } from './services/api';
 
@@ -32,6 +33,27 @@ export const App: React.FC = () => {
   const [metrics, setMetrics] = useState<OverviewMetrics | null>(null);
   const [response, setResponse] = useState<OrchestratorResponse | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+
+  // Real, persistent Chat Sessions
+  const [sessions, setSessions] = useState<ChatSession[]>(() => {
+    try {
+      const saved = localStorage.getItem('nexus_chat_sessions');
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
+  const [activeSessionId, setActiveSessionId] = useState<string | null>(null);
+  const [currentQuery, setCurrentQuery] = useState<string>('');
+  const [isSidebarExpanded, setIsSidebarExpanded] = useState<boolean>(false);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('nexus_chat_sessions', JSON.stringify(sessions));
+    } catch (e) {
+      console.error(e);
+    }
+  }, [sessions]);
 
   const [modelConfig, setModelConfig] = useState<AgentModelConfig>({
     sales_agent_model: 'gemini-2.0-flash',
@@ -64,9 +86,40 @@ export const App: React.FC = () => {
     initData();
   }, []);
 
+  const handleSelectSession = (id: string) => {
+    const s = sessions.find((item) => item.id === id);
+    if (s) {
+      setActiveSessionId(s.id);
+      setCurrentQuery(s.query);
+      setResponse(s.response);
+      setTimelineLogs(s.timelineLogs);
+      setCurrentView('chat');
+    }
+  };
+
+  const handleDeleteSession = (id: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    const updated = sessions.filter((s) => s.id !== id);
+    setSessions(updated);
+    if (activeSessionId === id) {
+      setActiveSessionId(null);
+      setResponse(null);
+      setTimelineLogs([]);
+      setCurrentQuery('');
+    }
+  };
+
+  const handleNewSession = () => {
+    setActiveSessionId(null);
+    setResponse(null);
+    setTimelineLogs([]);
+    setCurrentQuery('');
+  };
+
   // Execution flow handler
   const executeOrchestration = async (surgePct = 70, queryText = 'P100 Surge') => {
     setIsLoading(true);
+    setCurrentQuery(queryText);
     const now = new Date();
     const timeStr = now.toLocaleTimeString();
 
@@ -144,6 +197,28 @@ export const App: React.FC = () => {
         },
       ];
       setTimelineLogs(completedLogs);
+
+      // Save or update real chat session
+      const title =
+        queryText.length > 34 ? queryText.slice(0, 34).trim() + '...' : queryText;
+      const sessionId = activeSessionId || Date.now().toString();
+      const updatedSession: ChatSession = {
+        id: sessionId,
+        title,
+        query: queryText,
+        response: res,
+        timelineLogs: completedLogs,
+        timestamp: 'Just now',
+        createdAt: Date.now(),
+      };
+      setSessions((prev) => {
+        const exists = prev.some((s) => s.id === sessionId);
+        if (exists) {
+          return prev.map((s) => (s.id === sessionId ? updatedSession : s));
+        }
+        return [updatedSession, ...prev];
+      });
+      setActiveSessionId(sessionId);
     } catch (e) {
       console.error(e);
     } finally {
@@ -171,7 +246,7 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#131313] text-[#E3E3E3] flex font-sans selection:bg-[#A8C7FA]/30 selection:text-white">
+    <div className="min-h-screen w-full bg-[#131313] text-[#E3E3E3] flex flex-col font-sans selection:bg-[#A8C7FA]/30 selection:text-white overflow-x-hidden">
       {currentView === 'landing' ? (
         <LandingPage
           onGetStarted={() => setCurrentView('chat')}
@@ -183,32 +258,39 @@ export const App: React.FC = () => {
         />
       ) : (
         <div className="flex w-full h-screen overflow-hidden">
-          {/* Side Navigation Rail (Collapsible) */}
-          <Sidebar
-            user={user}
-            currentView={currentView}
-            onViewChange={setCurrentView}
-            onOpenDocs={() => setIsDocsModalOpen(true)}
-            onOpenGuide={() => setIsGuideModalOpen(true)}
-            onOpenAuth={() => setIsAuthModalOpen(true)}
-            onNewSession={() => {
-              setResponse(null);
-              setTimelineLogs([]);
-            }}
-            onLogout={() => {
-              setUser({ ...user, isLoggedIn: false });
-              setCurrentView('landing');
-            }}
-          />
+          {/* Side Navigation Rail (Shown exclusively in Executive Copilot Chat view) */}
+          {currentView === 'chat' && (
+            <Sidebar
+              user={user}
+              currentView={currentView}
+              onViewChange={setCurrentView}
+              onGoHome={() => setCurrentView('landing')}
+              onOpenDocs={() => setIsDocsModalOpen(true)}
+              onOpenGuide={() => setIsGuideModalOpen(true)}
+              onOpenAuth={() => setIsAuthModalOpen(true)}
+              onNewSession={handleNewSession}
+              onLogout={() => {
+                setUser({ ...user, isLoggedIn: false });
+                setCurrentView('landing');
+              }}
+              isExpanded={isSidebarExpanded}
+              onToggleExpand={() => setIsSidebarExpanded(!isSidebarExpanded)}
+              sessions={sessions}
+              activeSessionId={activeSessionId}
+              onSelectSession={handleSelectSession}
+              onDeleteSession={handleDeleteSession}
+            />
+          )}
 
           {/* Main Content Workspace */}
-          <div className="flex-1 flex flex-col h-screen overflow-hidden bg-[#131313]">
+          <div className="flex-1 flex flex-col h-screen overflow-hidden bg-[#131313] min-w-0">
             {currentView === 'flow' ? (
               <div className="flex-1 w-full h-full overflow-hidden flex flex-col">
                 <Header
                   user={user}
                   currentView={currentView}
                   onViewChange={setCurrentView}
+                  onGoHome={() => setCurrentView('landing')}
                   onOpenDocs={() => setIsDocsModalOpen(true)}
                   onToggleTimeline={() => setIsTimelineOpen(!isTimelineOpen)}
                   onOpenGuide={() => setIsGuideModalOpen(true)}
@@ -240,6 +322,7 @@ export const App: React.FC = () => {
                   user={user}
                   currentView={currentView}
                   onViewChange={setCurrentView}
+                  onGoHome={() => setCurrentView('landing')}
                   onOpenDocs={() => setIsDocsModalOpen(true)}
                   onToggleTimeline={() => setIsTimelineOpen(!isTimelineOpen)}
                   onOpenGuide={() => setIsGuideModalOpen(true)}
@@ -264,6 +347,8 @@ export const App: React.FC = () => {
                     onApprove={handleApproveAction}
                     onReject={handleRejectAction}
                     onSwitchToFlow={() => setCurrentView('flow')}
+                    currentQuery={currentQuery}
+                    isSidebarExpanded={isSidebarExpanded}
                   />
                 </main>
               </div>

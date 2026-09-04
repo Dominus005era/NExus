@@ -46,6 +46,8 @@ interface ChatViewProps {
   onApprove: () => void;
   onReject: () => void;
   onSwitchToFlow: () => void;
+  currentQuery?: string;
+  isSidebarExpanded?: boolean;
 }
 
 export const ChatView: React.FC<ChatViewProps> = ({
@@ -58,6 +60,8 @@ export const ChatView: React.FC<ChatViewProps> = ({
   onApprove,
   onReject,
   onSwitchToFlow,
+  currentQuery,
+  isSidebarExpanded = false,
 }) => {
   const [inputQuery, setInputQuery] = useState('');
   const [showThinking, setShowThinking] = useState(true);
@@ -182,7 +186,7 @@ export const ChatView: React.FC<ChatViewProps> = ({
                   <span>{user.name} ({user.role} • {user.company})</span>
                 </div>
                 <p className="text-xs sm:text-sm leading-relaxed text-[#E3E3E3]">
-                  {defaultUserQuery}
+                  {currentQuery || defaultUserQuery}
                 </p>
               </div>
               <div className="w-8 h-8 rounded-full bg-emerald-700 text-white font-extrabold text-xs flex items-center justify-center shrink-0 mt-1 border border-emerald-500/40 shadow-sm">
@@ -496,7 +500,11 @@ export const ChatView: React.FC<ChatViewProps> = ({
       </div>
 
       {/* ================= FIXED FLOATING PROMPT CAPSULE (Exact Match to Stitch Screen 2 & 4) ================= */}
-      <div className="fixed bottom-0 left-16 md:left-72 right-0 p-4 bg-gradient-to-t from-[#131313] via-[#131313]/90 to-transparent z-40">
+      <div
+        className={`fixed bottom-0 right-0 p-4 bg-gradient-to-t from-[#131313] via-[#131313]/90 to-transparent z-40 transition-all duration-300 ${
+          isSidebarExpanded ? 'left-72' : 'left-16'
+        }`}
+      >
         <div className="max-w-3xl mx-auto">
           <form
             onSubmit={handleSend}

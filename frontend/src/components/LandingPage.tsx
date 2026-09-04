@@ -56,12 +56,12 @@ export const LandingPage: React.FC<LandingPageProps> = ({
   };
 
   return (
-    <div className="min-h-screen bg-[#131313] text-[#E3E3E3] antialiased selection:bg-[#A8C7FA]/30 selection:text-white flex flex-col font-sans overflow-x-hidden">
+    <div className="min-h-screen w-full flex-1 bg-[#131313] text-[#E3E3E3] antialiased selection:bg-[#A8C7FA]/30 selection:text-white flex flex-col font-sans overflow-x-hidden">
       {/* ================= TOP APP BAR ================= */}
-      <header className="sticky top-0 z-50 bg-[#131313]/85 backdrop-blur-md border-b border-white/[0.08]">
-        <div className="flex justify-between items-center w-full px-6 md:px-10 py-3.5 max-w-7xl mx-auto">
+      <header className="sticky top-0 z-50 bg-[#131313]/90 backdrop-blur-md border-b border-white/[0.08] w-full">
+        <div className="relative flex justify-between items-center w-full px-6 md:px-12 py-3.5 max-w-7xl mx-auto">
           {/* Brand Logo Anchor */}
-          <div className="flex items-center gap-2 group cursor-pointer" onClick={onGetStarted}>
+          <div className="flex items-center gap-2 group cursor-pointer z-10" onClick={onGetStarted}>
             <span className="material-symbols-outlined text-[#A8C7FA] group-hover:rotate-45 transition-transform duration-300">
               spark
             </span>
@@ -73,9 +73,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             </span>
           </div>
 
-          {/* Navigation Links */}
-          <nav className="hidden md:flex items-center gap-6 text-xs font-medium text-[#C4C7C5]">
-            <a href="#models" className="text-white border-b-2 border-[#A8C7FA] pb-1">Models</a>
+          {/* Navigation Links - Centered */}
+          <nav className="hidden lg:flex items-center gap-6 text-xs font-medium text-[#C4C7C5] absolute left-1/2 -translate-x-1/2">
+            <a href="#models" className="hover:text-white transition-colors pb-1">Models</a>
             <a href="#capabilities" className="hover:text-white transition-colors pb-1">Capabilities</a>
             <a href="#research" className="hover:text-white transition-colors pb-1">Research</a>
             <a href="#benchmarks" className="hover:text-white transition-colors pb-1">Benchmarks</a>
@@ -90,7 +90,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           </nav>
 
           {/* Trailing Icon & Primary Actions */}
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-2.5 z-10">
             <button
               onClick={onGetStarted}
               className="hidden sm:inline-flex items-center justify-center px-4 py-1.5 rounded-full text-[#C4C7C5] hover:text-white border border-white/10 hover:border-white/20 bg-[#1E1F20] hover:bg-[#282A2C] transition-all text-xs font-medium cursor-pointer"
@@ -99,7 +99,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             </button>
             <button
               onClick={onGetStarted}
-              className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-[#C2E7FF] text-[#001E2C] hover:bg-[#A8C7FA] transition-all text-xs font-semibold shadow-sm cursor-pointer"
+              className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-[#C2E7FF] text-[#001E2C] hover:bg-[#A8C7FA] transition-all text-xs font-semibold shadow-sm cursor-pointer active:scale-95"
             >
               Try Nexus
             </button>
