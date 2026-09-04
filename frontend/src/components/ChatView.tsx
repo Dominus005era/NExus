@@ -27,6 +27,8 @@ import {
   FileText,
   Database,
   Check,
+  Truck,
+  RotateCcw,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -57,11 +59,14 @@ export const ChatView: React.FC<ChatViewProps> = ({
   const [showThinking, setShowThinking] = useState(true);
   const [actionStatus, setActionStatus] = useState<'IDLE' | 'APPROVED' | 'REJECTED'>('IDLE');
 
+  const defaultUserQuery =
+    'Resolve the stockout of 750 Future Trend TVs with 99.4% SLA for Q3 spike. Optimize purchase order allocation across suppliers within ₹1.80L liquid cash cap.';
+
   const promptSuggestions = [
     { title: 'Resolve P100 Viral Surge', desc: 'Simulate +70.6% demand spike on UltraGlide Mouse' },
     { title: 'Simulate +30% Marketing', desc: 'Assess stockout risk & cash burn horizon' },
     { title: 'Supplier B Net-30 Analysis', desc: 'Audit credit lines, ₹1.8L spend cap & 3d SLA' },
-    { title: 'Query Sales DB ground truth', desc: 'Inspect 5,229 historical order velocity records' },
+    { title: 'Query Sales DB Ground Truth', desc: 'Inspect 5,229 historical order velocity records' },
   ];
 
   const handleSend = (e: React.FormEvent) => {
@@ -73,7 +78,7 @@ export const ChatView: React.FC<ChatViewProps> = ({
   };
 
   const handleApprove = () => {
-    confetti({ particleCount: 140, spread: 90, origin: { y: 0.6 } });
+    confetti({ particleCount: 150, spread: 90, origin: { y: 0.6 } });
     setActionStatus('APPROVED');
     onApprove();
   };
@@ -84,7 +89,7 @@ export const ChatView: React.FC<ChatViewProps> = ({
   };
 
   return (
-    <div className="flex-1 flex flex-col h-full w-full max-w-5xl mx-auto px-4 justify-between relative select-none">
+    <div className="flex-1 flex flex-col h-full w-full max-w-5xl mx-auto px-4 justify-between relative select-none font-sans">
       {/* Scrollable Conversation Content Area */}
       <div className="flex-1 overflow-y-auto space-y-6 pr-2 pb-6 pt-4">
         {/* ================= 1. EMPTY STATE HERO (Exact Gemini Layout from Screenshot) ================= */}
@@ -92,11 +97,15 @@ export const ChatView: React.FC<ChatViewProps> = ({
           <div className="min-h-[calc(100vh-220px)] flex flex-col items-center justify-center text-center space-y-8 animate-in fade-in duration-300">
             {/* Center Heading matching screenshot */}
             <div className="space-y-3">
+              <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 text-cyan-300 text-xs font-medium">
+                <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
+                <span>Executive AI Copilot Ready</span>
+              </div>
               <h1 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">
                 Your move, {user.name}!
               </h1>
               <p className="text-xs sm:text-sm text-zinc-400 max-w-lg mx-auto leading-relaxed">
-                NEXUS Autonomous Operations Copilot connected to {user.company} database, document racks, and mathematical integer optimizer.
+                Nexus Autonomous Copilot connected to {user.company} database, document racks, and mathematical integer optimizer.
               </p>
             </div>
 
@@ -119,7 +128,7 @@ export const ChatView: React.FC<ChatViewProps> = ({
                   type="text"
                   value={inputQuery}
                   onChange={(e) => setInputQuery(e.target.value)}
-                  placeholder="Ask NEXUS or simulate demand (e.g. 'Handle P100 viral surge')..."
+                  placeholder="Ask Nexus or simulate demand (e.g. 'Handle P100 viral surge')..."
                   className="flex-1 bg-transparent text-white text-sm focus:outline-none placeholder:text-zinc-500 font-medium"
                 />
 
@@ -147,7 +156,7 @@ export const ChatView: React.FC<ChatViewProps> = ({
                 <button
                   type="submit"
                   disabled={!inputQuery.trim()}
-                  className="w-9 h-9 rounded-full bg-cyan-500 hover:bg-cyan-400 text-black flex items-center justify-center shadow-lg shadow-cyan-500/20 transition-all disabled:opacity-30 disabled:pointer-events-none"
+                  className="w-9 h-9 rounded-full bg-cyan-500 hover:bg-cyan-400 text-black flex items-center justify-center shadow-lg shadow-cyan-500/20 transition-all disabled:opacity-30 disabled:pointer-events-none cursor-pointer"
                 >
                   <Send className="w-4 h-4" />
                 </button>
@@ -160,7 +169,7 @@ export const ChatView: React.FC<ChatViewProps> = ({
                 <button
                   key={i}
                   onClick={() => onSendMessage(item.title)}
-                  className="p-3.5 rounded-2xl bg-[#141824]/60 hover:bg-[#182030] border border-white/10 hover:border-cyan-500/40 text-left transition-all group flex items-center justify-between"
+                  className="p-3.5 rounded-2xl bg-[#141824]/60 hover:bg-[#182030] border border-white/10 hover:border-cyan-500/40 text-left transition-all group flex items-center justify-between cursor-pointer"
                 >
                   <div className="space-y-1">
                     <div className="flex items-center space-x-2 text-xs font-bold text-white group-hover:text-cyan-400 transition-colors">
@@ -194,16 +203,31 @@ export const ChatView: React.FC<ChatViewProps> = ({
           </div>
         )}
 
-        {/* ================= 3. ACTIVE CONVERSATION THREAD ================= */}
+        {/* ================= 3. ACTIVE CONVERSATION THREAD (Exact Match to Stitch Screens 2 & 3) ================= */}
         {response && !isLoading && (
           <div className="space-y-6 animate-in fade-in duration-300 pt-2">
-            {/* Orchestrator Executive Response */}
+            {/* User Directive Bubble */}
+            <div className="flex items-start justify-end space-x-3">
+              <div className="max-w-2xl bg-[#171c2b] border border-white/10 rounded-3xl rounded-tr-sm p-4 shadow-xl text-xs sm:text-sm text-zinc-200 leading-relaxed">
+                <div className="text-[10px] font-mono text-cyan-400 mb-1 font-semibold flex items-center space-x-1">
+                  <User className="w-3 h-3" />
+                  <span>{user.name} ({user.role})</span>
+                </div>
+                {defaultUserQuery}
+              </div>
+              <div className="w-8 h-8 rounded-full bg-emerald-700 text-white font-bold text-xs flex items-center justify-center flex-shrink-0 mt-1 shadow-md border border-emerald-500/40">
+                {user.name.charAt(0).toUpperCase()}
+              </div>
+            </div>
+
+            {/* AI Assistant Executive Copilot Response */}
             <div className="flex items-start space-x-3.5">
               <div className="w-9 h-9 rounded-2xl bg-gradient-to-tr from-cyan-500 via-blue-500 to-indigo-600 text-white flex items-center justify-center flex-shrink-0 mt-1 shadow-lg shadow-cyan-500/20">
-                <Zap className="w-4 h-4 fill-white" />
+                <Sparkles className="w-4 h-4 fill-white" />
               </div>
 
               <div className="flex-1 space-y-4">
+                {/* Orchestrator Executive Summary */}
                 <div className="glass-panel p-5 rounded-3xl border border-white/10 space-y-3 shadow-2xl">
                   <div className="flex items-center justify-between border-b border-white/10 pb-2.5 text-xs font-mono text-zinc-400">
                     <div className="flex items-center space-x-2">
@@ -212,11 +236,12 @@ export const ChatView: React.FC<ChatViewProps> = ({
                     </div>
                     <button
                       onClick={() => onOpenModelModal('orchestrator')}
-                      className="text-cyan-400 bg-cyan-950/80 px-2.5 py-0.5 rounded-full border border-cyan-800 text-[10px] font-mono hover:bg-cyan-900 transition-colors"
+                      className="text-cyan-400 bg-cyan-950/80 px-2.5 py-0.5 rounded-full border border-cyan-800 text-[10px] font-mono hover:bg-cyan-900 transition-colors cursor-pointer"
                     >
                       Model: {modelConfig.orchestrator_model}
                     </button>
                   </div>
+
                   <p className="text-sm text-zinc-200 leading-relaxed font-normal">
                     {response.orchestrator_summary}
                   </p>
@@ -224,7 +249,7 @@ export const ChatView: React.FC<ChatViewProps> = ({
                   <div className="flex items-center space-x-3 pt-1 text-xs">
                     <button
                       onClick={onSwitchToFlow}
-                      className="px-3 py-1 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-cyan-300 font-bold flex items-center space-x-1.5 transition-colors"
+                      className="px-3 py-1 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-cyan-300 font-bold flex items-center space-x-1.5 transition-colors cursor-pointer"
                     >
                       <Workflow className="w-3.5 h-3.5 text-cyan-400" />
                       <span>Inspect in Agentic Swarm Studio</span>
@@ -236,7 +261,7 @@ export const ChatView: React.FC<ChatViewProps> = ({
                 <div className="border border-white/10 rounded-2xl overflow-hidden glass-card shadow-xl">
                   <button
                     onClick={() => setShowThinking(!showThinking)}
-                    className="w-full px-5 py-3.5 bg-white/[0.02] hover:bg-white/[0.04] flex items-center justify-between text-xs font-semibold text-zinc-300 transition-colors"
+                    className="w-full px-5 py-3.5 bg-white/[0.02] hover:bg-white/[0.04] flex items-center justify-between text-xs font-semibold text-zinc-300 transition-colors cursor-pointer"
                   >
                     <div className="flex items-center space-x-2">
                       <Cpu className="w-4 h-4 text-cyan-400" />
@@ -313,7 +338,7 @@ export const ChatView: React.FC<ChatViewProps> = ({
                   )}
                 </div>
 
-                {/* Constrained Linear Optimizer Decision Matrix */}
+                {/* Constrained Linear Optimizer Decision Matrix (Matching Stitch Screens 2 & 3) */}
                 <div className="glass-panel border-2 border-indigo-500/40 rounded-3xl p-6 shadow-2xl space-y-4 glow-primary">
                   <div className="flex items-center justify-between border-b border-white/10 pb-3.5">
                     <div className="flex items-center space-x-2.5">
@@ -340,7 +365,10 @@ export const ChatView: React.FC<ChatViewProps> = ({
                         className="bg-black/50 border border-white/10 rounded-2xl p-4 space-y-2 relative overflow-hidden shadow-inner"
                       >
                         <div className="flex justify-between items-center text-xs">
-                          <span className="font-bold text-white">{alloc.supplier_name}</span>
+                          <span className="font-bold text-white flex items-center space-x-1.5">
+                            <Truck className="w-3.5 h-3.5 text-cyan-400" />
+                            <span>{alloc.supplier_name}</span>
+                          </span>
                           <span className="font-mono font-bold text-emerald-400 bg-emerald-950/80 px-2.5 py-0.5 rounded-lg border border-emerald-700/40">
                             {alloc.allocated_units} Units
                           </span>
@@ -362,7 +390,7 @@ export const ChatView: React.FC<ChatViewProps> = ({
                         Total Procurement: <span className="text-white font-bold">₹{response.decision_output.total_procurement_cost.toLocaleString()}</span>
                       </div>
                       <div className="text-emerald-400 font-semibold">
-                        Liquid Upfront Impact: ₹{response.decision_output.total_upfront_cash_impact.toLocaleString()} <span className="text-zinc-500">(≤ ₹1.8L spend cap)</span>
+                        Liquid Upfront Impact: ₹{response.decision_output.total_upfront_cash_impact.toLocaleString()} <span className="text-zinc-500">(≤ ₹1.80L spend cap)</span>
                       </div>
                     </div>
 
@@ -370,14 +398,15 @@ export const ChatView: React.FC<ChatViewProps> = ({
                       <div className="flex items-center space-x-2.5 w-full sm:w-auto">
                         <button
                           onClick={handleApprove}
-                          className="flex-1 sm:flex-initial px-6 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs shadow-lg shadow-emerald-600/30 flex items-center justify-center space-x-1.5 transition-all transform active:scale-95"
+                          className="flex-1 sm:flex-initial px-6 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs shadow-lg shadow-emerald-600/30 flex items-center justify-center space-x-1.5 transition-all transform active:scale-95 cursor-pointer"
                         >
                           <CheckCircle2 className="w-4 h-4" />
                           <span>Approve & Dispatch PO</span>
                         </button>
                         <button
                           onClick={handleReject}
-                          className="px-3.5 py-2.5 rounded-xl bg-white/[0.04] hover:bg-rose-950/40 border border-white/10 hover:border-rose-500/40 text-zinc-400 hover:text-rose-300 text-xs font-medium transition-all"
+                          className="px-3.5 py-2.5 rounded-xl bg-white/[0.04] hover:bg-rose-950/40 border border-white/10 hover:border-rose-500/40 text-zinc-400 hover:text-rose-300 text-xs font-medium transition-all cursor-pointer"
+                          title="Reject Allocation"
                         >
                           <XCircle className="w-4 h-4" />
                         </button>
@@ -411,7 +440,7 @@ export const ChatView: React.FC<ChatViewProps> = ({
             <button
               type="button"
               onClick={() => onSendMessage('Resolve P100 Viral Demand Spike')}
-              className="w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 text-zinc-400 hover:text-white flex items-center justify-center transition-colors"
+              className="w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 text-zinc-400 hover:text-white flex items-center justify-center transition-colors cursor-pointer"
             >
               <Plus className="w-4 h-4" />
             </button>
@@ -437,7 +466,7 @@ export const ChatView: React.FC<ChatViewProps> = ({
             <button
               type="submit"
               disabled={isLoading || !inputQuery.trim()}
-              className="w-9 h-9 rounded-full bg-cyan-500 hover:bg-cyan-400 text-black flex items-center justify-center shadow-lg shadow-cyan-500/20 transition-all disabled:opacity-30 disabled:pointer-events-none"
+              className="w-9 h-9 rounded-full bg-cyan-500 hover:bg-cyan-400 text-black flex items-center justify-center shadow-lg shadow-cyan-500/20 transition-all disabled:opacity-30 disabled:pointer-events-none cursor-pointer"
             >
               {isLoading ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
             </button>
@@ -447,4 +476,3 @@ export const ChatView: React.FC<ChatViewProps> = ({
     </div>
   );
 };
-
