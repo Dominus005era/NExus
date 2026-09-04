@@ -12,7 +12,6 @@ import { api } from './services/api';
 import { LandingPage } from './components/LandingPage';
 import { Sidebar } from './components/Sidebar';
 import { Header } from './components/Header';
-import { KpiRibbon } from './components/KpiRibbon';
 import { HorizontalAgenticFlow } from './components/HorizontalAgenticFlow';
 import { ChatView } from './components/ChatView';
 import { AuthModal } from './components/AuthModal';
@@ -26,7 +25,7 @@ export const App: React.FC = () => {
     name: 'Rahul',
     role: 'CEO',
     company: 'TechMart Electronics',
-    isLoggedIn: false,
+    isLoggedIn: true,
   });
 
   const [currentView, setCurrentView] = useState<'landing' | 'chat' | 'flow'>('landing');
@@ -172,21 +171,19 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#030712] text-zinc-100 flex font-sans selection:bg-indigo-500 selection:text-white">
+    <div className="min-h-screen bg-[#131313] text-[#E3E3E3] flex font-sans selection:bg-[#A8C7FA]/30 selection:text-white">
       {currentView === 'landing' ? (
         <LandingPage
-          onGetStarted={() => {
-            if (!user.isLoggedIn) {
-              setIsAuthModalOpen(true);
-            } else {
-              setCurrentView('flow');
-            }
-          }}
+          onGetStarted={() => setCurrentView('chat')}
           onOpenDeploymentGuide={() => setIsGuideModalOpen(true)}
+          onSelectModel={(modelId, targetView) => {
+            setModelConfig({ ...modelConfig, orchestrator_model: modelId });
+            setCurrentView(targetView);
+          }}
         />
       ) : (
         <div className="flex w-full h-screen overflow-hidden">
-          {/* ChatGPT-Style Sidebar */}
+          {/* Side Navigation Rail (Collapsible) */}
           <Sidebar
             user={user}
             currentView={currentView}
@@ -205,22 +202,40 @@ export const App: React.FC = () => {
           />
 
           {/* Main Content Workspace */}
-          <div className="flex-1 flex flex-col h-screen overflow-hidden bg-[#07090e]">
+          <div className="flex-1 flex flex-col h-screen overflow-hidden bg-[#131313]">
             {currentView === 'flow' ? (
-              <div className="flex-1 w-full h-full p-3 overflow-hidden">
-                <HorizontalAgenticFlow
+              <div className="flex-1 w-full h-full overflow-hidden flex flex-col">
+                <Header
                   user={user}
-                  response={response}
-                  isLoading={isLoading}
-                  onTriggerFlow={(surge) => executeOrchestration(surge, `Demand Spike +${surge}%`)}
+                  currentView={currentView}
+                  onViewChange={setCurrentView}
+                  onOpenDocs={() => setIsDocsModalOpen(true)}
+                  onToggleTimeline={() => setIsTimelineOpen(!isTimelineOpen)}
+                  onOpenGuide={() => setIsGuideModalOpen(true)}
+                  onOpenAuth={() => setIsAuthModalOpen(true)}
+                  onLogout={() => {
+                    setUser({ ...user, isLoggedIn: false });
+                    setCurrentView('landing');
+                  }}
+                  isTimelineOpen={isTimelineOpen}
+                  activeModel={modelConfig.orchestrator_model}
                   onOpenModelModal={(role) => setSwapTargetRole(role)}
-                  modelConfig={modelConfig}
-                  onApprove={handleApproveAction}
-                  onReject={handleRejectAction}
                 />
+                <div className="flex-1 w-full h-[calc(100vh-3.5rem)] overflow-hidden">
+                  <HorizontalAgenticFlow
+                    user={user}
+                    response={response}
+                    isLoading={isLoading}
+                    onTriggerFlow={(surge) => executeOrchestration(surge, `Demand Spike +${surge}%`)}
+                    onOpenModelModal={(role) => setSwapTargetRole(role)}
+                    modelConfig={modelConfig}
+                    onApprove={handleApproveAction}
+                    onReject={handleRejectAction}
+                  />
+                </div>
               </div>
             ) : (
-              <div className="flex-1 flex flex-col h-screen overflow-y-auto bg-gradient-to-b from-[#080b12] via-[#090e1a] to-[#04060b]">
+              <div className="flex-1 flex flex-col h-screen overflow-y-auto bg-[#131313]">
                 <Header
                   user={user}
                   currentView={currentView}
@@ -238,7 +253,7 @@ export const App: React.FC = () => {
                   onOpenModelModal={(role) => setSwapTargetRole(role)}
                 />
 
-                <main className="flex-1 max-w-5xl w-full mx-auto px-4 py-3 flex flex-col justify-between">
+                <main className="flex-1 max-w-4xl w-full mx-auto px-4 py-2 flex flex-col justify-between">
                   <ChatView
                     user={user}
                     response={response}
@@ -262,12 +277,12 @@ export const App: React.FC = () => {
         isOpen={isAuthModalOpen}
         onClose={() => {
           setIsAuthModalOpen(false);
-          if (user.isLoggedIn) setCurrentView('flow');
+          if (user.isLoggedIn) setCurrentView('chat');
         }}
         currentProfile={user}
         onSaveProfile={(prof) => {
           setUser(prof);
-          setCurrentView('flow');
+          setCurrentView('chat');
         }}
       />
 
